@@ -14,6 +14,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     
+    var shipModel: SCNNode? {
+        let shipNode = sceneView.scene.rootNode.childNode(withName: "shipMesh", recursively: false)
+        return shipNode
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +40,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
+        guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: "test", bundle: nil) else {
+            fatalError("Missing expected asset catalog resources.")
+        }
+        configuration.detectionObjects = referenceObjects
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -71,5 +79,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        if let objectAnchor = anchor as? ARObjectAnchor {
+            if let shipModel = shipModel {
+                node.addChildNode(shipModel)
+            }
+        }
     }
 }
