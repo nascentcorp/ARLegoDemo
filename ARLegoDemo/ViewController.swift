@@ -15,7 +15,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     
     var shipModel: SCNNode? {
-        let shipNode = sceneView.scene.rootNode.childNode(withName: "shipMesh", recursively: false)
+        let shipNode = sceneView.scene.rootNode.childNode(withName: "ship", recursively: false)?.childNode(withName: "shipMesh", recursively: false)
         return shipNode
     }
     
@@ -82,7 +82,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        if let objectAnchor = anchor as? ARObjectAnchor {
+        if
+            let objectAnchor = anchor as? ARObjectAnchor,
+            let objectName = objectAnchor.referenceObject.name,
+            objectName == "babuska"
+        {
             if let shipModel = shipModel {
                 node.addChildNode(shipModel)
             }
