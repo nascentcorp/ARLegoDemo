@@ -57,6 +57,22 @@ class ViewController: UIViewController {
         // Pause the view's session
         sceneView.session.pause()
     }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let results = sceneView.hitTest(touch.location(in: sceneView), types: [.featurePoint])
+        
+        guard let hitFeature = results.last else { return }
+        let hitTransform = hitFeature.worldTransform
+        let hitPosition = SCNVector3Make(hitTransform.columns.3.x,
+                                         hitTransform.columns.3.y,
+                                         hitTransform.columns.3.z)
+        guard let shipModelNode = shipModel else {
+            return
+        }
+        sceneView.scene.rootNode.addChildNode(shipModelNode)
+        shipModelNode.position = hitPosition
+    }
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -84,7 +100,6 @@ extension ViewController: ARSCNViewDelegate {
         
     }
 
-
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if
             let objectAnchor = anchor as? ARObjectAnchor,
@@ -93,6 +108,8 @@ extension ViewController: ARSCNViewDelegate {
         {
             if let shipModel = shipModel {
                 node.addChildNode(shipModel)
+                shipModel.simdScale = objectAnchor.referenceObject.scale
+                shipModel.simdPosition = objectAnchor.referenceObject.center
             }
         }
     }
