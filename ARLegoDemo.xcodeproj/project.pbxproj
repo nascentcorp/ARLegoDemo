@@ -37,6 +37,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9433B5562162755900B69526 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				943C505A215E730D002A3773 /* ViewController.swift */,
+				943C5056215E730D002A3773 /* AppDelegate.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		9433B5572162756000B69526 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				943C5058215E730D002A3773 /* art.scnassets */,
+				943C505C215E730D002A3773 /* Main.storyboard */,
+				943C505F215E730E002A3773 /* Assets.xcassets */,
+				943C5061215E730E002A3773 /* LaunchScreen.storyboard */,
+				943C5064215E730E002A3773 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		943C504A215E730D002A3773 = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +77,8 @@
 		943C5055215E730D002A3773 /* ARLegoDemo */ = {
 			isa = PBXGroup;
 			children = (
-				943C5056215E730D002A3773 /* AppDelegate.swift */,
-				943C5058215E730D002A3773 /* art.scnassets */,
-				943C505A215E730D002A3773 /* ViewController.swift */,
-				943C505C215E730D002A3773 /* Main.storyboard */,
-				943C505F215E730E002A3773 /* Assets.xcassets */,
-				943C5061215E730E002A3773 /* LaunchScreen.storyboard */,
-				943C5064215E730E002A3773 /* Info.plist */,
+				9433B5572162756000B69526 /* Resources */,
+				9433B5562162755900B69526 /* Source */,
 			);
 			path = ARLegoDemo;
 			sourceTree = "<group>";
@@ -288,7 +304,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZCK647485N;
-				INFOPLIST_FILE = ARLegoDemo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ARLegoDemo/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -306,7 +322,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZCK647485N;
-				INFOPLIST_FILE = ARLegoDemo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ARLegoDemo/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
