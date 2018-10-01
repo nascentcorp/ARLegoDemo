@@ -6,12 +6,15 @@
 //  Copyright © 2018 Nascentcorp.io. All rights reserved.
 //
 
-import UIKit
-import SceneKit
 import ARKit
+import SceneKit
+import UIKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController {
 
+    private var lightingSufficient = false
+    private var worldMapStatus: ARFrame.WorldMappingStatus = .notAvailable
+    
     @IBOutlet var sceneView: ARSCNView!
     
     var shipModel: SCNNode? {
@@ -54,9 +57,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Pause the view's session
         sceneView.session.pause()
     }
+}
 
-    // MARK: - ARSCNViewDelegate
-    
+extension ViewController: ARSCNViewDelegate {
 /*
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
@@ -81,6 +84,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
 
+
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if
             let objectAnchor = anchor as? ARObjectAnchor,
@@ -90,6 +94,36 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             if let shipModel = shipModel {
                 node.addChildNode(shipModel)
             }
+        }
+    }
+
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        guard let frame = sceneView.session.currentFrame else { return }
+        updateOnEveryFrame(frame)
+    }
+
+    private func updateOnEveryFrame(_ frame: ARFrame) {
+        // World map status
+        if worldMapStatus != frame.worldMappingStatus {
+            switch frame.worldMappingStatus {
+            case .notAvailable:
+                print("WorldMappingStatus - World map not available")
+            case .limited:
+                print("WorldMappingStatus - Limited world map")
+            case .extending:
+                print("WorldMappingStatus - World map is being extended")
+            case .mapped:
+                print("WorldMappingStatus - World map done mapping")
+            }
+        }
+        worldMapStatus = frame.worldMappingStatus
+        
+        // Lighting
+        if let lightEstimate = frame.lightEstimate {
+            if lightEstimate.ambientIntensity < 500 {
+                print("Too dark for scanning.")
+            }
+            lightingSufficient = (lightEstimate.ambientIntensity >= 500)
         }
     }
 }

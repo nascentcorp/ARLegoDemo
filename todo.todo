@@ -1,4 +1,16 @@
 General:
-  ☐ Create a wireframe.
+  ✔ Create a wireframe. @done (18-10-01 13:44)
+  ☐ Create a UI with building step selection options/icons.
+  ☐ Create a specific step UI which needs to have:
+    ☐ Option to scan for required pieces.
+    ☐ Option to display each of the required pieces' details. The details should include:
+      ☐ Dimensions.
+      ☐ Large rotating 3D model which can be zoomed in-out, and rotated using gestures.
+      ☐ Material [optional].
+      ☐ Color [optional].
+      ☐ Description.
+    ☐ Option to scan the model.
+    ☐ Option to display the animation depicting how the pieces should fit onto the current-stage model.
+    ☐ Option to return to building stage selection.
   ☐ Create an eye-guided menu.
   ☐ Create a UI for detecting if all necessary pieces are on the scene.
