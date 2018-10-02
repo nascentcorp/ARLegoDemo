@@ -1,5 +1,14 @@
 General:
   ✔ Create a wireframe. @done (18-10-01 13:44)
+  ☐ Create a building step data structure.
+    ☐ Required pieces array.
+      ☐ Object file.
+      ☐ Info file.
+        ☐ Dimensions.
+        ☐ Material [optional].
+        ☐ Color [optional].
+        ☐ Description.
+    ☐ Current model state scans.
   ☐ Create a UI with building step selection options/icons.
   ☐ Create a specific step UI which needs to have:
     ☐ Option to scan for required pieces.
@@ -14,3 +23,4 @@ General:
     ☐ Option to return to building stage selection.
   ☐ Create an eye-guided menu.
   ☐ Create a UI for detecting if all necessary pieces are on the scene.
+  ☐ Create a fallback mechanism if a device has no world tracking configuration supported.
