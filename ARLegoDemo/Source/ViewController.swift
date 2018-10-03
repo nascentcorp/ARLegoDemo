@@ -10,12 +10,13 @@ import ARKit
 import SceneKit
 import UIKit
 
+
 class ViewController: UIViewController {
 
-    private var lightingSufficient = false
-    private var worldMapStatus: ARFrame.WorldMappingStatus = .notAvailable
-    
-    @IBOutlet var sceneView: ARSCNView!
+    private let arEnvironmentService = AREnvironmentService()
+    private let buildingStepService = BuildingStepService()
+
+    @IBOutlet private var sceneView: ARSCNView!
     
     var shipModel: SCNNode? {
         let shipNode = sceneView.scene.rootNode.childNode(withName: "ship", recursively: false)?.childNode(withName: "shipMesh", recursively: false)
@@ -43,7 +44,7 @@ class ViewController: UIViewController {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-        guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: "test", bundle: nil) else {
+        guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: buildingStepService.catalogName, bundle: nil) else {
             fatalError("Missing expected asset catalog resources.")
         }
         configuration.detectionObjects = referenceObjects
@@ -58,21 +59,21 @@ class ViewController: UIViewController {
         sceneView.session.pause()
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        let results = sceneView.hitTest(touch.location(in: sceneView), types: [.featurePoint])
-        
-        guard let hitFeature = results.last else { return }
-        let hitTransform = hitFeature.worldTransform
-        let hitPosition = SCNVector3Make(hitTransform.columns.3.x,
-                                         hitTransform.columns.3.y,
-                                         hitTransform.columns.3.z)
-        guard let shipModelNode = shipModel else {
-            return
-        }
-        sceneView.scene.rootNode.addChildNode(shipModelNode)
-        shipModelNode.position = hitPosition
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        guard let touch = touches.first else { return }
+//        let results = sceneView.hitTest(touch.location(in: sceneView), types: [.featurePoint])
+//
+//        guard let hitFeature = results.last else { return }
+//        let hitTransform = hitFeature.worldTransform
+//        let hitPosition = SCNVector3Make(hitTransform.columns.3.x,
+//                                         hitTransform.columns.3.y,
+//                                         hitTransform.columns.3.z)
+//        guard let shipModelNode = shipModel else {
+//            return
+//        }
+//        sceneView.scene.rootNode.addChildNode(shipModelNode)
+//        shipModelNode.position = hitPosition
+//    }
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -101,16 +102,22 @@ extension ViewController: ARSCNViewDelegate {
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        objectDetectionCheck(anchor, objectNames: buildingStepService.baseModelScanNames)
+        objectDetectionCheck(anchor, objectNames: buildingStepService.partsNames)
+    }
+
+    private func objectDetectionCheck(_ anchor: ARAnchor, objectNames: [String]) {
         if
             let objectAnchor = anchor as? ARObjectAnchor,
             let objectName = objectAnchor.referenceObject.name,
-            objectName == "babuska"
+            let objectNameIndex = objectNames.firstIndex(where: { $0 == objectName })
         {
-            if let shipModel = shipModel {
-                node.addChildNode(shipModel)
-                shipModel.simdScale = objectAnchor.referenceObject.scale
-                shipModel.simdPosition = objectAnchor.referenceObject.center
-            }
+            print("|||| Detected object: '\(objectNames[objectNameIndex])' ||||")
+            //            if let shipModel = shipModel {
+            //                node.addChildNode(shipModel)
+            //                shipModel.simdScale = objectAnchor.referenceObject.scale
+            //                shipModel.simdPosition = objectAnchor.referenceObject.center
+            //            }
         }
     }
 
@@ -120,27 +127,6 @@ extension ViewController: ARSCNViewDelegate {
     }
 
     private func updateOnEveryFrame(_ frame: ARFrame) {
-        // World map status
-        if worldMapStatus != frame.worldMappingStatus {
-            switch frame.worldMappingStatus {
-            case .notAvailable:
-                print("WorldMappingStatus - World map not available")
-            case .limited:
-                print("WorldMappingStatus - Limited world map")
-            case .extending:
-                print("WorldMappingStatus - World map is being extended")
-            case .mapped:
-                print("WorldMappingStatus - World map done mapping")
-            }
-        }
-        worldMapStatus = frame.worldMappingStatus
-        
-        // Lighting
-        if let lightEstimate = frame.lightEstimate {
-            if lightEstimate.ambientIntensity < 500 {
-                print("Too dark for scanning.")
-            }
-            lightingSufficient = (lightEstimate.ambientIntensity >= 500)
-        }
+        arEnvironmentService.updateWithFrameInfo(frame)
     }
 }

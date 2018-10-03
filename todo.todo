@@ -19,6 +19,7 @@ General:
       ☐ Color [optional].
       ☐ Description.
     ☐ Option to scan the model.
+      ☐ The needed pieces list should remove the pieces which a model scan determines are already used (fitted on the starting stage model) [bonus].
     ☐ Option to display the animation depicting how the pieces should fit onto the current-stage model.
     ☐ Option to return to building stage selection.
   ☐ Create an eye-guided menu.

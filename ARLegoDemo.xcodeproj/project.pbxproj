@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		940A79AC2164BE1E00C049CD /* AREnvironmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940A79AB2164BE1E00C049CD /* AREnvironmentService.swift */; };
+		940A79AE2164D29500C049CD /* BuildingStepService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940A79AD2164D29500C049CD /* BuildingStepService.swift */; };
 		943C5057215E730D002A3773 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943C5056215E730D002A3773 /* AppDelegate.swift */; };
 		943C5059215E730D002A3773 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 943C5058215E730D002A3773 /* art.scnassets */; };
 		943C505B215E730D002A3773 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943C505A215E730D002A3773 /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		940A79AB2164BE1E00C049CD /* AREnvironmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AREnvironmentService.swift; sourceTree = "<group>"; };
+		940A79AD2164D29500C049CD /* BuildingStepService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingStepService.swift; sourceTree = "<group>"; };
 		943C5053215E730D002A3773 /* ARLegoDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARLegoDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		943C5056215E730D002A3773 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		943C5058215E730D002A3773 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -37,9 +41,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		940A79AA2164BDF100C049CD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				940A79AB2164BE1E00C049CD /* AREnvironmentService.swift */,
+				940A79AD2164D29500C049CD /* BuildingStepService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		9433B5562162755900B69526 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				940A79AA2164BDF100C049CD /* Services */,
 				943C505A215E730D002A3773 /* ViewController.swift */,
 				943C5056215E730D002A3773 /* AppDelegate.swift */,
 			);
@@ -156,7 +170,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				943C505B215E730D002A3773 /* ViewController.swift in Sources */,
+				940A79AC2164BE1E00C049CD /* AREnvironmentService.swift in Sources */,
 				943C5057215E730D002A3773 /* AppDelegate.swift in Sources */,
+				940A79AE2164D29500C049CD /* BuildingStepService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
