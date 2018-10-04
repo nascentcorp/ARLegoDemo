@@ -15,6 +15,13 @@
 		943C505E215E730D002A3773 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 943C505C215E730D002A3773 /* Main.storyboard */; };
 		943C5060215E730E002A3773 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 943C505F215E730E002A3773 /* Assets.xcassets */; };
 		943C5063215E730E002A3773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 943C5061215E730E002A3773 /* LaunchScreen.storyboard */; };
+		9480652B21663C8C00DB1E76 /* statue_s.dds in Resources */ = {isa = PBXBuildFile; fileRef = 9480652621663C8C00DB1E76 /* statue_s.dds */; };
+		9480652C21663C8C00DB1E76 /* statue_d.dds in Resources */ = {isa = PBXBuildFile; fileRef = 9480652721663C8C00DB1E76 /* statue_d.dds */; };
+		9480652D21663C8C00DB1E76 /* statue.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 9480652821663C8C00DB1E76 /* statue.mtl */; };
+		9480652E21663C8C00DB1E76 /* statue_n.dds in Resources */ = {isa = PBXBuildFile; fileRef = 9480652921663C8C00DB1E76 /* statue_n.dds */; };
+		9480652F21663C8C00DB1E76 /* statue.obj in Resources */ = {isa = PBXBuildFile; fileRef = 9480652A21663C8C00DB1E76 /* statue.obj */; };
+		948199DA216633AC008D6D2E /* MDLMaterial+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948199D9216633AC008D6D2E /* MDLMaterial+Extensions.swift */; };
+		94DC82752166302500BC3CA6 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +35,13 @@
 		943C505F215E730E002A3773 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		943C5062215E730E002A3773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		943C5064215E730E002A3773 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9480652621663C8C00DB1E76 /* statue_s.dds */ = {isa = PBXFileReference; lastKnownFileType = file; path = statue_s.dds; sourceTree = "<group>"; };
+		9480652721663C8C00DB1E76 /* statue_d.dds */ = {isa = PBXFileReference; lastKnownFileType = file; path = statue_d.dds; sourceTree = "<group>"; };
+		9480652821663C8C00DB1E76 /* statue.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = statue.mtl; sourceTree = "<group>"; };
+		9480652921663C8C00DB1E76 /* statue_n.dds */ = {isa = PBXFileReference; lastKnownFileType = file; path = statue_n.dds; sourceTree = "<group>"; };
+		9480652A21663C8C00DB1E76 /* statue.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = statue.obj; sourceTree = "<group>"; };
+		948199D9216633AC008D6D2E /* MDLMaterial+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLMaterial+Extensions.swift"; sourceTree = "<group>"; };
+		94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +67,7 @@
 		9433B5562162755900B69526 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				94DC82732166301000BC3CA6 /* Extensions */,
 				940A79AA2164BDF100C049CD /* Services */,
 				943C505A215E730D002A3773 /* ViewController.swift */,
 				943C5056215E730D002A3773 /* AppDelegate.swift */,
@@ -63,6 +78,7 @@
 		9433B5572162756000B69526 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9480652421663C8C00DB1E76 /* Objects */,
 				943C5058215E730D002A3773 /* art.scnassets */,
 				943C505C215E730D002A3773 /* Main.storyboard */,
 				943C505F215E730E002A3773 /* Assets.xcassets */,
@@ -95,6 +111,35 @@
 				9433B5562162755900B69526 /* Source */,
 			);
 			path = ARLegoDemo;
+			sourceTree = "<group>";
+		};
+		9480652421663C8C00DB1E76 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				9480652521663C8C00DB1E76 /* Statue */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		9480652521663C8C00DB1E76 /* Statue */ = {
+			isa = PBXGroup;
+			children = (
+				9480652621663C8C00DB1E76 /* statue_s.dds */,
+				9480652721663C8C00DB1E76 /* statue_d.dds */,
+				9480652821663C8C00DB1E76 /* statue.mtl */,
+				9480652921663C8C00DB1E76 /* statue_n.dds */,
+				9480652A21663C8C00DB1E76 /* statue.obj */,
+			);
+			path = Statue;
+			sourceTree = "<group>";
+		};
+		94DC82732166301000BC3CA6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */,
+				948199D9216633AC008D6D2E /* MDLMaterial+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,9 +200,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9480652E21663C8C00DB1E76 /* statue_n.dds in Resources */,
+				9480652D21663C8C00DB1E76 /* statue.mtl in Resources */,
+				9480652F21663C8C00DB1E76 /* statue.obj in Resources */,
 				943C5059215E730D002A3773 /* art.scnassets in Resources */,
 				943C5063215E730E002A3773 /* LaunchScreen.storyboard in Resources */,
+				9480652C21663C8C00DB1E76 /* statue_d.dds in Resources */,
 				943C5060215E730E002A3773 /* Assets.xcassets in Resources */,
+				9480652B21663C8C00DB1E76 /* statue_s.dds in Resources */,
 				943C505E215E730D002A3773 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +223,8 @@
 				940A79AC2164BE1E00C049CD /* AREnvironmentService.swift in Sources */,
 				943C5057215E730D002A3773 /* AppDelegate.swift in Sources */,
 				940A79AE2164D29500C049CD /* BuildingStepService.swift in Sources */,
+				948199DA216633AC008D6D2E /* MDLMaterial+Extensions.swift in Sources */,
+				94DC82752166302500BC3CA6 /* SCNVector3+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </arscnView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZm-ZG-0Fh">
-                                <rect key="frame" x="0.0" y="0.0" width="120" height="144"/>
+                                <rect key="frame" x="0.0" y="20" width="120" height="144"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cwt-Bd-sZW">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="44"/>
@@ -40,19 +40,29 @@
                                     <constraint firstAttribute="width" constant="120" id="v9x-pE-m8a"/>
                                 </constraints>
                             </view>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lg8-M6-ioN">
+                                <rect key="frame" x="245" y="20" width="130" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="Ldw-cb-6Zr"/>
+                                    <constraint firstAttribute="height" constant="130" id="UUC-hr-19e"/>
+                                </constraints>
+                            </sceneKitView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Lg8-M6-ioN" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="ApH-e4-FYu"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
-                            <constraint firstItem="lZm-ZG-0Fh" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="NGo-Ey-EWd"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="Lg8-M6-ioN" secondAttribute="trailing" id="JQE-Zb-yR7"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="VpT-BR-CcM"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
                             <constraint firstItem="lZm-ZG-0Fh" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="doI-OW-D1z"/>
+                            <constraint firstItem="lZm-ZG-0Fh" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="n9B-4z-I5R"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
                     <connections>
+                        <outlet property="baseObjectPreviewView" destination="Lg8-M6-ioN" id="Bxx-vI-GpH"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                     </connections>
                 </viewController>

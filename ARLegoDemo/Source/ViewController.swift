@@ -8,14 +8,26 @@
 
 import ARKit
 import SceneKit
+import SceneKit.ModelIO
 import UIKit
 
+enum AcceptedFileType : String {
+    case obj
+    case stl
+    
+    static var acceptedFileTypeExtensions: [String] {
+        return [AcceptedFileType.obj, AcceptedFileType.stl].map { $0.rawValue }
+    }
+}
 
 class ViewController: UIViewController {
 
     private let arEnvironmentService = AREnvironmentService()
     private let buildingStepService = BuildingStepService()
 
+    private var objectScale: Float = 1.0
+
+    @IBOutlet private weak var baseObjectPreviewView: SCNView!
     @IBOutlet private var sceneView: ARSCNView!
     
     var shipModel: SCNNode? {
@@ -37,6 +49,8 @@ class ViewController: UIViewController {
         
         // Set the scene to the view
         sceneView.scene = scene
+
+        setupObjectPreview()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +73,92 @@ class ViewController: UIViewController {
         sceneView.session.pause()
     }
 
+    private func setupObjectPreview(objectType: AcceptedFileType = .obj) {
+        guard let objectPath = Bundle.main.path(forResource: "statue", ofType: objectType.rawValue) else { return }
+        let objectURL = URL(fileURLWithPath: objectPath)
+        let asset = MDLAsset(url: objectURL)
+        let objectScene = SCNScene(mdlAsset: asset)
+        let objectNode = objectScene.rootNode
+        adjustObjectGeometry(inNode: objectNode, objectType: objectType)
+
+        let camera = SCNCamera()
+        camera.zNear = 0.1
+        
+        let cameraNode = SCNNode()
+        cameraNode.camera = camera
+        cameraNode.position = SCNVector3(x: 0, y: 0.3, z: 1.2)
+        
+        let cameraOrbit = SCNNode()
+        cameraOrbit.addChildNode(cameraNode)
+        cameraOrbit.eulerAngles.x -= Float(Double.pi * 0.5 / 4)
+        
+        let mainScene = SCNScene()
+        mainScene.rootNode.addChildNode(objectNode)
+        mainScene.rootNode.addChildNode(cameraOrbit)
+        mainScene.rootNode.addChildNode(createPlaneNode())
+        
+        baseObjectPreviewView.scene = mainScene
+        baseObjectPreviewView.backgroundColor = UIColor.black
+        baseObjectPreviewView.allowsCameraControl = true
+        baseObjectPreviewView.autoenablesDefaultLighting = true
+    }
+
+    private func adjustObjectGeometry(inNode node: SCNNode?, objectType: AcceptedFileType) {
+        guard let node = node else { return }
+        rotateObject(inNode: node, objectType: objectType)
+        scaleObject(inNode: node, objectType: objectType)
+        centerObject(inNode: node, objectType: objectType)
+    }
+    
+    private func rotateObject(inNode node: SCNNode, objectType: AcceptedFileType) {
+        if objectType == .obj {
+            return
+        }
+        let previousTransform = node.transform
+        let rotation = SCNMatrix4MakeRotation(Float(-2 * Double.pi * 1 / 4), 1.0, 0.0, 0.0)
+        node.transform = SCNMatrix4Mult(rotation, previousTransform)
+    }
+    
+    private func centerObject(inNode node: SCNNode, objectType: AcceptedFileType) {
+        let (min, max) = node.boundingBox
+        let objectDimensions = max - min
+        var rawPivot = max - objectDimensions / 2.0
+        if objectType == .obj {
+            rawPivot.y = min.y
+        }
+        else {
+            rawPivot.z = min.z
+        }
+        let pivot = rawPivot.negate()
+        let previousTransform = node.transform
+        let translation = SCNMatrix4MakeTranslation(pivot.x, pivot.y, pivot.z)
+        node.transform = SCNMatrix4Mult(translation, previousTransform)
+    }
+    
+    private func scaleObject(inNode node: SCNNode, objectType: AcceptedFileType) {
+        let (min, max) = node.boundingBox
+        let objectDimensions = max - min
+        let objectLength = objectDimensions.length()
+        objectScale = 1.0 / objectLength
+        let previousTransform = node.transform
+        let scale = SCNMatrix4MakeScale(objectScale, objectScale, objectScale)
+        node.transform = SCNMatrix4Mult(scale, previousTransform)
+    }
+
+    private func createPlaneNode() -> SCNNode {
+        let plane = SCNPlane(width: 2.0, height: 2.0)
+        plane.widthSegmentCount = 20
+        plane.heightSegmentCount = 20
+        
+        guard let material = plane.firstMaterial else { return SCNNode() }
+        material.isDoubleSided = true
+        material.diffuse.contents = UIColor.red
+        material.fillMode = .lines
+        
+        let planeNode = SCNNode(geometry: plane)
+        planeNode.transform = SCNMatrix4MakeRotation(Float(Double.pi * 1 / 2), 1.0, 0.0, 0.0)
+        return planeNode
+    }
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        guard let touch = touches.first else { return }
 //        let results = sceneView.hitTest(touch.location(in: sceneView), types: [.featurePoint])
