@@ -28,6 +28,12 @@ class ViewController: UIViewController {
     private var objectScale: Float = 1.0
 
     @IBOutlet private weak var baseObjectPreviewView: SCNView!
+    @IBOutlet private weak var baseObjectPreviewContainer: UIView!
+    @IBOutlet private weak var btnMaximizeBaseObjectPreview: UIButton!
+    @IBOutlet private weak var btnMinimizeBaseObjectPreview: UIButton!
+    @IBOutlet private var cnBaseObjectPreviewTopDistance: NSLayoutConstraint!
+    @IBOutlet private var cnBaseObjectPreviewViewHeight: NSLayoutConstraint!
+    @IBOutlet private var cnBaseObjectPreviewViewWidth: NSLayoutConstraint!
     @IBOutlet private var sceneView: ARSCNView!
     
     var shipModel: SCNNode? {
@@ -73,6 +79,26 @@ class ViewController: UIViewController {
         sceneView.session.pause()
     }
 
+    @IBAction func btnMaximizeObjectPreviewTapped(_ sender: Any) {
+        maximizeBaseObjectPreviewWorker(maximize: true)
+    }
+    
+    @IBAction func btnMinimizeObjectPreviewTapped(_ sender: Any) {
+        maximizeBaseObjectPreviewWorker(maximize: false)
+    }
+    
+    private func maximizeBaseObjectPreviewWorker(maximize: Bool) {
+        btnMaximizeBaseObjectPreview.isHidden = maximize
+        btnMinimizeBaseObjectPreview.isHidden = !maximize
+
+        cnBaseObjectPreviewViewHeight.isActive = !maximize
+        cnBaseObjectPreviewViewWidth.isActive = !maximize
+        cnBaseObjectPreviewTopDistance.isActive = !maximize
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     private func setupObjectPreview(objectType: AcceptedFileType = .obj) {
         guard let objectPath = Bundle.main.path(forResource: "statue", ofType: objectType.rawValue) else { return }
         let objectURL = URL(fileURLWithPath: objectPath)
