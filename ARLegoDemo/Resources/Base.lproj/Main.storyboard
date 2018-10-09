@@ -48,11 +48,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
                                     </sceneKitView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vVR-Cj-LSS">
-                                        <rect key="frame" x="15" y="35" width="60" height="44"/>
+                                        <rect key="frame" x="15" y="35" width="40" height="44"/>
                                         <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="8D9-ef-K8h"/>
-                                            <constraint firstAttribute="width" constant="60" id="IGf-ke-Zbq"/>
                                         </constraints>
                                         <state key="normal" title="Back"/>
                                         <connections>
@@ -77,6 +76,7 @@
                                     <constraint firstItem="uKy-5M-3k6" firstAttribute="top" secondItem="Lg8-M6-ioN" secondAttribute="top" id="YkH-DC-pqg"/>
                                     <constraint firstItem="Lg8-M6-ioN" firstAttribute="leading" secondItem="5W7-Y0-fcw" secondAttribute="leading" id="b07-Jv-0Xg"/>
                                     <constraint firstAttribute="height" constant="130" id="i2C-Ek-Dwi"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vVR-Cj-LSS" secondAttribute="trailing" constant="20" symbolic="YES" id="nzn-ib-gC2"/>
                                     <constraint firstItem="vVR-Cj-LSS" firstAttribute="top" secondItem="5W7-Y0-fcw" secondAttribute="top" constant="35" id="rgc-bQ-lS6"/>
                                     <constraint firstItem="uKy-5M-3k6" firstAttribute="trailing" secondItem="Lg8-M6-ioN" secondAttribute="trailing" id="sxO-mw-xd5"/>
                                     <constraint firstItem="uKy-5M-3k6" firstAttribute="leading" secondItem="Lg8-M6-ioN" secondAttribute="leading" id="tbE-65-zbY"/>
