@@ -25,21 +25,23 @@ class ViewController: UIViewController {
     private let arEnvironmentService = AREnvironmentService()
     private let buildingStepService = BuildingStepService()
 
-    private let numberOfObjectParts = 10
+    private let numberOfObjectParts = 2
+    private let objectShapes = [ShapeType.box, .sphere, .pyramid, .torus, .tube, .box, .sphere]
+    private let objectPartSize = CGSize(width: 130, height: 130)
     private var objectScale: Float = 1.0
 
+    private var geometryNodeData = [GeometryNodeData]()
+    
     @IBOutlet private weak var baseObjectPreviewView: SCNView!
     @IBOutlet private weak var baseObjectPreviewContainer: UIView!
     @IBOutlet private weak var btnMaximizeBaseObjectPreview: UIButton!
     @IBOutlet private weak var btnMinimizeBaseObjectPreview: UIButton!
     @IBOutlet private var cnBaseObjectPreviewTopDistance: NSLayoutConstraint!
     @IBOutlet private var cnBaseObjectPreviewViewHeight: NSLayoutConstraint!
-    @IBOutlet private var cnPartSelectorHeight: NSLayoutConstraint!
-    @IBOutlet private weak var cnBaseObjectPreviewViewWidth: NSLayoutConstraint!
+    @IBOutlet private var cnBaseObjectPreviewViewWidth: NSLayoutConstraint!
+    @IBOutlet private weak var cnPartSelectorHeight: NSLayoutConstraint!
     @IBOutlet private weak var partSelectorView: SKView!
     @IBOutlet private var sceneView: ARSCNView!
-
-    
     
     var shipModel: SCNNode? {
         let shipNode = sceneView.scene.rootNode.childNode(withName: "ship", recursively: false)?.childNode(withName: "shipMesh", recursively: false)
@@ -48,14 +50,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let frame = partSelectorView.bounds
+
+        for i in 0..<objectShapes.count {
+            let geometryNode = GeometryNode(with: objectPartSize, type: objectShapes[i])
+            geometryNodeData.append(geometryNode.create())
+        }
         
         sceneView.delegate = self
         sceneView.showsStatistics = true
         let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
         sceneView.scene = scene
 
-        let frame = partSelectorView.bounds
-        let partSelectorScene = PartSelectorScene(size: frame.size, numberOfObjectParts: numberOfObjectParts)
+        let partSelectorScene = PartSelectorScene(size: frame.size, geometryNodeData: geometryNodeData, objectPartSize: objectPartSize)
         partSelectorScene.scaleMode = .aspectFill
         partSelectorView.presentScene(partSelectorScene)
 

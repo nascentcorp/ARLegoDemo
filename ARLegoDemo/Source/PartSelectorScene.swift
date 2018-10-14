@@ -10,14 +10,15 @@ import SpriteKit
 
 class PartSelectorScene: SKScene {
 
-    private let numberOfObjectParts: Int
-    private let objectPartSize = CGSize(width: 130, height: 130)
+    private let geometryNodeData: [GeometryNodeData]
+    private let objectPartSize: CGSize
 
     private var scrollView: SwiftySKScrollView?
-    private var moveableNode: SKSpriteNode?
+    private var moveableNode: SKNode?
 
-    init(size: CGSize, numberOfObjectParts: Int) {
-        self.numberOfObjectParts = numberOfObjectParts
+    init(size: CGSize, geometryNodeData: [GeometryNodeData], objectPartSize: CGSize) {
+        self.objectPartSize = objectPartSize
+        self.geometryNodeData = geometryNodeData
         
         super.init(size: size)
     }
@@ -29,7 +30,9 @@ class PartSelectorScene: SKScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
 
-        moveableNode = SKSpriteNode(color: .clear, size: frame.size)
+        view.showsFPS = true
+
+        moveableNode = SKNode()
         guard let moveableNode = moveableNode else {
             fatalError("MoveableNode should exist.")
         }
@@ -39,46 +42,18 @@ class PartSelectorScene: SKScene {
         guard let scrollView = scrollView else {
             fatalError("ScrollView should exist.")
         }
-        scrollView.contentSize = CGSize(width: scrollView.bounds.width, height: objectPartSize.height * CGFloat(numberOfObjectParts))
+        scrollView.contentSize = CGSize(width: scrollView.bounds.width, height: objectPartSize.height * CGFloat(geometryNodeData.count))
         view.addSubview(scrollView)
-        
-        let page1ScrollView = SKSpriteNode(color: .clear, size: frame.size)
-        page1ScrollView.position = CGPoint(x: frame.midX, y: frame.midY)
-        moveableNode.addChild(page1ScrollView)
-        
-        let page2ScrollView = SKSpriteNode(color: .clear, size: frame.size)
-        page2ScrollView.position = CGPoint(x: frame.midX, y: frame.midY - frame.height)
-        moveableNode.addChild(page2ScrollView)
-        
-        let page3ScrollView = SKSpriteNode(color: .clear, size: frame.size)
-        page3ScrollView.position = CGPoint(x: frame.midX, y: frame.midY - (frame.height * 2))
-        moveableNode.addChild(page3ScrollView)
-        
-        /// Test sprites page 1
-        let sprite1Page1 = SKSpriteNode(color: .red, size: CGSize(width: 50, height: 50))
-        sprite1Page1.position = CGPoint(x: 0, y: 0)
-        page1ScrollView.addChild(sprite1Page1)
-        
-        let sprite2Page1 = SKSpriteNode(color: .red, size: CGSize(width: 50, height: 50))
-        sprite2Page1.position = CGPoint(x: sprite1Page1.position.x, y: sprite1Page1.position.y - sprite2Page1.size.height * 1.5)
-        sprite1Page1.addChild(sprite2Page1)
-        
-        /// Test sprites page 2
-        let sprite1Page2 = SKSpriteNode(color: .red, size: CGSize(width: 50, height: 50))
-        sprite1Page2.position = CGPoint(x: 0, y: 0)
-        page2ScrollView.addChild(sprite1Page2)
-        
-        let sprite2Page2 = SKSpriteNode(color: .red, size: CGSize(width: 50, height: 50))
-        sprite2Page2.position = CGPoint(x: sprite1Page2.position.x, y: sprite1Page2.position.y - (sprite2Page2.size.height * 1.5))
-        sprite1Page2.addChild(sprite2Page2)
-        
-        /// Test sprites page 3
-        let sprite1Page3 = SKSpriteNode(color: .red, size: CGSize(width: 50, height: 50))
-        sprite1Page3.position = CGPoint(x: 0, y: 0)
-        page3ScrollView.addChild(sprite1Page3)
-        
-        let sprite2Page3 = SKSpriteNode(color: .red, size: CGSize(width: 50, height: 50))
-        sprite2Page3.position = CGPoint(x: sprite1Page3.position.x, y: sprite1Page3.position.y - (sprite2Page3.size.height * 1.5))
-        sprite1Page3.addChild(sprite2Page3)
+
+        for i in 0..<geometryNodeData.count {
+            let currentGeometryNodeData = geometryNodeData[i]
+            let sprite = currentGeometryNodeData.sprite
+
+            let containerNode = SKNode()
+            containerNode.position = CGPoint(x: frame.midX, y: size.height - objectPartSize.height * 0.5 - CGFloat(i) * objectPartSize.height)
+            containerNode.addChild(sprite)
+            
+            moveableNode.addChild(containerNode)
+        }
     }
 }
