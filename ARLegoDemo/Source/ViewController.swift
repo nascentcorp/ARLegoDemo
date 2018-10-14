@@ -7,16 +7,12 @@
 //
 
 import ARKit
-import SceneKit
-import SceneKit.ModelIO
 import UIKit
 
-enum AcceptedFileType : String {
-    case obj
-    case stl
-    
-    static var acceptedFileTypeExtensions: [String] {
-        return [AcceptedFileType.obj, AcceptedFileType.stl].map { $0.rawValue }
+class PartCell: UICollectionViewCell {
+
+    func setup(with part: BuildingStepService.BuildingStepPart) {
+        
     }
 }
 
@@ -25,22 +21,10 @@ class ViewController: UIViewController {
     private let arEnvironmentService = AREnvironmentService()
     private let buildingStepService = BuildingStepService()
 
-    private let numberOfObjectParts = 2
-    private let objectShapes = [ShapeType.box, .sphere, .pyramid, .torus, .tube, .box, .sphere]
+    private let cellName = String(describing: PartCell.self)
     private let objectPartSize = CGSize(width: 130, height: 130)
-    private var objectScale: Float = 1.0
-
-    private var geometryNodeData = [GeometryNodeData]()
     
-    @IBOutlet private weak var baseObjectPreviewView: SCNView!
-    @IBOutlet private weak var baseObjectPreviewContainer: UIView!
-    @IBOutlet private weak var btnMaximizeBaseObjectPreview: UIButton!
-    @IBOutlet private weak var btnMinimizeBaseObjectPreview: UIButton!
-    @IBOutlet private var cnBaseObjectPreviewTopDistance: NSLayoutConstraint!
-    @IBOutlet private var cnBaseObjectPreviewViewHeight: NSLayoutConstraint!
-    @IBOutlet private var cnBaseObjectPreviewViewWidth: NSLayoutConstraint!
-    @IBOutlet private weak var cnPartSelectorHeight: NSLayoutConstraint!
-    @IBOutlet private weak var partSelectorView: SKView!
+    @IBOutlet private weak var cvParts: UICollectionView!
     @IBOutlet private var sceneView: ARSCNView!
     
     var shipModel: SCNNode? {
@@ -50,24 +34,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let frame = partSelectorView.bounds
-
-        for i in 0..<objectShapes.count {
-            let geometryNode = GeometryNode(with: objectPartSize, type: objectShapes[i])
-            geometryNodeData.append(geometryNode.create())
-        }
         
         sceneView.delegate = self
         sceneView.showsStatistics = true
         let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
         sceneView.scene = scene
-
-        let partSelectorScene = PartSelectorScene(size: frame.size, geometryNodeData: geometryNodeData, objectPartSize: objectPartSize)
-        partSelectorScene.scaleMode = .aspectFill
-        partSelectorView.presentScene(partSelectorScene)
-
-        setupObjectPreview()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,114 +60,14 @@ class ViewController: UIViewController {
         // Pause the view's session
         sceneView.session.pause()
     }
-
-    @IBAction func btnMaximizeObjectPreviewTapped(_ sender: Any) {
-        maximizeBaseObjectPreviewWorker(maximize: true)
+    
+    @IBAction func btnBaseObjectPreviewTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let objectPreviewViewController = storyboard.instantiateViewController(withIdentifier: "ObjectPreviewViewController")
+        present(objectPreviewViewController, animated: true)
     }
     
-    @IBAction func btnMinimizeObjectPreviewTapped(_ sender: Any) {
-        maximizeBaseObjectPreviewWorker(maximize: false)
-    }
-    
-    private func maximizeBaseObjectPreviewWorker(maximize: Bool) {
-        btnMaximizeBaseObjectPreview.isHidden = maximize
-        btnMinimizeBaseObjectPreview.isHidden = !maximize
-
-        cnBaseObjectPreviewViewHeight.isActive = !maximize
-        cnBaseObjectPreviewViewWidth.isActive = !maximize
-        cnBaseObjectPreviewTopDistance.isActive = !maximize
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    private func setupObjectPreview(objectType: AcceptedFileType = .obj) {
-        guard let objectPath = Bundle.main.path(forResource: "statue", ofType: objectType.rawValue) else { return }
-        let objectURL = URL(fileURLWithPath: objectPath)
-        let asset = MDLAsset(url: objectURL)
-        let objectScene = SCNScene(mdlAsset: asset)
-        let objectNode = objectScene.rootNode
-        adjustObjectGeometry(inNode: objectNode, objectType: objectType)
-
-        let camera = SCNCamera()
-        camera.zNear = 0.1
-        
-        let cameraNode = SCNNode()
-        cameraNode.camera = camera
-        cameraNode.position = SCNVector3(x: 0, y: 0.3, z: 1.2)
-        
-        let cameraOrbit = SCNNode()
-        cameraOrbit.addChildNode(cameraNode)
-        cameraOrbit.eulerAngles.x -= Float(Double.pi * 0.5 / 4)
-        
-        let mainScene = SCNScene()
-        mainScene.rootNode.addChildNode(objectNode)
-        mainScene.rootNode.addChildNode(cameraOrbit)
-        mainScene.rootNode.addChildNode(createPlaneNode())
-        
-        baseObjectPreviewView.scene = mainScene
-        baseObjectPreviewView.backgroundColor = UIColor.black
-        baseObjectPreviewView.allowsCameraControl = true
-        baseObjectPreviewView.autoenablesDefaultLighting = true
-    }
-
-    private func adjustObjectGeometry(inNode node: SCNNode?, objectType: AcceptedFileType) {
-        guard let node = node else { return }
-        rotateObject(inNode: node, objectType: objectType)
-        scaleObject(inNode: node, objectType: objectType)
-        centerObject(inNode: node, objectType: objectType)
-    }
-    
-    private func rotateObject(inNode node: SCNNode, objectType: AcceptedFileType) {
-        if objectType == .obj {
-            return
-        }
-        let previousTransform = node.transform
-        let rotation = SCNMatrix4MakeRotation(Float(-2 * Double.pi * 1 / 4), 1.0, 0.0, 0.0)
-        node.transform = SCNMatrix4Mult(rotation, previousTransform)
-    }
-    
-    private func centerObject(inNode node: SCNNode, objectType: AcceptedFileType) {
-        let (min, max) = node.boundingBox
-        let objectDimensions = max - min
-        var rawPivot = max - objectDimensions / 2.0
-        if objectType == .obj {
-            rawPivot.y = min.y
-        }
-        else {
-            rawPivot.z = min.z
-        }
-        let pivot = rawPivot.negate()
-        let previousTransform = node.transform
-        let translation = SCNMatrix4MakeTranslation(pivot.x, pivot.y, pivot.z)
-        node.transform = SCNMatrix4Mult(translation, previousTransform)
-    }
-    
-    private func scaleObject(inNode node: SCNNode, objectType: AcceptedFileType) {
-        let (min, max) = node.boundingBox
-        let objectDimensions = max - min
-        let objectLength = objectDimensions.length()
-        objectScale = 1.0 / objectLength
-        let previousTransform = node.transform
-        let scale = SCNMatrix4MakeScale(objectScale, objectScale, objectScale)
-        node.transform = SCNMatrix4Mult(scale, previousTransform)
-    }
-
-    private func createPlaneNode() -> SCNNode {
-        let plane = SCNPlane(width: 2.0, height: 2.0)
-        plane.widthSegmentCount = 20
-        plane.heightSegmentCount = 20
-        
-        guard let material = plane.firstMaterial else { return SCNNode() }
-        material.isDoubleSided = true
-        material.diffuse.contents = UIColor.red
-        material.fillMode = .lines
-        
-        let planeNode = SCNNode(geometry: plane)
-        planeNode.transform = SCNMatrix4MakeRotation(Float(Double.pi * 1 / 2), 1.0, 0.0, 0.0)
-        return planeNode
-    }
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        guard let touch = touches.first else { return }
 //        let results = sceneView.hitTest(touch.location(in: sceneView), types: [.featurePoint])
 //
@@ -240,7 +111,7 @@ extension ViewController: ARSCNViewDelegate {
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         objectDetectionCheck(anchor, objectNames: buildingStepService.baseModelScanNames)
-        objectDetectionCheck(anchor, objectNames: buildingStepService.partsNames)
+        objectDetectionCheck(anchor, objectNames: buildingStepService.partNames)
     }
 
     private func objectDetectionCheck(_ anchor: ARAnchor, objectNames: [String]) {
@@ -265,5 +136,29 @@ extension ViewController: ARSCNViewDelegate {
 
     private func updateOnEveryFrame(_ frame: ARFrame) {
         arEnvironmentService.updateWithFrameInfo(frame)
+    }
+}
+
+extension ViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let objectPreviewViewController = storyboard.instantiateViewController(withIdentifier: "ObjectPreviewViewController")
+        present(objectPreviewViewController, animated: true)
+    }
+}
+
+extension ViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return buildingStepService.partNames.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! PartCell
+        cell.setup(with: buildingStepService.parts[indexPath.row])
+        return cell
     }
 }

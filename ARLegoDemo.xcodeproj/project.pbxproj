@@ -13,6 +13,7 @@
 		94125C09217341E5004D1A7E /* GeometryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94125C08217341E5004D1A7E /* GeometryNode.swift */; };
 		94125C0B21734869004D1A7E /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94125C0A21734869004D1A7E /* UIColor+Extensions.swift */; };
 		94125C0D21734BF3004D1A7E /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94125C0C21734BF3004D1A7E /* CGSize+Extensions.swift */; };
+		94125C0F21737017004D1A7E /* ObjectPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94125C0E21737017004D1A7E /* ObjectPreviewViewController.swift */; };
 		9427E45521733083001291AD /* SwiftySkScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9427E45421733083001291AD /* SwiftySkScrollView.swift */; };
 		943C5057215E730D002A3773 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943C5056215E730D002A3773 /* AppDelegate.swift */; };
 		943C5059215E730D002A3773 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 943C5058215E730D002A3773 /* art.scnassets */; };
@@ -36,6 +37,7 @@
 		94125C08217341E5004D1A7E /* GeometryNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryNode.swift; sourceTree = "<group>"; };
 		94125C0A21734869004D1A7E /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		94125C0C21734BF3004D1A7E /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
+		94125C0E21737017004D1A7E /* ObjectPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectPreviewViewController.swift; sourceTree = "<group>"; };
 		9427E45421733083001291AD /* SwiftySkScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftySkScrollView.swift; sourceTree = "<group>"; };
 		943C5053215E730D002A3773 /* ARLegoDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARLegoDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		943C5056215E730D002A3773 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				94DC82732166301000BC3CA6 /* Extensions */,
 				940A79AA2164BDF100C049CD /* Services */,
 				943C505A215E730D002A3773 /* ViewController.swift */,
+				94125C0E21737017004D1A7E /* ObjectPreviewViewController.swift */,
 				943C5056215E730D002A3773 /* AppDelegate.swift */,
 				94125C0621733CBA004D1A7E /* PartSelectorScene.swift */,
 				94125C08217341E5004D1A7E /* GeometryNode.swift */,
@@ -246,6 +249,7 @@
 				94125C0B21734869004D1A7E /* UIColor+Extensions.swift in Sources */,
 				94125C09217341E5004D1A7E /* GeometryNode.swift in Sources */,
 				943C505B215E730D002A3773 /* ViewController.swift in Sources */,
+				94125C0F21737017004D1A7E /* ObjectPreviewViewController.swift in Sources */,
 				94125C0D21734BF3004D1A7E /* CGSize+Extensions.swift in Sources */,
 				940A79AC2164BE1E00C049CD /* AREnvironmentService.swift in Sources */,
 				943C5057215E730D002A3773 /* AppDelegate.swift in Sources */,

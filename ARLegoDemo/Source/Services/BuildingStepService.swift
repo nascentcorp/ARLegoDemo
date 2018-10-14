@@ -10,18 +10,31 @@ import Foundation
 
 class BuildingStepService {
 
+    private struct BuildingStepBaseModel {
+        let names: [String]
+        let imageName: String
+    }
+    
+    struct BuildingStepPart {
+        let name: String
+        let imageName: String
+    }
+    
     private struct BuildingStep {
         let arCatalogName: String
-        let baseModelScanNames: [String]
-        let partsNames: [String]
+        let baseModel: BuildingStepBaseModel
+        let parts: [BuildingStepPart]
     }
 
     // TODO: This should be loaded from a config file
     private let buildingSteps = [
         BuildingStep(
             arCatalogName: "LegoStep1",
-            baseModelScanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"],
-            partsNames: ["part1BottomSide",  "part1TopSide"]
+            baseModel: BuildingStepBaseModel(names: ["baseStepModelTopSide", "baseStepModelBottomSide"], imageName: ""),
+            parts: [
+                BuildingStepPart(name: "part1BottomSide", imageName: ""),
+                BuildingStepPart(name: "part1TopSide", imageName: "")
+            ]
         )
     ]
     
@@ -36,11 +49,15 @@ class BuildingStepService {
     }
 
     var baseModelScanNames: [String] {
-        return buildingSteps[currentBuildingStepInternal].baseModelScanNames
+        return buildingSteps[currentBuildingStepInternal].baseModel.names
     }
 
-    var partsNames: [String] {
-        return buildingSteps[currentBuildingStepInternal].partsNames
+    var partNames: [String] {
+        return buildingSteps[currentBuildingStepInternal].parts.map({ $0.name })
+    }
+
+    var parts: [BuildingStepPart] {
+        return buildingSteps[currentBuildingStepInternal].parts
     }
 
     func nextBuildingStep() {
