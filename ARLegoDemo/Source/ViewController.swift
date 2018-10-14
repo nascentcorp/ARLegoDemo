@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     private let arEnvironmentService = AREnvironmentService()
     private let buildingStepService = BuildingStepService()
 
+    private let numberOfObjectParts = 10
     private var objectScale: Float = 1.0
 
     @IBOutlet private weak var baseObjectPreviewView: SCNView!
@@ -33,8 +34,12 @@ class ViewController: UIViewController {
     @IBOutlet private weak var btnMinimizeBaseObjectPreview: UIButton!
     @IBOutlet private var cnBaseObjectPreviewTopDistance: NSLayoutConstraint!
     @IBOutlet private var cnBaseObjectPreviewViewHeight: NSLayoutConstraint!
-    @IBOutlet private var cnBaseObjectPreviewViewWidth: NSLayoutConstraint!
+    @IBOutlet private var cnPartSelectorHeight: NSLayoutConstraint!
+    @IBOutlet private weak var cnBaseObjectPreviewViewWidth: NSLayoutConstraint!
+    @IBOutlet private weak var partSelectorView: SKView!
     @IBOutlet private var sceneView: ARSCNView!
+
+    
     
     var shipModel: SCNNode? {
         let shipNode = sceneView.scene.rootNode.childNode(withName: "ship", recursively: false)?.childNode(withName: "shipMesh", recursively: false)
@@ -44,17 +49,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the view's delegate
         sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // Set the scene to the view
+        let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
         sceneView.scene = scene
+
+        let frame = partSelectorView.bounds
+        let partSelectorScene = PartSelectorScene(size: frame.size, numberOfObjectParts: numberOfObjectParts)
+        partSelectorScene.scaleMode = .aspectFill
+        partSelectorView.presentScene(partSelectorScene)
 
         setupObjectPreview()
     }
