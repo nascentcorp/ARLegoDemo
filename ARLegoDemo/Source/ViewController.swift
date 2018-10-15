@@ -41,31 +41,31 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sceneView.delegate = self
-        sceneView.showsStatistics = true
-        let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
-        sceneView.scene = scene
-
+        if ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported {
+            setupARScene()
+        }
         setupAppearance()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
-        guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: buildingStepService.arCatalogName, bundle: nil) else {
-            fatalError("Missing expected asset catalog resources.")
+        if ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported {
+            let configuration = ARWorldTrackingConfiguration()
+            guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: buildingStepService.arCatalogName, bundle: nil) else {
+                fatalError("Missing expected asset catalog resources.")
+            }
+            configuration.detectionObjects = referenceObjects
+            sceneView.session.run(configuration)
         }
-        configuration.detectionObjects = referenceObjects
-        sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // Pause the view's session
-        sceneView.session.pause()
+
+        if ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported {
+            sceneView.session.pause()
+        }
     }
     
     @IBAction func btnBaseObjectPreviewTapped(_ sender: Any) {
@@ -75,6 +75,13 @@ class ViewController: UIViewController {
         }
         objectPreviewViewController.buildingStepPart = buildingStepService.baseModelPart
         present(objectPreviewViewController, animated: true)
+    }
+
+    private func setupARScene() {
+        sceneView.delegate = self
+        sceneView.showsStatistics = true
+        let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
+        sceneView.scene = scene
     }
 
     private func setupAppearance() {
@@ -120,8 +127,10 @@ extension ViewController: ARSCNViewDelegate {
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
+        guard let configuration = session.configuration else { return }
+        if ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported {
+            sceneView.session.run(configuration)
+        }
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
