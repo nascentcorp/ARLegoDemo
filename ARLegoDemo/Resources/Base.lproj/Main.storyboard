@@ -17,9 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS" userLabel="AR Scene View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </arscnView>
+                            <sceneKitView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mij-cc-48w">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </sceneKitView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZm-ZG-0Fh">
                                 <rect key="frame" x="0.0" y="20" width="120" height="144"/>
                                 <subviews>
@@ -42,7 +45,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jkx-j5-Kpg">
-                                <rect key="frame" x="245" y="170" width="130" height="477"/>
+                                <rect key="frame" x="245" y="170" width="130" height="487"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="Ry1-mz-DNS"/>
@@ -132,20 +135,41 @@
                                     <constraint firstItem="QCn-tV-BGS" firstAttribute="trailing" secondItem="7OG-63-RI3" secondAttribute="trailingMargin" id="r9c-mo-Wea"/>
                                 </constraints>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f12-MI-OID">
+                                <rect key="frame" x="135" y="613" width="95" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Tc9-sq-NKx"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="AR environment"/>
+                                    <segment title="3D environment"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="btnSceneSwitchTapped:" destination="BV1-FR-VrT" eventType="valueChanged" id="aMJ-yo-bCq"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Mij-cc-48w" secondAttribute="bottom" id="28H-am-NSh"/>
+                            <constraint firstItem="jkx-j5-Kpg" firstAttribute="leading" secondItem="f12-MI-OID" secondAttribute="trailing" constant="15" id="4FI-Md-7da"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="jkx-j5-Kpg" secondAttribute="trailing" id="A1m-Tv-qJ3"/>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
+                            <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="U0K-SW-4ec" secondAttribute="leading" id="GsS-dJ-CKf"/>
                             <constraint firstItem="jkx-j5-Kpg" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="150" id="N1E-Q4-Vr9"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="f12-MI-OID" secondAttribute="bottom" constant="10" id="PSd-DR-KYb"/>
                             <constraint firstItem="7OG-63-RI3" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="RGa-BQ-W1G"/>
-                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="jkx-j5-Kpg" secondAttribute="bottom" constant="20" id="UTS-5x-mHv"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="jkx-j5-Kpg" secondAttribute="bottom" constant="10" id="UTS-5x-mHv"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="7OG-63-RI3" secondAttribute="trailing" id="VGx-rg-FCw"/>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="VpT-BR-CcM"/>
-                            <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
+                            <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="U0K-SW-4ec" secondAttribute="bottom" id="VpT-BR-CcM"/>
+                            <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="U0K-SW-4ec" secondAttribute="trailing" id="XyZ-9z-H8e"/>
                             <constraint firstItem="lZm-ZG-0Fh" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="doI-OW-D1z"/>
+                            <constraint firstItem="Mij-cc-48w" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="fvr-be-j1B"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="Mij-cc-48w" secondAttribute="trailing" id="iTP-wg-uj6"/>
                             <constraint firstItem="lZm-ZG-0Fh" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="n9B-4z-I5R"/>
+                            <constraint firstItem="Mij-cc-48w" firstAttribute="leading" secondItem="U0K-SW-4ec" secondAttribute="leading" id="qm2-EB-Erd"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
+                            <constraint firstItem="f12-MI-OID" firstAttribute="leading" secondItem="lZm-ZG-0Fh" secondAttribute="trailing" constant="15" id="rxA-Fw-SFG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
@@ -153,7 +177,9 @@
                         <outlet property="cvParts" destination="jkx-j5-Kpg" id="Cu8-OL-mbL"/>
                         <outlet property="ivBaseObjectImage" destination="YwK-Jl-QSh" id="q0O-wC-HiN"/>
                         <outlet property="lblBaseObjectName" destination="QCn-tV-BGS" id="XeS-cm-TVk"/>
-                        <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
+                        <outlet property="sgmSceneSwitch" destination="f12-MI-OID" id="FTf-IU-D36"/>
+                        <outlet property="view3DScene" destination="Mij-cc-48w" id="RHt-VF-x57"/>
+                        <outlet property="viewARScene" destination="BrB-h1-WRS" id="sP1-aq-92T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

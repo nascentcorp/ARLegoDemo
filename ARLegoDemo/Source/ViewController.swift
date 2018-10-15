@@ -29,42 +29,49 @@ class ViewController: UIViewController {
     private let objectPartSize = CGSize(width: 130, height: 130)
     
     @IBOutlet private weak var cvParts: UICollectionView!
-    @IBOutlet weak var ivBaseObjectImage: UIImageView!
-    @IBOutlet weak var lblBaseObjectName: UILabel!
-    @IBOutlet private var sceneView: ARSCNView!
+    @IBOutlet private weak var ivBaseObjectImage: UIImageView!
+    @IBOutlet private weak var lblBaseObjectName: UILabel!
+    @IBOutlet private weak var sgmSceneSwitch: UISegmentedControl!
+    @IBOutlet private weak var view3DScene: SCNView!
+    @IBOutlet private var viewARScene: ARSCNView!
     
     var shipModel: SCNNode? {
-        let shipNode = sceneView.scene.rootNode.childNode(withName: "ship", recursively: false)?.childNode(withName: "shipMesh", recursively: false)
+        let shipNode = viewARScene.scene.rootNode.childNode(withName: "ship", recursively: false)?.childNode(withName: "shipMesh", recursively: false)
         return shipNode
     }
+    
+    lazy var isDeviceARCapable: Bool = {
+        return ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported {
+        if isDeviceARCapable {
             setupARScene()
         }
+        setup3DScene()
         setupAppearance()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported {
+        if isDeviceARCapable {
             let configuration = ARWorldTrackingConfiguration()
             guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: buildingStepService.arCatalogName, bundle: nil) else {
                 fatalError("Missing expected asset catalog resources.")
             }
             configuration.detectionObjects = referenceObjects
-            sceneView.session.run(configuration)
+            viewARScene.session.run(configuration)
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported {
-            sceneView.session.pause()
+        if isDeviceARCapable {
+            viewARScene.session.pause()
         }
     }
     
@@ -77,16 +84,30 @@ class ViewController: UIViewController {
         present(objectPreviewViewController, animated: true)
     }
 
+    @IBAction func btnSceneSwitchTapped(_ sender: UISegmentedControl) {
+        view3DScene.isHidden = (sender.selectedSegmentIndex == 0)
+        viewARScene.isHidden = (sender.selectedSegmentIndex == 1)
+    }
+    
     private func setupARScene() {
-        sceneView.delegate = self
-        sceneView.showsStatistics = true
-        let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
-        sceneView.scene = scene
+        viewARScene.delegate = self
+        setupSceneWorker(viewARScene)
     }
 
+    private func setup3DScene() {
+        setupSceneWorker(view3DScene)
+    }
+    
+    private func setupSceneWorker(_ view: SCNView) {
+        let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
+        view.scene = scene
+        view.showsStatistics = true
+    }
+    
     private func setupAppearance() {
         lblBaseObjectName.text = buildingStepService.baseModelPart.name
         ivBaseObjectImage.image = UIImage(named: buildingStepService.baseModelPart.imageName)
+        sgmSceneSwitch.isHidden = !isDeviceARCapable
     }
     
     //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -127,10 +148,13 @@ extension ViewController: ARSCNViewDelegate {
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
-        guard let configuration = session.configuration else { return }
-        if ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported {
-            sceneView.session.run(configuration)
+        guard
+            let configuration = session.configuration,
+            isDeviceARCapable
+            else {
+                return
         }
+        viewARScene.session.run(configuration)
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -154,7 +178,7 @@ extension ViewController: ARSCNViewDelegate {
     }
 
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        guard let frame = sceneView.session.currentFrame else { return }
+        guard let frame = viewARScene.session.currentFrame else { return }
         updateOnEveryFrame(frame)
     }
 
