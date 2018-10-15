@@ -52,7 +52,7 @@ class ObjectPreviewViewController: UIViewController {
     private func setupObjectPreview(objectType: AcceptedFileType = .obj) {
         guard
             let buildingStepPath = buildingStepPart,
-            let objectPath = Bundle.main.path(forResource: buildingStepPath.name, ofType: buildingStepPath.objectType.rawValue)
+            let objectPath = Bundle.main.path(forResource: buildingStepPath.objectName, ofType: buildingStepPath.objectType.rawValue)
             else {
                 return
         }

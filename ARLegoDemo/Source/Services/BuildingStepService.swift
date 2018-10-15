@@ -11,13 +11,14 @@ import Foundation
 class BuildingStepService {
 
     private struct BuildingStepBaseModel {
-        let names: [String]
-        let imageName: String
+        let part: BuildingStepPart
+        let scanNames: [String]
     }
     
     struct BuildingStepPart {
         let name: String
         let imageName: String
+        let objectName: String
         let objectType: AcceptedFileType
     }
     
@@ -31,10 +32,13 @@ class BuildingStepService {
     private let buildingSteps = [
         BuildingStep(
             arCatalogName: "LegoStep1",
-            baseModel: BuildingStepBaseModel(names: ["baseStepModelTopSide", "baseStepModelBottomSide"], imageName: ""),
+            baseModel: BuildingStepBaseModel(
+                part: BuildingStepPart(name: "This step's base object", imageName: "", objectName: "torus", objectType: .obj),
+                scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]
+            ),
             parts: [
-                BuildingStepPart(name: "cube", imageName: "cube.png", objectType: .obj),
-                BuildingStepPart(name: "statue", imageName: "", objectType: .obj)
+                BuildingStepPart(name: "Cube part", imageName: "cube.png", objectName: "cube", objectType: .obj),
+                BuildingStepPart(name: "Statue part", imageName: "", objectName: "statue", objectType: .obj)
             ]
         )
     ]
@@ -45,12 +49,16 @@ class BuildingStepService {
         return currentBuildingStepInternal
     }
 
-    var catalogName: String {
+    var arCatalogName: String {
         return buildingSteps[currentBuildingStepInternal].arCatalogName
     }
 
+    var baseModelPart: BuildingStepPart {
+        return buildingSteps[currentBuildingStepInternal].baseModel.part
+    }
+
     var baseModelScanNames: [String] {
-        return buildingSteps[currentBuildingStepInternal].baseModel.names
+        return buildingSteps[currentBuildingStepInternal].baseModel.scanNames
     }
 
     var partNames: [String] {

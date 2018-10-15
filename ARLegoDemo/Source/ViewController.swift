@@ -11,8 +11,12 @@ import UIKit
 
 class PartCell: UICollectionViewCell {
 
+    @IBOutlet private weak var ivPartImage: UIImageView!
+    @IBOutlet private weak var lblPartName: UILabel!
+    
     func setup(with part: BuildingStepService.BuildingStepPart) {
-        
+        lblPartName.text = part.name
+        ivPartImage.image = UIImage(named: part.imageName)
     }
 }
 
@@ -25,6 +29,8 @@ class ViewController: UIViewController {
     private let objectPartSize = CGSize(width: 130, height: 130)
     
     @IBOutlet private weak var cvParts: UICollectionView!
+    @IBOutlet weak var ivBaseObjectImage: UIImageView!
+    @IBOutlet weak var lblBaseObjectName: UILabel!
     @IBOutlet private var sceneView: ARSCNView!
     
     var shipModel: SCNNode? {
@@ -39,6 +45,8 @@ class ViewController: UIViewController {
         sceneView.showsStatistics = true
         let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
         sceneView.scene = scene
+
+        setupAppearance()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,11 +54,10 @@ class ViewController: UIViewController {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-        guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: buildingStepService.catalogName, bundle: nil) else {
+        guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: buildingStepService.arCatalogName, bundle: nil) else {
             fatalError("Missing expected asset catalog resources.")
         }
         configuration.detectionObjects = referenceObjects
-        // Run the view's session
         sceneView.session.run(configuration)
     }
     
@@ -63,8 +70,16 @@ class ViewController: UIViewController {
     
     @IBAction func btnBaseObjectPreviewTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let objectPreviewViewController = storyboard.instantiateViewController(withIdentifier: "ObjectPreviewViewController")
+        guard let objectPreviewViewController = storyboard.instantiateViewController(withIdentifier: "ObjectPreviewViewController") as? ObjectPreviewViewController else {
+            return
+        }
+        objectPreviewViewController.buildingStepPart = buildingStepService.baseModelPart
         present(objectPreviewViewController, animated: true)
+    }
+
+    private func setupAppearance() {
+        lblBaseObjectName.text = buildingStepService.baseModelPart.name
+        ivBaseObjectImage.image = UIImage(named: buildingStepService.baseModelPart.imageName)
     }
     
     //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
