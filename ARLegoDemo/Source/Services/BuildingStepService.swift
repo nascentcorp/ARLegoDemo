@@ -33,12 +33,12 @@ class BuildingStepService {
         BuildingStep(
             arCatalogName: "LegoStep1",
             baseModel: BuildingStepBaseModel(
-                part: BuildingStepPart(name: "This step's base object", imageName: "", objectName: "torus", objectType: .obj),
+                part: BuildingStepPart(name: "This step's base object", imageName: "torus.png", objectName: "torus", objectType: .obj),
                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]
             ),
             parts: [
                 BuildingStepPart(name: "Cube part", imageName: "cube.png", objectName: "cube", objectType: .obj),
-                BuildingStepPart(name: "Statue part", imageName: "", objectName: "statue", objectType: .obj)
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", objectName: "statue", objectType: .obj)
             ]
         )
     ]

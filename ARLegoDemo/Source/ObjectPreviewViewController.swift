@@ -26,6 +26,8 @@ class ObjectPreviewViewController: UIViewController {
 
     var buildingStepPart: BuildingStepService.BuildingStepPart?
     
+    @IBOutlet private weak var lblPartDescription: UILabel!
+    @IBOutlet private weak var lblPartName: UILabel!
     @IBOutlet private weak var objectPreviewView: SCNView!
 
     deinit {
@@ -43,10 +45,16 @@ class ObjectPreviewViewController: UIViewController {
         super.viewDidLoad()
         
         setupObjectPreview()
+        setupAppearance()
     }
     
     @IBAction func btnDismissTapped(_ sender: Any) {
         dismiss(animated: true)
+    }
+    
+    private func setupAppearance() {
+        lblPartName.text = buildingStepPart?.name
+        lblPartDescription.text = "Some long part description can go in here.\nWe also support multline descriptions."
     }
     
     private func setupObjectPreview(objectType: AcceptedFileType = .obj) {

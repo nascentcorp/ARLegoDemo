@@ -181,20 +181,41 @@
                                     <constraint firstAttribute="height" constant="350" id="zXq-be-wMM"/>
                                 </constraints>
                             </sceneKitView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Part name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUq-tn-2uX">
+                                <rect key="frame" x="20" y="420" width="335" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Part description" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tri-SK-ABo">
+                                <rect key="frame" x="40" y="450.5" width="335" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="tri-SK-ABo" firstAttribute="top" secondItem="jUq-tn-2uX" secondAttribute="bottom" constant="10" id="23b-mi-xGW"/>
                             <constraint firstItem="wfd-1b-NNu" firstAttribute="top" secondItem="XDV-Rf-Sfp" secondAttribute="top" id="5zZ-bZ-a2G"/>
+                            <constraint firstItem="tri-SK-ABo" firstAttribute="trailing" secondItem="Lg8-M6-ioN" secondAttribute="trailing" constant="20" id="CMN-mf-Ora"/>
+                            <constraint firstItem="L5f-Od-es0" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tri-SK-ABo" secondAttribute="bottom" constant="30" id="Emu-72-0KL"/>
                             <constraint firstItem="wfd-1b-NNu" firstAttribute="leading" secondItem="XDV-Rf-Sfp" secondAttribute="leading" id="Gqb-y3-Crd"/>
+                            <constraint firstItem="jUq-tn-2uX" firstAttribute="top" secondItem="Lg8-M6-ioN" secondAttribute="bottom" constant="30" id="I9d-88-6Y5"/>
                             <constraint firstAttribute="trailing" secondItem="wfd-1b-NNu" secondAttribute="trailing" id="LXD-1s-zEg"/>
                             <constraint firstItem="Lg8-M6-ioN" firstAttribute="leading" secondItem="L5f-Od-es0" secondAttribute="leading" constant="20" id="gPf-Uc-xes"/>
+                            <constraint firstItem="jUq-tn-2uX" firstAttribute="trailing" secondItem="Lg8-M6-ioN" secondAttribute="trailing" id="kKg-D5-ASO"/>
                             <constraint firstItem="Lg8-M6-ioN" firstAttribute="top" secondItem="L5f-Od-es0" secondAttribute="top" constant="20" id="o1h-EB-weP"/>
                             <constraint firstItem="L5f-Od-es0" firstAttribute="trailing" secondItem="Lg8-M6-ioN" secondAttribute="trailing" constant="20" id="rfY-iZ-UxW"/>
+                            <constraint firstItem="tri-SK-ABo" firstAttribute="leading" secondItem="Lg8-M6-ioN" secondAttribute="leading" constant="20" id="rmz-F3-CzT"/>
                             <constraint firstAttribute="bottom" secondItem="wfd-1b-NNu" secondAttribute="bottom" id="trs-3f-PDh"/>
+                            <constraint firstItem="jUq-tn-2uX" firstAttribute="leading" secondItem="Lg8-M6-ioN" secondAttribute="leading" id="zOz-8U-Hkf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="L5f-Od-es0"/>
                     </view>
                     <connections>
+                        <outlet property="lblPartDescription" destination="tri-SK-ABo" id="E5p-H2-OKx"/>
+                        <outlet property="lblPartName" destination="jUq-tn-2uX" id="CPT-9C-Dig"/>
                         <outlet property="objectPreviewView" destination="Lg8-M6-ioN" id="3mK-bZ-Vbu"/>
                     </connections>
                 </viewController>
