@@ -15,6 +15,9 @@
 		94125C0D21734BF3004D1A7E /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94125C0C21734BF3004D1A7E /* CGSize+Extensions.swift */; };
 		94125C0F21737017004D1A7E /* ObjectPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94125C0E21737017004D1A7E /* ObjectPreviewViewController.swift */; };
 		9427E45521733083001291AD /* SwiftySkScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9427E45421733083001291AD /* SwiftySkScrollView.swift */; };
+		942D1921217488840066795B /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = 942D191E217488840066795B /* cube.png */; };
+		942D1922217488840066795B /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 942D191F217488840066795B /* cube.obj */; };
+		942D1923217488840066795B /* cube.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 942D1920217488840066795B /* cube.mtl */; };
 		943C5057215E730D002A3773 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943C5056215E730D002A3773 /* AppDelegate.swift */; };
 		943C5059215E730D002A3773 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 943C5058215E730D002A3773 /* art.scnassets */; };
 		943C505B215E730D002A3773 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943C505A215E730D002A3773 /* ViewController.swift */; };
@@ -39,6 +42,9 @@
 		94125C0C21734BF3004D1A7E /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		94125C0E21737017004D1A7E /* ObjectPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectPreviewViewController.swift; sourceTree = "<group>"; };
 		9427E45421733083001291AD /* SwiftySkScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftySkScrollView.swift; sourceTree = "<group>"; };
+		942D191E217488840066795B /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cube.png; sourceTree = "<group>"; };
+		942D191F217488840066795B /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
+		942D1920217488840066795B /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.mtl; sourceTree = "<group>"; };
 		943C5053215E730D002A3773 /* ARLegoDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARLegoDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		943C5056215E730D002A3773 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		943C5058215E730D002A3773 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -82,6 +88,16 @@
 				9427E45421733083001291AD /* SwiftySkScrollView.swift */,
 			);
 			path = External;
+			sourceTree = "<group>";
+		};
+		942D191D217488840066795B /* Cube */ = {
+			isa = PBXGroup;
+			children = (
+				942D191E217488840066795B /* cube.png */,
+				942D191F217488840066795B /* cube.obj */,
+				942D1920217488840066795B /* cube.mtl */,
+			);
+			path = Cube;
 			sourceTree = "<group>";
 		};
 		9433B5562162755900B69526 /* Source */ = {
@@ -140,6 +156,7 @@
 		9480652421663C8C00DB1E76 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				942D191D217488840066795B /* Cube */,
 				9480652521663C8C00DB1E76 /* Statue */,
 			);
 			path = Objects;
@@ -231,7 +248,10 @@
 				9480652F21663C8C00DB1E76 /* statue.obj in Resources */,
 				943C5059215E730D002A3773 /* art.scnassets in Resources */,
 				943C5063215E730E002A3773 /* LaunchScreen.storyboard in Resources */,
+				942D1922217488840066795B /* cube.obj in Resources */,
+				942D1923217488840066795B /* cube.mtl in Resources */,
 				9480652C21663C8C00DB1E76 /* statue_d.dds in Resources */,
+				942D1921217488840066795B /* cube.png in Resources */,
 				943C5060215E730E002A3773 /* Assets.xcassets in Resources */,
 				9480652B21663C8C00DB1E76 /* statue_s.dds in Resources */,
 				943C505E215E730D002A3773 /* Main.storyboard in Resources */,

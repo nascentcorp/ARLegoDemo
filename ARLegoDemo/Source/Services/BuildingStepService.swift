@@ -18,6 +18,7 @@ class BuildingStepService {
     struct BuildingStepPart {
         let name: String
         let imageName: String
+        let objectType: AcceptedFileType
     }
     
     private struct BuildingStep {
@@ -32,8 +33,8 @@ class BuildingStepService {
             arCatalogName: "LegoStep1",
             baseModel: BuildingStepBaseModel(names: ["baseStepModelTopSide", "baseStepModelBottomSide"], imageName: ""),
             parts: [
-                BuildingStepPart(name: "part1BottomSide", imageName: ""),
-                BuildingStepPart(name: "part1TopSide", imageName: "")
+                BuildingStepPart(name: "cube", imageName: "cube.png", objectType: .obj),
+                BuildingStepPart(name: "statue", imageName: "", objectType: .obj)
             ]
         )
     ]

@@ -13,9 +13,10 @@ import UIKit
 enum AcceptedFileType : String {
     case obj
     case stl
+    case dae
     
     static var acceptedFileTypeExtensions: [String] {
-        return [AcceptedFileType.obj, AcceptedFileType.stl].map { $0.rawValue }
+        return [AcceptedFileType.obj, AcceptedFileType.stl, AcceptedFileType.dae].map { $0.rawValue }
     }
 }
 
@@ -23,6 +24,8 @@ class ObjectPreviewViewController: UIViewController {
 
     private var objectScale: Float = 1.0
 
+    var buildingStepPart: BuildingStepService.BuildingStepPart?
+    
     @IBOutlet private weak var objectPreviewView: SCNView!
 
     deinit {
@@ -47,7 +50,12 @@ class ObjectPreviewViewController: UIViewController {
     }
     
     private func setupObjectPreview(objectType: AcceptedFileType = .obj) {
-        guard let objectPath = Bundle.main.path(forResource: "statue", ofType: objectType.rawValue) else { return }
+        guard
+            let buildingStepPath = buildingStepPart,
+            let objectPath = Bundle.main.path(forResource: buildingStepPath.name, ofType: buildingStepPath.objectType.rawValue)
+            else {
+                return
+        }
         let objectURL = URL(fileURLWithPath: objectPath)
         let asset = MDLAsset(url: objectURL)
         let objectScene = SCNScene(mdlAsset: asset)

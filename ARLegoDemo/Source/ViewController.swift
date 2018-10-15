@@ -145,7 +145,10 @@ extension ViewController: UICollectionViewDelegate {
         collectionView.deselectItem(at: indexPath, animated: true)
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let objectPreviewViewController = storyboard.instantiateViewController(withIdentifier: "ObjectPreviewViewController")
+        guard let objectPreviewViewController = storyboard.instantiateViewController(withIdentifier: "ObjectPreviewViewController") as? ObjectPreviewViewController else {
+            return
+        }
+        objectPreviewViewController.buildingStepPart = buildingStepService.parts[indexPath.row]
         present(objectPreviewViewController, animated: true)
     }
 }
