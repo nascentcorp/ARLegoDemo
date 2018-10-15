@@ -38,7 +38,14 @@ class BuildingStepService {
             ),
             parts: [
                 BuildingStepPart(name: "Cube part", imageName: "cube.png", objectName: "cube", objectType: .obj),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", objectName: "statue", objectType: .obj)
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", objectName: "statue", objectType: .obj),
+                BuildingStepPart(name: "Torus part", imageName: "torus.png", objectName: "torus", objectType: .obj),
+                BuildingStepPart(name: "Cube part", imageName: "cube.png", objectName: "cube", objectType: .obj),
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", objectName: "statue", objectType: .obj),
+                BuildingStepPart(name: "Torus part", imageName: "torus.png", objectName: "torus", objectType: .obj),
+                BuildingStepPart(name: "Cube part", imageName: "cube.png", objectName: "cube", objectType: .obj),
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", objectName: "statue", objectType: .obj),
+                BuildingStepPart(name: "Torus part", imageName: "torus.png", objectName: "torus", objectType: .obj)
             ]
         )
     ]
