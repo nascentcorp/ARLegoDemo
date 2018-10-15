@@ -52,13 +52,10 @@ class ObjectPreviewViewController: UIViewController {
     private func setupObjectPreview(objectType: AcceptedFileType = .obj) {
         guard
             let buildingStepPath = buildingStepPart,
-            let objectPath = Bundle.main.path(forResource: buildingStepPath.objectName, ofType: buildingStepPath.objectType.rawValue)
+            let objectScene = SCNScene(named: "\(buildingStepPath.objectName).\(buildingStepPath.objectType.rawValue)")
             else {
                 return
         }
-        let objectURL = URL(fileURLWithPath: objectPath)
-        let asset = MDLAsset(url: objectURL)
-        let objectScene = SCNScene(mdlAsset: asset)
         let objectNode = objectScene.rootNode
         adjustObjectGeometry(inNode: objectNode, objectType: objectType)
         
