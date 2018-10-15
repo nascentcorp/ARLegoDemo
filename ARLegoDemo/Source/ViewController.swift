@@ -107,6 +107,7 @@ class ViewController: UIViewController {
         addParts(toScene: scene)
 
         viewARScene.scene = scene
+        viewARScene.showsStatistics = true
         viewARScene.delegate = self
         viewARScene.automaticallyUpdatesLighting = true
     }
@@ -130,27 +131,25 @@ class ViewController: UIViewController {
         addParts(toScene: mainScene)
         
         view3DScene.scene = mainScene
+        view3DScene.showsStatistics = true
         view3DScene.backgroundColor = UIColor.black
         view3DScene.allowsCameraControl = true
         view3DScene.autoenablesDefaultLighting = true
     }
 
     private func addParts(toScene scene: SCNScene) {
-        addBaseObjectPart(toScene: scene)
-    }
-
-    private func addBaseObjectPart(toScene scene: SCNScene) {
         addPartWorker(buildingStepService.baseModelPart, toScene: scene)
-    }
-
-    private func addBasePart(toScene scene: SCNScene) {
         buildingStepService.parts.forEach({ part in
-            self.addPartWorker(buildingStepService.baseModelPart, toScene: scene)
+            self.addPartWorker(part, toScene: scene)
         })
     }
     
     private func addPartWorker(_ part: BuildingStepService.BuildingStepPart, toScene scene: SCNScene) {
-        
+        let partScene = SCNScene.create(fromPart: part)
+        let partNode = partScene.rootNode
+        partNode.adjustObjectGeometry(objectType: part.objectType)
+
+        scene.rootNode.addChildNode(partNode)
     }
     
     //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
