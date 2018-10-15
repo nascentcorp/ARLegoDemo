@@ -28,6 +28,7 @@
 		9478C17C217491BD00F05576 /* torus.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 9478C17A217491BD00F05576 /* torus.mtl */; };
 		9478C17E2174985100F05576 /* statue.png in Resources */ = {isa = PBXBuildFile; fileRef = 9478C17D2174985100F05576 /* statue.png */; };
 		9478C1802174994100F05576 /* torus.png in Resources */ = {isa = PBXBuildFile; fileRef = 9478C17F2174994100F05576 /* torus.png */; };
+		9478C1822174BEB500F05576 /* SCNNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9478C1812174BEB500F05576 /* SCNNode+Extensions.swift */; };
 		9480652B21663C8C00DB1E76 /* statue_s.dds in Resources */ = {isa = PBXBuildFile; fileRef = 9480652621663C8C00DB1E76 /* statue_s.dds */; };
 		9480652C21663C8C00DB1E76 /* statue_d.dds in Resources */ = {isa = PBXBuildFile; fileRef = 9480652721663C8C00DB1E76 /* statue_d.dds */; };
 		9480652D21663C8C00DB1E76 /* statue.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 9480652821663C8C00DB1E76 /* statue.mtl */; };
@@ -61,6 +62,7 @@
 		9478C17A217491BD00F05576 /* torus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = torus.mtl; sourceTree = "<group>"; };
 		9478C17D2174985100F05576 /* statue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = statue.png; sourceTree = "<group>"; };
 		9478C17F2174994100F05576 /* torus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = torus.png; sourceTree = "<group>"; };
+		9478C1812174BEB500F05576 /* SCNNode+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode+Extensions.swift"; sourceTree = "<group>"; };
 		9480652621663C8C00DB1E76 /* statue_s.dds */ = {isa = PBXFileReference; lastKnownFileType = file; path = statue_s.dds; sourceTree = "<group>"; };
 		9480652721663C8C00DB1E76 /* statue_d.dds */ = {isa = PBXFileReference; lastKnownFileType = file; path = statue_d.dds; sourceTree = "<group>"; };
 		9480652821663C8C00DB1E76 /* statue.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = statue.mtl; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */,
+				9478C1812174BEB500F05576 /* SCNNode+Extensions.swift */,
 				948199D9216633AC008D6D2E /* MDLMaterial+Extensions.swift */,
 				94125C0A21734869004D1A7E /* UIColor+Extensions.swift */,
 				94125C0C21734BF3004D1A7E /* CGSize+Extensions.swift */,
@@ -299,6 +302,7 @@
 				943C5057215E730D002A3773 /* AppDelegate.swift in Sources */,
 				940A79AE2164D29500C049CD /* BuildingStepService.swift in Sources */,
 				948199DA216633AC008D6D2E /* MDLMaterial+Extensions.swift in Sources */,
+				9478C1822174BEB500F05576 /* SCNNode+Extensions.swift in Sources */,
 				94DC82752166302500BC3CA6 /* SCNVector3+Extensions.swift in Sources */,
 				9427E45521733083001291AD /* SwiftySkScrollView.swift in Sources */,
 			);

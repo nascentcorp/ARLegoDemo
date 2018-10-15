@@ -81,7 +81,7 @@ class ObjectPreviewViewController: UIViewController {
         let mainScene = SCNScene()
         mainScene.rootNode.addChildNode(objectNode)
         mainScene.rootNode.addChildNode(cameraOrbit)
-        mainScene.rootNode.addChildNode(createPlaneNode())
+        mainScene.rootNode.createPlaneNode()
         
         objectPreviewView.scene = mainScene
         objectPreviewView.backgroundColor = UIColor.black
@@ -129,20 +129,5 @@ class ObjectPreviewViewController: UIViewController {
         let previousTransform = node.transform
         let scale = SCNMatrix4MakeScale(objectScale, objectScale, objectScale)
         node.transform = SCNMatrix4Mult(scale, previousTransform)
-    }
-    
-    private func createPlaneNode() -> SCNNode {
-        let plane = SCNPlane(width: 2.0, height: 2.0)
-        plane.widthSegmentCount = 20
-        plane.heightSegmentCount = 20
-        
-        guard let material = plane.firstMaterial else { return SCNNode() }
-        material.isDoubleSided = true
-        material.diffuse.contents = UIColor.red
-        material.fillMode = .lines
-        
-        let planeNode = SCNNode(geometry: plane)
-        planeNode.transform = SCNMatrix4MakeRotation(Float(Double.pi * 1 / 2), 1.0, 0.0, 0.0)
-        return planeNode
     }
 }

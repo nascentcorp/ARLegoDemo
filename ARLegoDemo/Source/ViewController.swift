@@ -90,24 +90,44 @@ class ViewController: UIViewController {
     }
     
     private func setupARScene() {
+        // TODO: See if we can initialize this with an empty scene.
+        let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
+        viewARScene.scene = scene
         viewARScene.delegate = self
-        setupSceneWorker(viewARScene)
+        viewARScene.automaticallyUpdatesLighting = true
     }
 
     private func setup3DScene() {
-        setupSceneWorker(view3DScene)
+        let camera = SCNCamera()
+        camera.zNear = 0.1
+        
+        let cameraNode = SCNNode()
+        cameraNode.camera = camera
+        cameraNode.position = SCNVector3(x: 0, y: 0.3, z: 1.2)
+        
+        let cameraOrbit = SCNNode()
+        cameraOrbit.addChildNode(cameraNode)
+        cameraOrbit.eulerAngles.x -= Float(Double.pi * 0.5 / 4)
+        
+        let mainScene = SCNScene()
+        mainScene.rootNode.addChildNode(cameraOrbit)
+        mainScene.rootNode.createPlaneNode(color: .yellow)
+        
+        view3DScene.scene = mainScene
+        view3DScene.backgroundColor = UIColor.black
+        view3DScene.allowsCameraControl = true
+        view3DScene.autoenablesDefaultLighting = true
     }
-    
-    private func setupSceneWorker(_ view: SCNView) {
-        let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
-        view.scene = scene
-        view.showsStatistics = true
-    }
-    
+
     private func setupAppearance() {
         lblBaseObjectName.text = buildingStepService.baseModelPart.name
         ivBaseObjectImage.image = UIImage(named: buildingStepService.baseModelPart.imageName)
-        sgmSceneSwitch.isHidden = !isDeviceARCapable
+        
+        if !isDeviceARCapable {
+            sgmSceneSwitch.isHidden = true
+            view3DScene.isHidden = false
+            viewARScene.isHidden = true
+        }
     }
     
     //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
