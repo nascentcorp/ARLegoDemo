@@ -33,6 +33,8 @@ class ViewController: UIViewController {
     private let cellName = String(describing: PartCell.self)
     private let objectPartSize = CGSize(width: 130, height: 130)
     
+    private var scene3DSetup = false
+
     @IBOutlet private weak var cvParts: UICollectionView!
     @IBOutlet private weak var ivBaseObjectImage: UIImageView!
     @IBOutlet private weak var lblBaseObjectName: UILabel!
@@ -52,10 +54,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // We want 3D scene to be setup when first selected on AR capable devices.
         if isDeviceARCapable {
             setupARScene()
         }
-        setup3DScene()
+        else {
+            setup3DScene()
+        }
         setupAppearance()
     }
     
@@ -90,8 +95,13 @@ class ViewController: UIViewController {
     }
 
     @IBAction func btnSceneSwitchTapped(_ sender: UISegmentedControl) {
-        view3DScene.isHidden = (sender.selectedSegmentIndex == 0)
-        viewARScene.isHidden = (sender.selectedSegmentIndex == 1)
+        let sceneARSelected = (sender.selectedSegmentIndex == 0)
+        if !sceneARSelected && !scene3DSetup {
+            scene3DSetup = true
+            setup3DScene()
+        }
+        view3DScene.isHidden = sceneARSelected
+        viewARScene.isHidden = !sceneARSelected
     }
     
     private func setupAppearance() {
