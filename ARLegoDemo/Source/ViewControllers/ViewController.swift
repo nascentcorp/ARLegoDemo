@@ -131,8 +131,7 @@ class ViewController: UIViewController {
     }
     
     private func setupARScene() {
-        // TODO: See if we can initialize this with an empty scene.
-        let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
+        let scene = SCNScene()
 
         addParts(toScene: scene, sceneType: .sceneAR)
 
