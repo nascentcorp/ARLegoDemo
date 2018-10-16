@@ -117,12 +117,11 @@
 			children = (
 				9427E45321733071001291AD /* External */,
 				94DC82732166301000BC3CA6 /* Extensions */,
+				94FF995621760AC30054085A /* Nodes */,
+				94FF995821760AE60054085A /* Scenes */,
 				940A79AA2164BDF100C049CD /* Services */,
-				943C505A215E730D002A3773 /* ViewController.swift */,
-				94125C0E21737017004D1A7E /* ObjectPreviewViewController.swift */,
+				94FF995721760AD40054085A /* ViewControllers */,
 				943C5056215E730D002A3773 /* AppDelegate.swift */,
-				94125C0621733CBA004D1A7E /* PartSelectorScene.swift */,
-				94125C08217341E5004D1A7E /* GeometryNode.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -209,6 +208,31 @@
 				94125C0C21734BF3004D1A7E /* CGSize+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		94FF995621760AC30054085A /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				94125C08217341E5004D1A7E /* GeometryNode.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		94FF995721760AD40054085A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				943C505A215E730D002A3773 /* ViewController.swift */,
+				94125C0E21737017004D1A7E /* ObjectPreviewViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		94FF995821760AE60054085A /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				94125C0621733CBA004D1A7E /* PartSelectorScene.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
