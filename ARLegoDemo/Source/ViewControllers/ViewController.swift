@@ -42,6 +42,17 @@ class ViewController: UIViewController {
     @IBOutlet private weak var view3DScene: SCNView!
     @IBOutlet private var viewARScene: ARSCNView!
     
+    var activeSceneType: SceneType {
+        if !isDeviceARCapable {
+            return .scene3D
+        }
+        return (sgmSceneSwitch.selectedSegmentIndex == 0) ? .sceneAR : .scene3D
+    }
+
+    var activeSceneView: SCNView {
+        return (activeSceneType == .sceneAR) ? viewARScene : view3DScene
+    }
+    
     var shipModel: SCNNode? {
         let shipNode = viewARScene.scene.rootNode.childNode(withName: "ship", recursively: false)?.childNode(withName: "shipMesh", recursively: false)
         return shipNode
@@ -178,7 +189,8 @@ class ViewController: UIViewController {
         )
     {
         let partScene = SCNScene.create(fromPart: part)
-        let partNode = partScene.rootNode
+        guard let partNode = partScene.rootNode.childNodes.first else { return }
+        partNode.setValue(part, forKey: "part")
         partNode.adjustObjectGeometry(objectType: part.objectType, scale: (sceneType == .scene3D) ? 0.3 : 0.2)
 
         scene.rootNode.addChildNode(partNode)
@@ -197,7 +209,7 @@ class ViewController: UIViewController {
         partNode.runAction(sequence)
     }
     
-    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        guard let touch = touches.first else { return }
 //        let results = sceneView.hitTest(touch.location(in: sceneView), types: [.featurePoint])
 //
@@ -212,6 +224,31 @@ class ViewController: UIViewController {
 //        sceneView.scene.rootNode.addChildNode(shipModelNode)
 //        shipModelNode.position = hitPosition
 //    }
+}
+
+extension ViewController {
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let results = activeSceneView.hitTest(touch.location(in: activeSceneView), options: nil)
+        
+        guard let node = results.first?.node else { return }
+        
+        if let part = node.value(forKey: "part") {
+            print(part)
+        }
+
+//        guard let hitFeature = results.last else { return }
+//        let hitTransform = hitFeature.worldTransform
+//        let hitPosition = SCNVector3Make(hitTransform.columns.3.x,
+//                                         hitTransform.columns.3.y,
+//                                         hitTransform.columns.3.z)
+//        guard let shipModelNode = shipModel else {
+//            return
+//        }
+//        sceneView.scene.rootNode.addChildNode(shipModelNode)
+//        shipModelNode.position = hitPosition
+    }
 }
 
 extension ViewController: ARSCNViewDelegate {
