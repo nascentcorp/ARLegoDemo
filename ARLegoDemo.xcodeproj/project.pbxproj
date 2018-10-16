@@ -37,7 +37,6 @@
 		9480652F21663C8C00DB1E76 /* statue.obj in Resources */ = {isa = PBXBuildFile; fileRef = 9480652A21663C8C00DB1E76 /* statue.obj */; };
 		948199DA216633AC008D6D2E /* MDLMaterial+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948199D9216633AC008D6D2E /* MDLMaterial+Extensions.swift */; };
 		94DC82752166302500BC3CA6 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */; };
-		94FF995A21760D6B0054085A /* PartNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF995921760D6B0054085A /* PartNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,7 +72,6 @@
 		9480652A21663C8C00DB1E76 /* statue.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = statue.obj; sourceTree = "<group>"; };
 		948199D9216633AC008D6D2E /* MDLMaterial+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLMaterial+Extensions.swift"; sourceTree = "<group>"; };
 		94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
-		94FF995921760D6B0054085A /* PartNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,7 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				94125C08217341E5004D1A7E /* GeometryNode.swift */,
-				94FF995921760D6B0054085A /* PartNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -326,7 +323,6 @@
 				94125C0B21734869004D1A7E /* UIColor+Extensions.swift in Sources */,
 				94125C09217341E5004D1A7E /* GeometryNode.swift in Sources */,
 				943C505B215E730D002A3773 /* ViewController.swift in Sources */,
-				94FF995A21760D6B0054085A /* PartNode.swift in Sources */,
 				94125C0F21737017004D1A7E /* ObjectPreviewViewController.swift in Sources */,
 				94125C0D21734BF3004D1A7E /* CGSize+Extensions.swift in Sources */,
 				940A79AC2164BE1E00C049CD /* AREnvironmentService.swift in Sources */,

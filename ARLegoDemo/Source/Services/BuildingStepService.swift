@@ -18,6 +18,7 @@ class BuildingStepService {
     struct BuildingStepPart {
         let name: String
         let imageName: String
+        let isBaseModel: Bool
         let objectName: String
         let objectType: AcceptedFileType
     }
@@ -33,19 +34,19 @@ class BuildingStepService {
         BuildingStep(
             arCatalogName: "LegoStep1",
             baseModel: BuildingStepBaseModel(
-                part: BuildingStepPart(name: "This step's base object", imageName: "torus.png", objectName: "torus", objectType: .obj),
+                part: BuildingStepPart(name: "This step's base object", imageName: "torus.png", isBaseModel: true, objectName: "torus", objectType: .obj),
                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]
             ),
             parts: [
-                BuildingStepPart(name: "Cube part", imageName: "cube.png", objectName: "cube", objectType: .obj),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", objectName: "statue", objectType: .obj),
-                BuildingStepPart(name: "Torus part", imageName: "torus.png", objectName: "torus", objectType: .obj),
-                BuildingStepPart(name: "Cube part", imageName: "cube.png", objectName: "cube", objectType: .obj),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", objectName: "statue", objectType: .obj),
-                BuildingStepPart(name: "Torus part", imageName: "torus.png", objectName: "torus", objectType: .obj),
-                BuildingStepPart(name: "Cube part", imageName: "cube.png", objectName: "cube", objectType: .obj),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", objectName: "statue", objectType: .obj),
-                BuildingStepPart(name: "Torus part", imageName: "torus.png", objectName: "torus", objectType: .obj)
+                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj),
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj),
+                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj),
+                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj),
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj),
+                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj),
+                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj),
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj),
+                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj)
             ]
         )
     ]

@@ -25,6 +25,10 @@ enum SceneType {
     case scene3D
 }
 
+enum PartNodeKeys: String {
+    case part
+}
+
 class ViewController: UIViewController {
 
     private let arEnvironmentService = AREnvironmentService()
@@ -190,7 +194,7 @@ class ViewController: UIViewController {
     {
         let partScene = SCNScene.create(fromPart: part)
         guard let partNode = partScene.rootNode.childNodes.first else { return }
-        partNode.setValue(part, forKey: "part")
+        partNode.setValue(part, forKey: PartNodeKeys.part.rawValue)
         partNode.adjustObjectGeometry(objectType: part.objectType, scale: (sceneType == .scene3D) ? 0.3 : 0.2)
 
         scene.rootNode.addChildNode(partNode)
@@ -232,10 +236,20 @@ extension ViewController {
         guard let touch = touches.first else { return }
         let results = activeSceneView.hitTest(touch.location(in: activeSceneView), options: nil)
         
-        guard let node = results.first?.node else { return }
+        guard let scene = activeSceneView.scene else { return }
+        guard let node = results.first?.node else {
+            highlightWorker(SCNNode(), scene: scene, toggleHighlight: true)
+            return
+        }
         
-        if let part = node.value(forKey: "part") {
-            print(part)
+        if
+            let part = node.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart,
+            !part.isBaseModel
+        {
+            highlight(node, scene: scene)
+        }
+        else {
+            highlightWorker(SCNNode(), scene: scene, toggleHighlight: true)
         }
 
 //        guard let hitFeature = results.last else { return }
@@ -248,6 +262,34 @@ extension ViewController {
 //        }
 //        sceneView.scene.rootNode.addChildNode(shipModelNode)
 //        shipModelNode.position = hitPosition
+    }
+
+    private func highlight(_ node: SCNNode, scene: SCNScene) {
+        highlightWorker(node, scene: scene)
+    }
+
+    private func highlightWorker(_ node: SCNNode, scene: SCNScene, toggleHighlight: Bool? = nil) {
+        scene.rootNode.childNodes.forEach({ otherPartNode in
+            guard
+                let part = otherPartNode.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart,
+                !part.isBaseModel
+                else {
+                    return
+            }
+            let lowOpacity: CGFloat = 0.3
+            let highOpacity: CGFloat = 1.0
+            let targetOpacity: CGFloat = (toggleHighlight != nil)
+                ? ((toggleHighlight ?? true)
+                    ? highOpacity
+                    : lowOpacity
+                    )
+                : ((otherPartNode == node)
+                    ? highOpacity
+                    : lowOpacity
+            )
+            let opacityAction = SCNAction.fadeOpacity(to: targetOpacity, duration: 0.3)
+            otherPartNode.runAction(opacityAction)
+        })
     }
 }
 
