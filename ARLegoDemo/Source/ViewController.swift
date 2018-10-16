@@ -20,6 +20,11 @@ class PartCell: UICollectionViewCell {
     }
 }
 
+enum SceneType {
+    case sceneAR
+    case scene3D
+}
+
 class ViewController: UIViewController {
 
     private let arEnvironmentService = AREnvironmentService()
@@ -104,7 +109,7 @@ class ViewController: UIViewController {
         // TODO: See if we can initialize this with an empty scene.
         let scene = SCNScene(named: "art.scnassets/ARLegoDemo.scn")!
 
-        addParts(toScene: scene)
+        addParts(toScene: scene, sceneType: .sceneAR)
 
         viewARScene.scene = scene
         viewARScene.showsStatistics = true
@@ -128,7 +133,7 @@ class ViewController: UIViewController {
         mainScene.rootNode.addChildNode(cameraOrbit)
         mainScene.rootNode.createPlaneNode(color: .yellow)
         
-        addParts(toScene: mainScene)
+        addParts(toScene: mainScene, sceneType: .scene3D)
         
         view3DScene.scene = mainScene
         view3DScene.showsStatistics = true
@@ -137,19 +142,49 @@ class ViewController: UIViewController {
         view3DScene.autoenablesDefaultLighting = true
     }
 
-    private func addParts(toScene scene: SCNScene) {
-        addPartWorker(buildingStepService.baseModelPart, toScene: scene)
-        buildingStepService.parts.forEach({ part in
-            self.addPartWorker(part, toScene: scene)
-        })
+    private func addParts(toScene scene: SCNScene, sceneType: SceneType) {
+        addPartWorker(buildingStepService.baseModelPart, toScene: scene, sceneType: sceneType)
+        for i in 0..<buildingStepService.parts.count {
+            let part = buildingStepService.parts[i]
+            let radius = (sceneType == .scene3D) ? 0.7 : 0.5
+            let angle = Double(i) / (Double(buildingStepService.parts.count) / 2.0) * Double.pi
+            let position = SCNVector3(
+                radius * cos(angle),
+                0.0,
+                radius * sin(angle)
+            )
+            let delayFactor = Double(i) / Double(buildingStepService.parts.count)
+            addPartWorker(part, toScene: scene, sceneType: sceneType, position: position, shouldAnimate: true, delayFactor: delayFactor)
+        }
     }
     
-    private func addPartWorker(_ part: BuildingStepService.BuildingStepPart, toScene scene: SCNScene) {
+    private func addPartWorker(
+        _ part: BuildingStepService.BuildingStepPart,
+        toScene scene: SCNScene,
+        sceneType: SceneType,
+        position: SCNVector3 = SCNVector3(),
+        shouldAnimate: Bool = false,
+        delayFactor: Double = 0.0
+        )
+    {
         let partScene = SCNScene.create(fromPart: part)
         let partNode = partScene.rootNode
-        partNode.adjustObjectGeometry(objectType: part.objectType)
+        partNode.adjustObjectGeometry(objectType: part.objectType, scale: (sceneType == .scene3D) ? 0.3 : 0.2)
 
         scene.rootNode.addChildNode(partNode)
+
+        if !shouldAnimate {
+            partNode.position = position
+            return
+        }
+        
+        let animationDuration = 1.0
+        let rotate = SCNAction.rotateBy(x: 0, y: CGFloat(4 * Float.pi), z: 0, duration: 1.5 * animationDuration)
+        let move = SCNAction.move(to: position, duration: animationDuration)
+        let initialDelay = SCNAction.wait(duration: delayFactor * 1.5 * animationDuration)
+        let group = SCNAction.group([rotate, move])
+        let sequence = SCNAction.sequence([initialDelay, group])
+        partNode.runAction(sequence)
     }
     
     //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
