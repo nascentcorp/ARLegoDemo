@@ -23,6 +23,46 @@
                             <sceneKitView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" loops="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mij-cc-48w">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </sceneKitView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7XY-61-eUL">
+                                <rect key="frame" x="127.5" y="20" width="120" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qcX-OS-y8K">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nh3-gN-Ueb">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="BLG-Bo-DPt"/>
+                                                    <constraint firstAttribute="width" constant="50" id="Eu8-yS-mRD"/>
+                                                </constraints>
+                                                <state key="normal" image="info"/>
+                                                <connections>
+                                                    <action selector="btnObjectInfoTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="nPM-j6-Kp7"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFC-A0-434">
+                                                <rect key="frame" x="70" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="fTl-T4-X24"/>
+                                                    <constraint firstAttribute="height" constant="50" id="jVV-hh-lvf"/>
+                                                </constraints>
+                                                <state key="normal" image="jigsaw"/>
+                                                <connections>
+                                                    <action selector="btnObjectConnectTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="588-ZI-LIh"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="qcX-OS-y8K" firstAttribute="top" secondItem="7XY-61-eUL" secondAttribute="top" id="GeX-hc-ijA"/>
+                                    <constraint firstAttribute="trailing" secondItem="qcX-OS-y8K" secondAttribute="trailing" id="ftw-Zg-8LG"/>
+                                    <constraint firstItem="qcX-OS-y8K" firstAttribute="leading" secondItem="7XY-61-eUL" secondAttribute="leading" id="iSl-yq-HSu"/>
+                                    <constraint firstAttribute="bottom" secondItem="qcX-OS-y8K" secondAttribute="bottom" id="seq-UB-aBt"/>
+                                    <constraint firstAttribute="height" constant="50" id="zzL-l5-UcN"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZm-ZG-0Fh">
                                 <rect key="frame" x="0.0" y="20" width="120" height="144"/>
                                 <subviews>
@@ -156,6 +196,7 @@
                             <constraint firstItem="jkx-j5-Kpg" firstAttribute="leading" secondItem="f12-MI-OID" secondAttribute="trailing" constant="15" id="4FI-Md-7da"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="jkx-j5-Kpg" secondAttribute="trailing" id="A1m-Tv-qJ3"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="U0K-SW-4ec" secondAttribute="leading" id="GsS-dJ-CKf"/>
+                            <constraint firstItem="7XY-61-eUL" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="LJh-nH-1xD"/>
                             <constraint firstItem="jkx-j5-Kpg" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="150" id="N1E-Q4-Vr9"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="f12-MI-OID" secondAttribute="bottom" constant="10" id="PSd-DR-KYb"/>
                             <constraint firstItem="7OG-63-RI3" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="RGa-BQ-W1G"/>
@@ -170,6 +211,7 @@
                             <constraint firstItem="Mij-cc-48w" firstAttribute="leading" secondItem="U0K-SW-4ec" secondAttribute="leading" id="qm2-EB-Erd"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
                             <constraint firstItem="f12-MI-OID" firstAttribute="leading" secondItem="lZm-ZG-0Fh" secondAttribute="trailing" constant="15" id="rxA-Fw-SFG"/>
+                            <constraint firstItem="7XY-61-eUL" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="wGz-2F-vqw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
@@ -180,6 +222,7 @@
                         <outlet property="sgmSceneSwitch" destination="f12-MI-OID" id="FTf-IU-D36"/>
                         <outlet property="view3DScene" destination="Mij-cc-48w" id="RHt-VF-x57"/>
                         <outlet property="viewARScene" destination="BrB-h1-WRS" id="sP1-aq-92T"/>
+                        <outlet property="viewActions" destination="7XY-61-eUL" id="4dE-wh-xD3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -250,4 +293,8 @@
             <point key="canvasLocation" x="1180" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="info" width="100" height="100"/>
+        <image name="jigsaw" width="100" height="100"/>
+    </resources>
 </document>

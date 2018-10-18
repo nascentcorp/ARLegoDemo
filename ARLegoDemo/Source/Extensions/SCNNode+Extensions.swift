@@ -9,34 +9,6 @@
 import SceneKit
 
 extension SCNNode {
-
-//    func createIconNode(image: UIImage, position: CGPoint) {
-//        let cylinderNode = SCNCylinder(radius: 0.2, height: 3)
-//    }
-
-    func addActionNode(image: UIImage, eyeNode: SCNNode?) {
-        var actionsNode = childNodes.filter({ $0.name == PartNodeKeys.actionsNode.rawValue }).first
-        if actionsNode == nil {
-            actionsNode = SCNNode()
-        }
-        guard let actionsNodeContainer = actionsNode else {
-            fatalError("This should not happen.")
-        }
-
-        let box = SCNBox(width: 0.5, height: 0.5, length: 0.1, chamferRadius: 0)
-        box.materials.first?.diffuse.contents = UIColor.red
-//        box.materials.first?.diffuse.contents = image
-        let boxNode = SCNNode(geometry: box)
-
-        if let eyeNode = eyeNode {
-            let lookAtConstraint = SCNLookAtConstraint(target: eyeNode)
-            boxNode.constraints = [lookAtConstraint]
-        }
-        actionsNodeContainer.addChildNode(boxNode)
-
-        actionsNodeContainer.position = boundingSphere.center + SCNVector3(0.0, boundingSphere.radius + 0.01, 0.0)
-        addChildNode(actionsNodeContainer)
-    }
     
     func createPlaneNode(color: UIColor = .red) {
         let plane = SCNPlane(width: 2.0, height: 2.0)

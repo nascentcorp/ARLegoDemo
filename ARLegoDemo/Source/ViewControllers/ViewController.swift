@@ -43,12 +43,14 @@ class ViewController: UIViewController {
     private let objectPartSize = CGSize(width: 130, height: 130)
     
     private var scene3DSetup = false
+    private var selectedNode: SCNNode?
 
     @IBOutlet private weak var cvParts: UICollectionView!
     @IBOutlet private weak var ivBaseObjectImage: UIImageView!
     @IBOutlet private weak var lblBaseObjectName: UILabel!
     @IBOutlet private weak var sgmSceneSwitch: UISegmentedControl!
     @IBOutlet private weak var view3DScene: SCNView!
+    @IBOutlet private weak var viewActions: UIView!
     @IBOutlet private var viewARScene: ARSCNView!
     
     var activeSceneType: SceneType {
@@ -114,6 +116,25 @@ class ViewController: UIViewController {
         present(objectPreviewViewController, animated: true)
     }
 
+    @IBAction func btnObjectInfoTapped(_ sender: Any) {
+        guard
+            let selectedNode = selectedNode,
+            let part = getNodePart(selectedNode)
+            else {
+                return
+        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let objectPreviewViewController = storyboard.instantiateViewController(withIdentifier: "ObjectPreviewViewController") as? ObjectPreviewViewController else {
+            return
+        }
+        objectPreviewViewController.buildingStepPart = part
+        present(objectPreviewViewController, animated: true)
+
+    }
+    
+    @IBAction func btnObjectConnectTapped(_ sender: Any) {
+    }
+    
     @IBAction func btnSceneSwitchTapped(_ sender: UISegmentedControl) {
         let sceneARSelected = (sender.selectedSegmentIndex == 0)
         if !sceneARSelected && !scene3DSetup {
@@ -160,7 +181,6 @@ class ViewController: UIViewController {
         
         let mainScene = SCNScene()
         mainScene.rootNode.addChildNode(cameraOrbit)
-        mainScene.rootNode.addActionNode(image: UIImage(imageLiteralResourceName: "info"), eyeNode: cameraNode)
         mainScene.rootNode.createPlaneNode(color: .yellow)
 
         addParts(toScene: mainScene, sceneType: .scene3D)
@@ -177,7 +197,7 @@ class ViewController: UIViewController {
         for i in 0..<buildingStepService.parts.count {
             let part = buildingStepService.parts[i]
             let radius = (sceneType == .scene3D) ? 0.7 : 0.5
-            let angle = Double(i) / (Double(buildingStepService.parts.count) / 2.0) * Double.pi
+            let angle = Double(i) / (Double(buildingStepService.parts.count) / 2.0) * Double.pi - Double.pi / 2.0
             let position = SCNVector3(
                 radius * cos(angle),
                 0.0,
@@ -244,17 +264,20 @@ extension ViewController {
         guard let scene = activeSceneView.scene else { return }
         guard let node = results.first?.node else {
             highlightWorker(SCNNode(), scene: scene, toggleHighlight: true)
+            selectedNode = nil
             return
         }
         
         if
-            let part = node.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart,
+            let part = getNodePart(node),
             !part.isBaseModel
         {
             highlight(node, scene: scene)
+            selectedNode = node
         }
         else {
             highlightWorker(SCNNode(), scene: scene, toggleHighlight: true)
+            selectedNode = nil
         }
 
 //        guard let hitFeature = results.last else { return }
@@ -274,9 +297,13 @@ extension ViewController {
     }
 
     private func highlightWorker(_ node: SCNNode, scene: SCNScene, toggleHighlight: Bool? = nil) {
+        let animationDuration = 0.3
+        UIView.animate(withDuration: animationDuration) {
+            self.viewActions.alpha = (toggleHighlight != nil) ? 0 : 1
+        }
         scene.rootNode.childNodes.forEach({ otherPartNode in
             guard
-                let part = otherPartNode.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart,
+                let part = getNodePart(otherPartNode),
                 !part.isBaseModel
                 else {
                     return
@@ -292,9 +319,13 @@ extension ViewController {
                     ? highOpacity
                     : lowOpacity
             )
-            let opacityAction = SCNAction.fadeOpacity(to: targetOpacity, duration: 0.3)
+            let opacityAction = SCNAction.fadeOpacity(to: targetOpacity, duration: animationDuration)
             otherPartNode.runAction(opacityAction)
         })
+    }
+
+    private func getNodePart(_ node: SCNNode) -> BuildingStepService.BuildingStepPart? {
+        return node.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart
     }
 }
 
@@ -377,24 +408,10 @@ extension ViewController: UICollectionViewDelegate {
                 nodePart == cellPart
             {
                 highlight(node, scene: scene)
+                selectedNode = node
                 break
             }
         }
-        
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        guard let objectPreviewViewController = storyboard.instantiateViewController(withIdentifier: "ObjectPreviewViewController") as? ObjectPreviewViewController else {
-//            return
-//        }
-//        objectPreviewViewController.buildingStepPart = buildingStepService.parts[indexPath.row]
-//        present(objectPreviewViewController, animated: true)
-
-//        if
-//            let part = node.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart,
-//            !part.isBaseModel
-//        {
-//            highlight(node, scene: scene)
-//        }
-
     }
 }
 
