@@ -11,10 +11,14 @@ import UIKit
 
 class PartCell: UICollectionViewCell {
 
+    var part: BuildingStepService.BuildingStepPart?
+
     @IBOutlet private weak var ivPartImage: UIImageView!
     @IBOutlet private weak var lblPartName: UILabel!
     
     func setup(with part: BuildingStepService.BuildingStepPart) {
+        self.part = part
+
         lblPartName.text = part.name
         ivPartImage.image = UIImage(named: part.imageName)
     }
@@ -26,6 +30,7 @@ enum SceneType {
 }
 
 enum PartNodeKeys: String {
+    case actionsNode
     case part
 }
 
@@ -155,17 +160,18 @@ class ViewController: UIViewController {
         
         let mainScene = SCNScene()
         mainScene.rootNode.addChildNode(cameraOrbit)
+        mainScene.rootNode.addActionNode(image: UIImage(imageLiteralResourceName: "info"), eyeNode: cameraNode)
         mainScene.rootNode.createPlaneNode(color: .yellow)
-        
+
         addParts(toScene: mainScene, sceneType: .scene3D)
-        
+
         view3DScene.scene = mainScene
         view3DScene.showsStatistics = true
         view3DScene.backgroundColor = UIColor.black
         view3DScene.allowsCameraControl = true
         view3DScene.autoenablesDefaultLighting = true
     }
-
+    
     private func addParts(toScene scene: SCNScene, sceneType: SceneType) {
         addPartWorker(buildingStepService.baseModelPart, toScene: scene, sceneType: sceneType)
         for i in 0..<buildingStepService.parts.count {
@@ -357,12 +363,38 @@ extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let objectPreviewViewController = storyboard.instantiateViewController(withIdentifier: "ObjectPreviewViewController") as? ObjectPreviewViewController else {
-            return
+        let partCell = collectionView.cellForItem(at: indexPath) as! PartCell
+        guard
+            let cellPart = partCell.part,
+            let scene = activeSceneView.scene
+            else {
+                return
         }
-        objectPreviewViewController.buildingStepPart = buildingStepService.parts[indexPath.row]
-        present(objectPreviewViewController, animated: true)
+        for i in 0..<scene.rootNode.childNodes.count {
+            let node = scene.rootNode.childNodes[i]
+            if
+                let nodePart = node.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart,
+                nodePart == cellPart
+            {
+                highlight(node, scene: scene)
+                break
+            }
+        }
+        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        guard let objectPreviewViewController = storyboard.instantiateViewController(withIdentifier: "ObjectPreviewViewController") as? ObjectPreviewViewController else {
+//            return
+//        }
+//        objectPreviewViewController.buildingStepPart = buildingStepService.parts[indexPath.row]
+//        present(objectPreviewViewController, animated: true)
+
+//        if
+//            let part = node.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart,
+//            !part.isBaseModel
+//        {
+//            highlight(node, scene: scene)
+//        }
+
     }
 }
 

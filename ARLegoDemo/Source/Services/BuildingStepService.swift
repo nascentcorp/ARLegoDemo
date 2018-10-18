@@ -8,6 +8,12 @@
 
 import Foundation
 
+extension BuildingStepService.BuildingStepPart: Equatable {}
+
+func ==(lhs: BuildingStepService.BuildingStepPart, rhs: BuildingStepService.BuildingStepPart) -> Bool {
+    return lhs.id == rhs.id
+}
+
 class BuildingStepService {
 
     private struct BuildingStepBaseModel {
@@ -16,11 +22,21 @@ class BuildingStepService {
     }
     
     struct BuildingStepPart {
+        let id: String
         let name: String
         let imageName: String
         let isBaseModel: Bool
         let objectName: String
         let objectType: AcceptedFileType
+
+        init(id: String = UUID().uuidString, name: String, imageName: String, isBaseModel: Bool, objectName: String, objectType: AcceptedFileType) {
+            self.id = id
+            self.name = name
+            self.imageName = imageName
+            self.isBaseModel = isBaseModel
+            self.objectName = objectName
+            self.objectType = objectType
+        }
     }
     
     private struct BuildingStep {
