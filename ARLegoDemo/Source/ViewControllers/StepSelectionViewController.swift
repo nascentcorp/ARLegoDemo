@@ -1,0 +1,72 @@
+//
+//  StepSelectionViewController.swift
+//  ARLegoDemo
+//
+//  Created by Miran Brajsa on 19/10/2018.
+//  Copyright © 2018 Nascentcorp.io. All rights reserved.
+//
+
+import UIKit
+
+class StepSelectionCell: UITableViewCell {
+
+    @IBOutlet private weak var ivStepBasePart: UIImageView!
+    @IBOutlet private weak var lblStepTitle: UILabel!
+    @IBOutlet private weak var viewPartsNeededContainer: UIView!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        viewPartsNeededContainer.subviews.forEach({ $0.removeFromSuperview() })
+    }
+    
+    func setup(with step: BuildingStepService.BuildingStep) {
+        ivStepBasePart.image = UIImage(named: step.baseModel.part.imageName)
+        lblStepTitle.text = step.baseModel.part.name
+
+        for i in 0..<step.parts.count {
+            let part = step.parts[i]
+            
+            let partImageView = UIImageView(frame: CGRect(x: i * 52, y: 0, width: 52, height: 52))
+            partImageView.image = UIImage(named: part.imageName)
+            viewPartsNeededContainer.addSubview(partImageView)
+        }
+    }
+}
+
+class StepSelectionViewController: UIViewController {
+
+    private let arEnvironmentService = AREnvironmentService()
+    private let buildingStepService = BuildingStepService()
+}
+
+extension StepSelectionViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return buildingStepService.numberOfBuildingSteps
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StepSelectionCell") as! StepSelectionCell
+        cell.setup(with: buildingStepService.buildingStep(at: indexPath.row))
+        return cell
+    }
+}
+
+extension StepSelectionViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        buildingStepService.setBuildingStep(at: indexPath.row)
+        
+        if !arEnvironmentService.isDeviceARCapable {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let stepAssemblyViewController = storyboard.instantiateViewController(withIdentifier: "StepAssemblyViewController") as? StepAssemblyViewController else {
+                return
+            }
+            stepAssemblyViewController.buildingStepService = buildingStepService
+            navigationController?.pushViewController(stepAssemblyViewController, animated: true)
+        }
+    }
+}

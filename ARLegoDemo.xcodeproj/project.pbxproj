@@ -20,7 +20,7 @@
 		942D1923217488840066795B /* cube.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 942D1920217488840066795B /* cube.mtl */; };
 		943C5057215E730D002A3773 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943C5056215E730D002A3773 /* AppDelegate.swift */; };
 		943C5059215E730D002A3773 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 943C5058215E730D002A3773 /* art.scnassets */; };
-		943C505B215E730D002A3773 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943C505A215E730D002A3773 /* ViewController.swift */; };
+		943C505B215E730D002A3773 /* StepAssemblyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943C505A215E730D002A3773 /* StepAssemblyViewController.swift */; };
 		943C505E215E730D002A3773 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 943C505C215E730D002A3773 /* Main.storyboard */; };
 		943C5060215E730E002A3773 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 943C505F215E730E002A3773 /* Assets.xcassets */; };
 		943C5063215E730E002A3773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 943C5061215E730E002A3773 /* LaunchScreen.storyboard */; };
@@ -36,6 +36,8 @@
 		9480652E21663C8C00DB1E76 /* statue_n.dds in Resources */ = {isa = PBXBuildFile; fileRef = 9480652921663C8C00DB1E76 /* statue_n.dds */; };
 		9480652F21663C8C00DB1E76 /* statue.obj in Resources */ = {isa = PBXBuildFile; fileRef = 9480652A21663C8C00DB1E76 /* statue.obj */; };
 		948199DA216633AC008D6D2E /* MDLMaterial+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948199D9216633AC008D6D2E /* MDLMaterial+Extensions.swift */; };
+		94B5BE62217A02A200E98F19 /* StepScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5BE61217A02A200E98F19 /* StepScanViewController.swift */; };
+		94B5BE64217A02E800E98F19 /* StepSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5BE63217A02E800E98F19 /* StepSelectionViewController.swift */; };
 		94DC82752166302500BC3CA6 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +56,7 @@
 		943C5053215E730D002A3773 /* ARLegoDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARLegoDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		943C5056215E730D002A3773 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		943C5058215E730D002A3773 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		943C505A215E730D002A3773 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		943C505A215E730D002A3773 /* StepAssemblyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepAssemblyViewController.swift; sourceTree = "<group>"; };
 		943C505D215E730D002A3773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		943C505F215E730E002A3773 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		943C5062215E730E002A3773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -71,6 +73,8 @@
 		9480652921663C8C00DB1E76 /* statue_n.dds */ = {isa = PBXFileReference; lastKnownFileType = file; path = statue_n.dds; sourceTree = "<group>"; };
 		9480652A21663C8C00DB1E76 /* statue.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = statue.obj; sourceTree = "<group>"; };
 		948199D9216633AC008D6D2E /* MDLMaterial+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLMaterial+Extensions.swift"; sourceTree = "<group>"; };
+		94B5BE61217A02A200E98F19 /* StepScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepScanViewController.swift; sourceTree = "<group>"; };
+		94B5BE63217A02E800E98F19 /* StepSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSelectionViewController.swift; sourceTree = "<group>"; };
 		94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -221,8 +225,10 @@
 		94FF995721760AD40054085A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				943C505A215E730D002A3773 /* ViewController.swift */,
+				943C505A215E730D002A3773 /* StepAssemblyViewController.swift */,
+				94B5BE63217A02E800E98F19 /* StepSelectionViewController.swift */,
 				94125C0E21737017004D1A7E /* ObjectPreviewViewController.swift */,
+				94B5BE61217A02A200E98F19 /* StepScanViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -322,9 +328,11 @@
 				94125C0721733CBA004D1A7E /* PartSelectorScene.swift in Sources */,
 				94125C0B21734869004D1A7E /* UIColor+Extensions.swift in Sources */,
 				94125C09217341E5004D1A7E /* GeometryNode.swift in Sources */,
-				943C505B215E730D002A3773 /* ViewController.swift in Sources */,
+				943C505B215E730D002A3773 /* StepAssemblyViewController.swift in Sources */,
 				94125C0F21737017004D1A7E /* ObjectPreviewViewController.swift in Sources */,
 				94125C0D21734BF3004D1A7E /* CGSize+Extensions.swift in Sources */,
+				94B5BE62217A02A200E98F19 /* StepScanViewController.swift in Sources */,
+				94B5BE64217A02E800E98F19 /* StepSelectionViewController.swift in Sources */,
 				940A79AC2164BE1E00C049CD /* AREnvironmentService.swift in Sources */,
 				9478C1842174CA3900F05576 /* SCNScene+Extensions.swift in Sources */,
 				943C5057215E730D002A3773 /* AppDelegate.swift in Sources */,

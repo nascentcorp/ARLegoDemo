@@ -16,7 +16,7 @@ func ==(lhs: BuildingStepService.BuildingStepPart, rhs: BuildingStepService.Buil
 
 class BuildingStepService {
 
-    private struct BuildingStepBaseModel {
+    struct BuildingStepBaseModel {
         let part: BuildingStepPart
         let scanNames: [String]
     }
@@ -39,7 +39,7 @@ class BuildingStepService {
         }
     }
     
-    private struct BuildingStep {
+    struct BuildingStep {
         let arCatalogName: String
         let baseModel: BuildingStepBaseModel
         let parts: [BuildingStepPart]
@@ -48,9 +48,21 @@ class BuildingStepService {
     // TODO: This should be loaded from a config file
     private let buildingSteps = [
         BuildingStep(
-            arCatalogName: "LegoStep1",
+            arCatalogName: "arBatwing1",
             baseModel: BuildingStepBaseModel(
-                part: BuildingStepPart(name: "This step's base object", imageName: "torus.png", isBaseModel: true, objectName: "torus", objectType: .obj),
+                part: BuildingStepPart(name: "Batwing Step 1", imageName: "torus.png", isBaseModel: true, objectName: "torus", objectType: .obj),
+                scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]
+            ),
+            parts: [
+                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj),
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj),
+                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj)
+            ]
+        ),
+        BuildingStep(
+            arCatalogName: "arBatwing2",
+            baseModel: BuildingStepBaseModel(
+                part: BuildingStepPart(name: "Batwing Step 2", imageName: "torus.png", isBaseModel: true, objectName: "torus", objectType: .obj),
                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]
             ),
             parts: [
@@ -69,10 +81,6 @@ class BuildingStepService {
     
     private var currentBuildingStepInternal: Int = 0
 
-    var currentBuildingStep: Int {
-        return currentBuildingStepInternal
-    }
-
     var arCatalogName: String {
         return buildingSteps[currentBuildingStepInternal].arCatalogName
     }
@@ -85,6 +93,10 @@ class BuildingStepService {
         return buildingSteps[currentBuildingStepInternal].baseModel.scanNames
     }
 
+    var numberOfBuildingSteps: Int {
+        return buildingSteps.count
+    }
+    
     var partNames: [String] {
         return buildingSteps[currentBuildingStepInternal].parts.map({ $0.name })
     }
@@ -93,15 +105,17 @@ class BuildingStepService {
         return buildingSteps[currentBuildingStepInternal].parts
     }
 
-    func nextBuildingStep() {
-        if currentBuildingStepInternal < buildingSteps.count - 1 {
-            currentBuildingStepInternal += 1
-        }
+    func buildingStep(at index: Int) -> BuildingStep {
+        return buildingSteps[index]
     }
 
-    func previousBuildingStep() {
-        if currentBuildingStepInternal > 0 {
-            currentBuildingStepInternal -= 1
-        }
+    func setBuildingStep(at index: Int) {
+        currentBuildingStepInternal = (index < 0)
+            ? 0
+            : (
+                (index > buildingSteps.count - 1)
+                    ? buildingSteps.count - 1
+                    : index
+        )
     }
 }

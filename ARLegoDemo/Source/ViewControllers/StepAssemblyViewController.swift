@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  StepAssemblyViewController.swift
 //  ARLegoDemo
 //
 //  Created by Miran Brajsa on 28/09/2018.
@@ -34,10 +34,9 @@ enum PartNodeKeys: String {
     case part
 }
 
-class ViewController: UIViewController {
+class StepAssemblyViewController: UIViewController {
 
     private let arEnvironmentService = AREnvironmentService()
-    private let buildingStepService = BuildingStepService()
 
     private let cellName = String(describing: PartCell.self)
     private let objectPartSize = CGSize(width: 130, height: 130)
@@ -52,9 +51,11 @@ class ViewController: UIViewController {
     @IBOutlet private weak var view3DScene: SCNView!
     @IBOutlet private weak var viewActions: UIView!
     @IBOutlet private var viewARScene: ARSCNView!
-    
+
+    var buildingStepService: BuildingStepService!
+
     var activeSceneType: SceneType {
-        if !isDeviceARCapable {
+        if !arEnvironmentService.isDeviceARCapable {
             return .scene3D
         }
         return (sgmSceneSwitch.selectedSegmentIndex == 0) ? .sceneAR : .scene3D
@@ -69,15 +70,11 @@ class ViewController: UIViewController {
         return shipNode
     }
     
-    lazy var isDeviceARCapable: Bool = {
-        return ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // We want 3D scene to be setup when first selected on AR capable devices.
-        if isDeviceARCapable {
+        if arEnvironmentService.isDeviceARCapable {
             setupARScene()
         }
         else {
@@ -89,7 +86,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if isDeviceARCapable {
+        if arEnvironmentService.isDeviceARCapable {
             let configuration = ARWorldTrackingConfiguration()
             guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: buildingStepService.arCatalogName, bundle: nil) else {
                 fatalError("Missing expected asset catalog resources.")
@@ -102,7 +99,7 @@ class ViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if isDeviceARCapable {
+        if arEnvironmentService.isDeviceARCapable {
             viewARScene.session.pause()
         }
     }
@@ -149,7 +146,7 @@ class ViewController: UIViewController {
         lblBaseObjectName.text = buildingStepService.baseModelPart.name
         ivBaseObjectImage.image = UIImage(named: buildingStepService.baseModelPart.imageName)
         
-        if !isDeviceARCapable {
+        if !arEnvironmentService.isDeviceARCapable {
             sgmSceneSwitch.isHidden = true
             view3DScene.isHidden = false
             viewARScene.isHidden = true
@@ -255,7 +252,7 @@ class ViewController: UIViewController {
 //    }
 }
 
-extension ViewController {
+extension StepAssemblyViewController {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
@@ -329,7 +326,7 @@ extension ViewController {
     }
 }
 
-extension ViewController: ARSCNViewDelegate {
+extension StepAssemblyViewController: ARSCNViewDelegate {
 /*
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
@@ -352,7 +349,7 @@ extension ViewController: ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         guard
             let configuration = session.configuration,
-            isDeviceARCapable
+            arEnvironmentService.isDeviceARCapable
             else {
                 return
         }
@@ -389,7 +386,7 @@ extension ViewController: ARSCNViewDelegate {
     }
 }
 
-extension ViewController: UICollectionViewDelegate {
+extension StepAssemblyViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
@@ -415,7 +412,7 @@ extension ViewController: UICollectionViewDelegate {
     }
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension StepAssemblyViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return buildingStepService.partNames.count

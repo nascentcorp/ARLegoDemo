@@ -13,6 +13,10 @@ class AREnvironmentService {
     var lightingSufficient = false
     var worldMapStatus: ARFrame.WorldMappingStatus = .notAvailable
 
+    lazy var isDeviceARCapable: Bool = {
+        return ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported
+    }()
+
     func updateWithFrameInfo(_ frame: ARFrame) {
         // World map status
         if worldMapStatus != frame.worldMappingStatus {
