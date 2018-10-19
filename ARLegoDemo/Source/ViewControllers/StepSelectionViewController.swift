@@ -38,6 +38,13 @@ class StepSelectionViewController: UIViewController {
 
     private let arEnvironmentService = AREnvironmentService()
     private let buildingStepService = BuildingStepService()
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let stepAssemblyViewController = segue.destination as? StepAssemblyViewController else {
+            return
+        }
+        stepAssemblyViewController.buildingStepService = buildingStepService
+    }
 }
 
 extension StepSelectionViewController: UITableViewDataSource {
@@ -61,12 +68,7 @@ extension StepSelectionViewController: UITableViewDelegate {
         buildingStepService.setBuildingStep(at: indexPath.row)
         
         if !arEnvironmentService.isDeviceARCapable {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let stepAssemblyViewController = storyboard.instantiateViewController(withIdentifier: "StepAssemblyViewController") as? StepAssemblyViewController else {
-                return
-            }
-            stepAssemblyViewController.buildingStepService = buildingStepService
-            navigationController?.pushViewController(stepAssemblyViewController, animated: true)
+            performSegue(withIdentifier: "stepAssembly", sender: nil)
         }
     }
 }
