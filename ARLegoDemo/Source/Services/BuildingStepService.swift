@@ -48,9 +48,9 @@ class BuildingStepService {
     // TODO: This should be loaded from a config file
     private let buildingSteps = [
         BuildingStep(
-            arCatalogName: "arBatwing1",
+            arCatalogName: "LegoStep1",
             baseModel: BuildingStepBaseModel(
-                part: BuildingStepPart(name: "Batwing Step 1", imageName: "torus.png", isBaseModel: true, objectName: "torus", objectType: .obj),
+                part: BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj),
                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]
             ),
             parts: [
@@ -60,7 +60,7 @@ class BuildingStepService {
             ]
         ),
         BuildingStep(
-            arCatalogName: "arBatwing2",
+            arCatalogName: "LegoStep1",
             baseModel: BuildingStepBaseModel(
                 part: BuildingStepPart(name: "Batwing Step 2", imageName: "torus.png", isBaseModel: true, objectName: "torus", objectType: .obj),
                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]

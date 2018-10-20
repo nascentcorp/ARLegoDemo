@@ -398,7 +398,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Build step selection" id="Ryd-3O-uyi"/>
                     <connections>
-                        <segue destination="DHV-kh-J5v" kind="show" id="9vr-JJ-NMy"/>
+                        <segue destination="DHV-kh-J5v" kind="show" identifier="baseObjectScan" id="9vr-JJ-NMy"/>
                         <segue destination="BV1-FR-VrT" kind="show" identifier="stepAssembly" id="fCh-FQ-dSv"/>
                     </connections>
                 </viewController>
@@ -406,7 +406,7 @@
             </objects>
             <point key="canvasLocation" x="-82" y="506"/>
         </scene>
-        <!--Title-->
+        <!--Scan-->
         <scene sceneID="Njq-dC-FLA">
             <objects>
                 <viewController id="DHV-kh-J5v" customClass="StepScanViewController" customModule="ARLegoDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -417,24 +417,94 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6t-xI-gTd" userLabel="AR Scene View">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </arscnView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan starting object" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8B-KO-erG">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="OoC-WK-h6H"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Too dark for scanning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVN-eN-PCb">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.51967176260000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="xuP-ah-572"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f5f-Kg-mko">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6B0-l6-EiG">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                    </sceneKitView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan complete. Tap anywhere to continue." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0r-eX-4TS">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="s8K-sC-D2X"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60n-un-PZj">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="60n-un-PZj" firstAttribute="top" secondItem="f5f-Kg-mko" secondAttribute="top" id="4MJ-Fq-MlS"/>
+                                    <constraint firstItem="D0r-eX-4TS" firstAttribute="top" secondItem="f5f-Kg-mko" secondAttribute="top" id="4is-3r-84X"/>
+                                    <constraint firstAttribute="bottom" secondItem="60n-un-PZj" secondAttribute="bottom" id="Deq-s7-8jJ"/>
+                                    <constraint firstItem="60n-un-PZj" firstAttribute="leading" secondItem="f5f-Kg-mko" secondAttribute="leading" id="FYd-mj-RLT"/>
+                                    <constraint firstItem="6B0-l6-EiG" firstAttribute="leading" secondItem="f5f-Kg-mko" secondAttribute="leading" id="K8m-5F-pRH"/>
+                                    <constraint firstAttribute="trailing" secondItem="6B0-l6-EiG" secondAttribute="trailing" id="N1a-27-ghW"/>
+                                    <constraint firstAttribute="bottom" secondItem="6B0-l6-EiG" secondAttribute="bottom" id="Vum-lN-OVp"/>
+                                    <constraint firstAttribute="trailing" secondItem="60n-un-PZj" secondAttribute="trailing" id="cMm-95-kG9"/>
+                                    <constraint firstAttribute="trailing" secondItem="D0r-eX-4TS" secondAttribute="trailing" id="kkA-fD-taJ"/>
+                                    <constraint firstItem="D0r-eX-4TS" firstAttribute="leading" secondItem="f5f-Kg-mko" secondAttribute="leading" id="uqj-Fo-gln"/>
+                                    <constraint firstItem="6B0-l6-EiG" firstAttribute="top" secondItem="f5f-Kg-mko" secondAttribute="top" id="vdh-XB-ZdQ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="m8B-KO-erG" firstAttribute="top" secondItem="tT5-mZ-gjx" secondAttribute="top" id="3ig-Ds-ucx"/>
                             <constraint firstItem="t6t-xI-gTd" firstAttribute="top" secondItem="tT5-mZ-gjx" secondAttribute="top" id="Dix-2r-kZH"/>
                             <constraint firstItem="t6t-xI-gTd" firstAttribute="bottom" secondItem="EZX-fr-1TP" secondAttribute="bottom" id="OWt-ja-aWg"/>
                             <constraint firstItem="t6t-xI-gTd" firstAttribute="leading" secondItem="EZX-fr-1TP" secondAttribute="leading" id="WIG-YM-DZp"/>
+                            <constraint firstAttribute="bottom" secondItem="f5f-Kg-mko" secondAttribute="bottom" id="at5-Ci-d5v"/>
                             <constraint firstItem="t6t-xI-gTd" firstAttribute="trailing" secondItem="EZX-fr-1TP" secondAttribute="trailing" id="cOe-ey-GFo"/>
+                            <constraint firstAttribute="trailing" secondItem="m8B-KO-erG" secondAttribute="trailing" id="gx7-Zn-De6"/>
+                            <constraint firstAttribute="trailing" secondItem="PVN-eN-PCb" secondAttribute="trailing" id="hrq-q6-vBS"/>
+                            <constraint firstItem="f5f-Kg-mko" firstAttribute="top" secondItem="tT5-mZ-gjx" secondAttribute="top" id="jkU-sq-rps"/>
+                            <constraint firstAttribute="trailing" secondItem="f5f-Kg-mko" secondAttribute="trailing" id="joc-sP-jxL"/>
+                            <constraint firstItem="m8B-KO-erG" firstAttribute="leading" secondItem="EZX-fr-1TP" secondAttribute="leading" id="krL-f4-2xw"/>
+                            <constraint firstItem="PVN-eN-PCb" firstAttribute="leading" secondItem="EZX-fr-1TP" secondAttribute="leading" id="n3v-Ik-myZ"/>
+                            <constraint firstItem="f5f-Kg-mko" firstAttribute="leading" secondItem="EZX-fr-1TP" secondAttribute="leading" id="n9a-gb-zOW"/>
+                            <constraint firstItem="PVN-eN-PCb" firstAttribute="top" secondItem="tT5-mZ-gjx" secondAttribute="top" constant="-44" id="tHQ-dd-6k8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tT5-mZ-gjx"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="zSW-NJ-mYw"/>
+                    <navigationItem key="navigationItem" title="Scan" id="zSW-NJ-mYw"/>
                     <connections>
-                        <outlet property="viewARScene" destination="t6t-xI-gTd" id="kFC-uh-7qG"/>
+                        <outlet property="cnTooDarkToScanningToTop" destination="tHQ-dd-6k8" id="wtb-wN-Swr"/>
+                        <outlet property="lblScanDescription" destination="m8B-KO-erG" id="GEq-SK-iIk"/>
+                        <outlet property="lblTooDarkForScanning" destination="PVN-eN-PCb" id="o9d-gC-s0f"/>
+                        <outlet property="view3DScene" destination="6B0-l6-EiG" id="6MD-CU-vx3"/>
+                        <outlet property="view3DSceneContainer" destination="f5f-Kg-mko" id="Ngk-uU-AfB"/>
+                        <outlet property="viewARScene" destination="t6t-xI-gTd" id="jUM-4d-gas"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ejx-ml-Rdn" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="759" y="506"/>
+            <point key="canvasLocation" x="757.60000000000002" y="505.99700149925042"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="O9r-O7-aX7">

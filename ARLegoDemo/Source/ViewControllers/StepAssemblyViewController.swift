@@ -50,7 +50,7 @@ class StepAssemblyViewController: UIViewController {
     @IBOutlet private weak var sgmSceneSwitch: UISegmentedControl!
     @IBOutlet private weak var view3DScene: SCNView!
     @IBOutlet private weak var viewActions: UIView!
-    @IBOutlet private var viewARScene: ARSCNView!
+    @IBOutlet private weak var viewARScene: ARSCNView!
 
     var buildingStepService: BuildingStepService!
 

@@ -8,11 +8,19 @@
 
 import ARKit
 
+enum LightingStatus {
+    case sufficientLight
+    case tooDarkForScanning
+}
+
 class AREnvironmentService {
 
-    var lightingSufficient = false
+    private var lightingStatus: LightingStatus = .sufficientLight
+    
     var worldMapStatus: ARFrame.WorldMappingStatus = .notAvailable
 
+    var lightingStatusChanged: ((LightingStatus) -> ())?
+    
     lazy var isDeviceARCapable: Bool = {
         return ARObjectScanningConfiguration.isSupported && ARWorldTrackingConfiguration.isSupported
     }()
@@ -35,10 +43,10 @@ class AREnvironmentService {
         
         // Lighting
         if let lightEstimate = frame.lightEstimate {
-            if lightEstimate.ambientIntensity < 500 {
-                print("Too dark for scanning.")
+            lightingStatus = (lightEstimate.ambientIntensity >= 500) ? .sufficientLight : .tooDarkForScanning
+            if let lightingStatusChanged = lightingStatusChanged {
+                lightingStatusChanged(self.lightingStatus)
             }
-            lightingSufficient = (lightEstimate.ambientIntensity >= 500)
         }
     }
 }

@@ -40,10 +40,12 @@ class StepSelectionViewController: UIViewController {
     private let buildingStepService = BuildingStepService()
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let stepAssemblyViewController = segue.destination as? StepAssemblyViewController else {
-            return
+        if let stepAssemblyViewController = segue.destination as? StepAssemblyViewController {
+            stepAssemblyViewController.buildingStepService = buildingStepService
         }
-        stepAssemblyViewController.buildingStepService = buildingStepService
+        else if let stepScanViewController = segue.destination as? StepScanViewController {
+            stepScanViewController.buildingStepService = buildingStepService
+        }
     }
 }
 
@@ -67,8 +69,7 @@ extension StepSelectionViewController: UITableViewDelegate {
 
         buildingStepService.setBuildingStep(at: indexPath.row)
         
-        if !arEnvironmentService.isDeviceARCapable {
-            performSegue(withIdentifier: "stepAssembly", sender: nil)
-        }
+        let segueToExecute = (arEnvironmentService.isDeviceARCapable) ? "baseObjectScan" : "stepAssembly"
+        performSegue(withIdentifier: segueToExecute, sender: nil)
     }
 }
