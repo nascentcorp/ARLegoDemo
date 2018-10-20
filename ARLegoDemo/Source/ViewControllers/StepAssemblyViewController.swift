@@ -37,9 +37,7 @@ enum PartNodeKeys: String {
 class StepAssemblyViewController: UIViewController {
 
     private let arEnvironmentService = AREnvironmentService()
-
     private let cellName = String(describing: PartCell.self)
-    private let objectPartSize = CGSize(width: 130, height: 130)
     
     private var scene3DSetup = false
     private var selectedNode: SCNNode?

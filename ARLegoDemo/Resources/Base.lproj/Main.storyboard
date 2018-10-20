@@ -406,10 +406,10 @@
             </objects>
             <point key="canvasLocation" x="-82" y="506"/>
         </scene>
-        <!--Scan-->
+        <!--Base Object Scan-->
         <scene sceneID="Njq-dC-FLA">
             <objects>
-                <viewController id="DHV-kh-J5v" customClass="StepScanViewController" customModule="ARLegoDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DHV-kh-J5v" customClass="BaseObjectScanViewController" customModule="ARLegoDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EZX-fr-1TP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -417,7 +417,7 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6t-xI-gTd" userLabel="AR Scene View">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </arscnView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan starting object" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8B-KO-erG">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan base object" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8B-KO-erG">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -455,6 +455,9 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60n-un-PZj">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <connections>
+                                            <action selector="btnContinueTapped:" destination="DHV-kh-J5v" eventType="touchUpInside" id="PNr-JA-4tS"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -492,7 +495,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tT5-mZ-gjx"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Scan" id="zSW-NJ-mYw"/>
+                    <navigationItem key="navigationItem" title="Base Object Scan" id="zSW-NJ-mYw"/>
                     <connections>
                         <outlet property="cnTooDarkToScanningToTop" destination="tHQ-dd-6k8" id="wtb-wN-Swr"/>
                         <outlet property="lblScanDescription" destination="m8B-KO-erG" id="GEq-SK-iIk"/>
@@ -500,6 +503,7 @@
                         <outlet property="view3DScene" destination="6B0-l6-EiG" id="6MD-CU-vx3"/>
                         <outlet property="view3DSceneContainer" destination="f5f-Kg-mko" id="Ngk-uU-AfB"/>
                         <outlet property="viewARScene" destination="t6t-xI-gTd" id="jUM-4d-gas"/>
+                        <segue destination="tz8-K4-aMR" kind="show" identifier="partsScan" id="foA-3t-a8M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ejx-ml-Rdn" sceneMemberID="firstResponder"/>
@@ -523,6 +527,137 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wHd-Ec-XBi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-924" y="505.99700149925042"/>
+        </scene>
+        <!--Parts Scan-->
+        <scene sceneID="mpY-IR-Rdp">
+            <objects>
+                <viewController id="tz8-K4-aMR" customClass="PartsScanViewController" customModule="ARLegoDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Udb-Nf-LGW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buC-zf-ktY" userLabel="AR Scene View">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </arscnView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0Eh-k1-Kdo">
+                                <rect key="frame" x="235" y="123" width="130" height="534"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="yTb-oK-hAw"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="hbB-Al-K68">
+                                    <size key="itemSize" width="130" height="130"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PartCell" id="ub5-mr-dTv" customClass="PartCell" customModule="ARLegoDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Part name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4j-kk-n0J">
+                                                    <rect key="frame" x="8" y="28" width="114" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FZZ-z5-jia">
+                                                    <rect key="frame" x="8" y="53.5" width="114" height="68.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="jwL-SF-XSP"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="FZZ-z5-jia" firstAttribute="leading" secondItem="ub5-mr-dTv" secondAttribute="leadingMargin" id="B9m-Hy-TlM"/>
+                                            <constraint firstItem="S4j-kk-n0J" firstAttribute="top" secondItem="ub5-mr-dTv" secondAttribute="topMargin" id="FcN-dq-U9f"/>
+                                            <constraint firstItem="FZZ-z5-jia" firstAttribute="top" secondItem="S4j-kk-n0J" secondAttribute="bottom" constant="5" id="L7R-bv-k8j"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="FZZ-z5-jia" secondAttribute="bottom" id="f5w-vu-TuX"/>
+                                            <constraint firstItem="S4j-kk-n0J" firstAttribute="leading" secondItem="ub5-mr-dTv" secondAttribute="leadingMargin" id="frG-Z4-fbI"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="S4j-kk-n0J" secondAttribute="trailing" id="k4a-ml-6Aa"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="FZZ-z5-jia" secondAttribute="trailing" id="xW2-uj-buF"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="ivPartImage" destination="FZZ-z5-jia" id="Ucv-si-7vv"/>
+                                            <outlet property="lblPartName" destination="S4j-kk-n0J" id="Cac-KA-rYq"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="tz8-K4-aMR" id="bMA-Ib-VED"/>
+                                </connections>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan parts objects" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyb-8C-d6T">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="nW0-K6-dYC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Too dark for scanning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgV-vb-5hG">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.51967176260000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Icc-Ng-8zU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parts remaining: 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3uH-oC-y8N">
+                                <rect key="frame" x="145" y="613" width="75" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="n0w-57-9rK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0Eh-k1-Kdo" firstAttribute="top" secondItem="Gyb-8C-d6T" secondAttribute="bottom" constant="15" id="2VE-oD-gJB"/>
+                            <constraint firstAttribute="trailing" secondItem="Gyb-8C-d6T" secondAttribute="trailing" id="3o0-EJ-pXg"/>
+                            <constraint firstItem="Ynr-JQ-zdY" firstAttribute="trailing" secondItem="0Eh-k1-Kdo" secondAttribute="trailing" constant="10" id="5Lj-X5-ou4"/>
+                            <constraint firstItem="Ynr-JQ-zdY" firstAttribute="bottom" secondItem="0Eh-k1-Kdo" secondAttribute="bottom" constant="10" id="8rw-tB-N6y"/>
+                            <constraint firstItem="buC-zf-ktY" firstAttribute="trailing" secondItem="Udb-Nf-LGW" secondAttribute="trailing" id="Awx-FC-npf"/>
+                            <constraint firstItem="qgV-vb-5hG" firstAttribute="leading" secondItem="Udb-Nf-LGW" secondAttribute="leading" id="Ntn-So-6hO"/>
+                            <constraint firstItem="buC-zf-ktY" firstAttribute="bottom" secondItem="Udb-Nf-LGW" secondAttribute="bottom" id="YGL-EH-GAo"/>
+                            <constraint firstItem="0Eh-k1-Kdo" firstAttribute="leading" secondItem="3uH-oC-y8N" secondAttribute="trailing" constant="15" id="aZw-bF-TQV"/>
+                            <constraint firstItem="buC-zf-ktY" firstAttribute="top" secondItem="Ynr-JQ-zdY" secondAttribute="top" id="alG-iS-kWo"/>
+                            <constraint firstItem="Ynr-JQ-zdY" firstAttribute="bottom" secondItem="3uH-oC-y8N" secondAttribute="bottom" constant="10" id="cw4-rB-p7i"/>
+                            <constraint firstItem="buC-zf-ktY" firstAttribute="leading" secondItem="Udb-Nf-LGW" secondAttribute="leading" id="jSd-ii-dvJ"/>
+                            <constraint firstItem="Gyb-8C-d6T" firstAttribute="top" secondItem="Ynr-JQ-zdY" secondAttribute="top" id="jWA-cx-To7"/>
+                            <constraint firstItem="3uH-oC-y8N" firstAttribute="leading" secondItem="Ynr-JQ-zdY" secondAttribute="leading" constant="145" id="jWM-1k-4Nl"/>
+                            <constraint firstItem="qgV-vb-5hG" firstAttribute="top" secondItem="Ynr-JQ-zdY" secondAttribute="top" constant="-44" id="kXj-lc-j3o"/>
+                            <constraint firstAttribute="trailing" secondItem="qgV-vb-5hG" secondAttribute="trailing" id="scS-sY-Kth"/>
+                            <constraint firstItem="Gyb-8C-d6T" firstAttribute="leading" secondItem="Udb-Nf-LGW" secondAttribute="leading" id="yM2-2P-M2x"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ynr-JQ-zdY"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Parts Scan" id="yqg-b8-jTN"/>
+                    <connections>
+                        <outlet property="cnTooDarkToScanningToTop" destination="kXj-lc-j3o" id="m1C-Jc-rta"/>
+                        <outlet property="cvParts" destination="0Eh-k1-Kdo" id="wf7-zY-MWB"/>
+                        <outlet property="lblPartsRemaining" destination="3uH-oC-y8N" id="tIO-y2-5zE"/>
+                        <outlet property="lblScanDescription" destination="Gyb-8C-d6T" id="kXq-5L-rxX"/>
+                        <outlet property="lblTooDarkForScanning" destination="qgV-vb-5hG" id="UGD-w9-IC7"/>
+                        <outlet property="viewARScene" destination="buC-zf-ktY" id="JhY-t5-TQt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AZj-h5-avI" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1597.5999999999999" y="505.99700149925042"/>
         </scene>
     </scenes>
     <resources>

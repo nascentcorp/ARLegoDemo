@@ -21,11 +21,11 @@ class StepSelectionCell: UITableViewCell {
     }
     
     func setup(with step: BuildingStepService.BuildingStep) {
-        ivStepBasePart.image = UIImage(named: step.baseModel.part.imageName)
-        lblStepTitle.text = step.baseModel.part.name
+        ivStepBasePart.image = UIImage(named: step.baseModel.imageName)
+        lblStepTitle.text = step.baseModel.name
 
-        for i in 0..<step.parts.count {
-            let part = step.parts[i]
+        for i in 0..<step.additionalParts.count {
+            let part = step.additionalParts[i]
             
             let partImageView = UIImageView(frame: CGRect(x: i * 52, y: 0, width: 52, height: 52))
             partImageView.image = UIImage(named: part.imageName)
@@ -43,8 +43,8 @@ class StepSelectionViewController: UIViewController {
         if let stepAssemblyViewController = segue.destination as? StepAssemblyViewController {
             stepAssemblyViewController.buildingStepService = buildingStepService
         }
-        else if let stepScanViewController = segue.destination as? StepScanViewController {
-            stepScanViewController.buildingStepService = buildingStepService
+        else if let baseObjectScanViewController = segue.destination as? BaseObjectScanViewController {
+            baseObjectScanViewController.buildingStepService = buildingStepService
         }
     }
 }

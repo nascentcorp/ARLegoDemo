@@ -36,8 +36,9 @@
 		9480652E21663C8C00DB1E76 /* statue_n.dds in Resources */ = {isa = PBXBuildFile; fileRef = 9480652921663C8C00DB1E76 /* statue_n.dds */; };
 		9480652F21663C8C00DB1E76 /* statue.obj in Resources */ = {isa = PBXBuildFile; fileRef = 9480652A21663C8C00DB1E76 /* statue.obj */; };
 		948199DA216633AC008D6D2E /* MDLMaterial+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948199D9216633AC008D6D2E /* MDLMaterial+Extensions.swift */; };
-		94B5BE62217A02A200E98F19 /* StepScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5BE61217A02A200E98F19 /* StepScanViewController.swift */; };
+		94B5BE62217A02A200E98F19 /* BaseObjectScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5BE61217A02A200E98F19 /* BaseObjectScanViewController.swift */; };
 		94B5BE64217A02E800E98F19 /* StepSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5BE63217A02E800E98F19 /* StepSelectionViewController.swift */; };
+		94B5BE66217B105200E98F19 /* PartsScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5BE65217B105200E98F19 /* PartsScanViewController.swift */; };
 		94DC82752166302500BC3CA6 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,8 +74,9 @@
 		9480652921663C8C00DB1E76 /* statue_n.dds */ = {isa = PBXFileReference; lastKnownFileType = file; path = statue_n.dds; sourceTree = "<group>"; };
 		9480652A21663C8C00DB1E76 /* statue.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = statue.obj; sourceTree = "<group>"; };
 		948199D9216633AC008D6D2E /* MDLMaterial+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLMaterial+Extensions.swift"; sourceTree = "<group>"; };
-		94B5BE61217A02A200E98F19 /* StepScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepScanViewController.swift; sourceTree = "<group>"; };
+		94B5BE61217A02A200E98F19 /* BaseObjectScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseObjectScanViewController.swift; sourceTree = "<group>"; };
 		94B5BE63217A02E800E98F19 /* StepSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSelectionViewController.swift; sourceTree = "<group>"; };
+		94B5BE65217B105200E98F19 /* PartsScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartsScanViewController.swift; sourceTree = "<group>"; };
 		94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,7 +230,8 @@
 				943C505A215E730D002A3773 /* StepAssemblyViewController.swift */,
 				94B5BE63217A02E800E98F19 /* StepSelectionViewController.swift */,
 				94125C0E21737017004D1A7E /* ObjectPreviewViewController.swift */,
-				94B5BE61217A02A200E98F19 /* StepScanViewController.swift */,
+				94B5BE61217A02A200E98F19 /* BaseObjectScanViewController.swift */,
+				94B5BE65217B105200E98F19 /* PartsScanViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -331,11 +334,12 @@
 				943C505B215E730D002A3773 /* StepAssemblyViewController.swift in Sources */,
 				94125C0F21737017004D1A7E /* ObjectPreviewViewController.swift in Sources */,
 				94125C0D21734BF3004D1A7E /* CGSize+Extensions.swift in Sources */,
-				94B5BE62217A02A200E98F19 /* StepScanViewController.swift in Sources */,
+				94B5BE62217A02A200E98F19 /* BaseObjectScanViewController.swift in Sources */,
 				94B5BE64217A02E800E98F19 /* StepSelectionViewController.swift in Sources */,
 				940A79AC2164BE1E00C049CD /* AREnvironmentService.swift in Sources */,
 				9478C1842174CA3900F05576 /* SCNScene+Extensions.swift in Sources */,
 				943C5057215E730D002A3773 /* AppDelegate.swift in Sources */,
+				94B5BE66217B105200E98F19 /* PartsScanViewController.swift in Sources */,
 				940A79AE2164D29500C049CD /* BuildingStepService.swift in Sources */,
 				948199DA216633AC008D6D2E /* MDLMaterial+Extensions.swift in Sources */,
 				9478C1822174BEB500F05576 /* SCNNode+Extensions.swift in Sources */,

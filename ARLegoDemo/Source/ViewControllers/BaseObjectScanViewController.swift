@@ -1,5 +1,5 @@
 //
-//  StepScanViewController.swift
+//  BaseObjectScanViewController.swift
 //  ARLegoDemo
 //
 //  Created by Miran Brajsa on 19/10/2018.
@@ -9,7 +9,7 @@
 import ARKit
 import UIKit
 
-class StepScanViewController: UIViewController {
+class BaseObjectScanViewController: UIViewController {
 
     private let arEnvironmentService = AREnvironmentService()
 
@@ -25,7 +25,7 @@ class StepScanViewController: UIViewController {
     var buildingStepService: BuildingStepService!
 
     deinit {
-        print("deinit step scan")
+        print("deinit base object scan")
     }
     
     override func viewDidLoad() {
@@ -57,6 +57,16 @@ class StepScanViewController: UIViewController {
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let partsScanViewController = segue.destination as? PartsScanViewController {
+            partsScanViewController.buildingStepService = buildingStepService
+        }
+    }
+    
+    @IBAction func btnContinueTapped(_ sender: Any) {
+        performSegue(withIdentifier: "partsScan", sender: nil)
+    }
+    
     private func setup3DScene() {
         let camera = SCNCamera()
         camera.zNear = 0.1
@@ -158,7 +168,7 @@ class StepScanViewController: UIViewController {
     }
 }
 
-extension StepScanViewController: ARSCNViewDelegate {
+extension BaseObjectScanViewController: ARSCNViewDelegate {
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         objectDetectionCheck(anchor, objectNames: buildingStepService.baseModelScanNames)

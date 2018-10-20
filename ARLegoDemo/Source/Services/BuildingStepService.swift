@@ -8,6 +8,10 @@
 
 import Foundation
 
+// TODO: Make strutures private if they're not needed in the outside declarations
+// TODO: Updated getters to be consistent and use getters only
+// TODO: See if we should store current step index or not
+
 extension BuildingStepService.BuildingStepPart: Equatable {}
 
 func ==(lhs: BuildingStepService.BuildingStepPart, rhs: BuildingStepService.BuildingStepPart) -> Bool {
@@ -16,11 +20,6 @@ func ==(lhs: BuildingStepService.BuildingStepPart, rhs: BuildingStepService.Buil
 
 class BuildingStepService {
 
-    struct BuildingStepBaseModel {
-        let part: BuildingStepPart
-        let scanNames: [String]
-    }
-    
     struct BuildingStepPart {
         let id: String
         let name: String
@@ -28,53 +27,54 @@ class BuildingStepService {
         let isBaseModel: Bool
         let objectName: String
         let objectType: AcceptedFileType
-
-        init(id: String = UUID().uuidString, name: String, imageName: String, isBaseModel: Bool, objectName: String, objectType: AcceptedFileType) {
+        let scanNames: [String]
+        
+        init(id: String = UUID().uuidString, name: String, imageName: String, isBaseModel: Bool, objectName: String, objectType: AcceptedFileType, scanNames: [String]) {
             self.id = id
             self.name = name
             self.imageName = imageName
             self.isBaseModel = isBaseModel
             self.objectName = objectName
             self.objectType = objectType
+            self.scanNames = scanNames
         }
     }
     
     struct BuildingStep {
         let arCatalogName: String
-        let baseModel: BuildingStepBaseModel
-        let parts: [BuildingStepPart]
+        let baseModel: BuildingStepPart
+        let additionalParts: [BuildingStepPart]
     }
 
     // TODO: This should be loaded from a config file
     private let buildingSteps = [
         BuildingStep(
             arCatalogName: "LegoStep1",
-            baseModel: BuildingStepBaseModel(
-                part: BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj),
-                scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]
-            ),
-            parts: [
-                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj),
-                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj)
+            baseModel: BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj,
+                scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]),
+            additionalParts: [
+                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj,
+                                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]),
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj,
+                                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]),
+                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj,
+                                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"])
             ]
         ),
         BuildingStep(
             arCatalogName: "LegoStep1",
-            baseModel: BuildingStepBaseModel(
-                part: BuildingStepPart(name: "Batwing Step 2", imageName: "torus.png", isBaseModel: true, objectName: "torus", objectType: .obj),
-                scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]
-            ),
-            parts: [
-                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj),
-                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj),
-                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj),
-                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj),
-                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj),
-                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj)
+            baseModel: BuildingStepPart(name: "Batwing Step 2", imageName: "torus.png", isBaseModel: true, objectName: "torus", objectType: .obj,
+                scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]),
+            additionalParts: [
+                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj, scanNames: []),
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj, scanNames: []),
+                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj, scanNames: []),
+                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj, scanNames: []),
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj, scanNames: []),
+                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj, scanNames: []),
+                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj, scanNames: []),
+                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj, scanNames: []),
+                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj, scanNames: [])
             ]
         )
     ]
@@ -86,7 +86,7 @@ class BuildingStepService {
     }
 
     var baseModelPart: BuildingStepPart {
-        return buildingSteps[currentBuildingStepInternal].baseModel.part
+        return buildingSteps[currentBuildingStepInternal].baseModel
     }
 
     var baseModelScanNames: [String] {
@@ -98,15 +98,19 @@ class BuildingStepService {
     }
     
     var partNames: [String] {
-        return buildingSteps[currentBuildingStepInternal].parts.map({ $0.name })
+        return buildingSteps[currentBuildingStepInternal].additionalParts.map({ $0.name })
     }
 
     var parts: [BuildingStepPart] {
-        return buildingSteps[currentBuildingStepInternal].parts
+        return buildingSteps[currentBuildingStepInternal].additionalParts
     }
 
     func buildingStep(at index: Int) -> BuildingStep {
         return buildingSteps[index]
+    }
+
+    func partScanNames(at index: Int) -> [String] {
+        return buildingSteps[currentBuildingStepInternal].additionalParts[index].scanNames
     }
 
     func setBuildingStep(at index: Int) {
