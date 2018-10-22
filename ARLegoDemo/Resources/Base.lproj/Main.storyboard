@@ -228,7 +228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2334" y="-375"/>
+            <point key="canvasLocation" x="2343" y="-6"/>
         </scene>
         <!--Object Preview View Controller-->
         <scene sceneID="A3s-lt-1I1">
@@ -291,7 +291,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3IX-O4-Yeh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3762" y="506"/>
+            <point key="canvasLocation" x="3226" y="-6"/>
         </scene>
         <!--Build step selection-->
         <scene sceneID="qm8-ja-loM">
@@ -404,7 +404,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="src-SS-ItW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-82" y="506"/>
+            <point key="canvasLocation" x="-74" y="-5"/>
         </scene>
         <!--Base Object Scan-->
         <scene sceneID="Njq-dC-FLA">
@@ -508,7 +508,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ejx-ml-Rdn" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="757.60000000000002" y="505.99700149925042"/>
+            <point key="canvasLocation" x="644" y="761"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="O9r-O7-aX7">
@@ -526,7 +526,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wHd-Ec-XBi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-924" y="505.99700149925042"/>
+            <point key="canvasLocation" x="-887" y="-6"/>
         </scene>
         <!--Parts Scan-->
         <scene sceneID="mpY-IR-Rdp">
@@ -694,7 +694,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AZj-h5-avI" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1597.5999999999999" y="505.99700149925042"/>
+            <point key="canvasLocation" x="1553" y="761"/>
         </scene>
     </scenes>
     <resources>
