@@ -63,11 +63,6 @@ class StepAssemblyViewController: UIViewController {
         return (activeSceneType == .sceneAR) ? viewARScene : view3DScene
     }
     
-    var shipModel: SCNNode? {
-        let shipNode = viewARScene.scene.rootNode.childNode(withName: "ship", recursively: false)?.childNode(withName: "shipMesh", recursively: false)
-        return shipNode
-    }
-    
     deinit {
         print("deinit step assembly")
     }
@@ -236,22 +231,6 @@ class StepAssemblyViewController: UIViewController {
         let sequence = SCNAction.sequence([initialDelay, group])
         partNode.runAction(sequence)
     }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let touch = touches.first else { return }
-//        let results = sceneView.hitTest(touch.location(in: sceneView), types: [.featurePoint])
-//
-//        guard let hitFeature = results.last else { return }
-//        let hitTransform = hitFeature.worldTransform
-//        let hitPosition = SCNVector3Make(hitTransform.columns.3.x,
-//                                         hitTransform.columns.3.y,
-//                                         hitTransform.columns.3.z)
-//        guard let shipModelNode = shipModel else {
-//            return
-//        }
-//        sceneView.scene.rootNode.addChildNode(shipModelNode)
-//        shipModelNode.position = hitPosition
-//    }
 }
 
 extension StepAssemblyViewController {
