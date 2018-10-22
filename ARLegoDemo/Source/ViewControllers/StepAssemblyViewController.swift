@@ -68,6 +68,10 @@ class StepAssemblyViewController: UIViewController {
         return shipNode
     }
     
+    deinit {
+        print("deinit step assembly")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

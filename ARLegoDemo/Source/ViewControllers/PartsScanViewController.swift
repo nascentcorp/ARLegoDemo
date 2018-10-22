@@ -21,6 +21,7 @@ class PartsScanViewController: UIViewController {
     @IBOutlet private weak var lblScanDescription: UILabel!
     @IBOutlet private weak var lblTooDarkForScanning: UILabel!
     @IBOutlet private weak var viewARScene: ARSCNView!
+    @IBOutlet private weak var viewScanCompleted: UIView!
     
     var buildingStepService: BuildingStepService!
 
@@ -57,15 +58,15 @@ class PartsScanViewController: UIViewController {
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let partsScanViewController = segue.destination as? PartsScanViewController {
-//            partsScanViewController.buildingStepService = buildingStepService
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let stepAssemblyViewController = segue.destination as? StepAssemblyViewController {
+            stepAssemblyViewController.buildingStepService = buildingStepService
+        }
+    }
     
-//    @IBAction func btnContinueTapped(_ sender: Any) {
-//        performSegue(withIdentifier: "partsScan", sender: nil)
-//    }
+    @IBAction func btnContinueTapped(_ sender: Any) {
+        performSegue(withIdentifier: "stepAssembly", sender: nil)
+    }
     
     private func setupARScene() {
         let scene = SCNScene()
@@ -75,25 +76,15 @@ class PartsScanViewController: UIViewController {
         viewARScene.automaticallyUpdatesLighting = true
     }
     
-//    private func displayResultView() {
-//        if arEnvironmentService.isDeviceARCapable {
-//            viewARScene.session.pause()
-//        }
-//        guard let scannedObjectModel = self.scannedObjectModel else {
-//            assertionFailure("Scanned object model should exist at this point.")
-//            return
-//        }
-//
-//        let rotate = SCNAction.rotateBy(x: 0, y: -CGFloat(4 * Float.pi), z: 0, duration: 6)
-//        let rotateForever = SCNAction.repeatForever(rotate)
-//        scannedObjectModel.runAction(rotateForever)
-//
-//        UIView.animate(withDuration: 0.7) { [weak self] in
-//            guard let `self` = self else { return }
-//            self.view3DSceneContainer.alpha = 1.0
-//        }
-//    }
-//
+    private func displayResultView() {
+        if arEnvironmentService.isDeviceARCapable {
+            viewARScene.session.pause()
+        }
+        UIView.animate(withDuration: 0.7) { [weak self] in
+            guard let `self` = self else { return }
+            self.viewScanCompleted.alpha = 1.0
+        }
+    }
     
     private func updatePartsRemainingLabel() {
         lblPartsRemaining.text = "Parts remaining: \((buildingStepService.partNames.count - scannedPartIndexes.count))"
@@ -143,8 +134,7 @@ extension PartsScanViewController: ARSCNViewDelegate {
                 }
 
                 if self.buildingStepService.partNames.count - self.scannedPartIndexes.count == 0 {
-                    // TODO: Display result view
-                    //                self.displayResultView()
+                    self.displayResultView()
                 }
             }
         }
