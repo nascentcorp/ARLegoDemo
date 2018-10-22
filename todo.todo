@@ -30,3 +30,6 @@ Refactoring:
   ☐ Extract repetitive code into protocols with default implementations.
   ☐ Extract cell definitions to separate modules.
   ☐ Extract type definitions to separate modules.
+  ☐ Go through all of the modules and handle bool flags. They should possibly become a part of some services?
+  ☐ Make AREnvironment service execute closures on main thread.
+    ☐ See how to unify that with the AR Scene Delegate which executes delegates on background threads.

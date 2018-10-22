@@ -34,17 +34,26 @@ enum PartNodeKeys: String {
     case part
 }
 
+enum AssemblyTooltipTextType: String {
+    case scanBaseObject = "Please, scan the base object so we could place all of the needed parts around it"
+    case tapOnPart = "Tap on objects to connect them or get more info"
+}
+
 class StepAssemblyViewController: UIViewController {
 
     private let arEnvironmentService = AREnvironmentService()
     private let cellName = String(describing: PartCell.self)
     
+    private var baseObjectScanned = false
     private var scene3DSetup = false
     private var selectedNode: SCNNode?
 
     @IBOutlet private weak var cvParts: UICollectionView!
+    @IBOutlet private weak var cnTooDarkToScanningToTop: NSLayoutConstraint!
     @IBOutlet private weak var ivBaseObjectImage: UIImageView!
     @IBOutlet private weak var lblBaseObjectName: UILabel!
+    @IBOutlet private weak var lblScanTooltop: UILabel!
+    @IBOutlet private weak var lblTooDarkForScanning: UILabel!
     @IBOutlet private weak var sgmSceneSwitch: UISegmentedControl!
     @IBOutlet private weak var view3DScene: SCNView!
     @IBOutlet private weak var viewActions: UIView!
@@ -78,6 +87,7 @@ class StepAssemblyViewController: UIViewController {
             setup3DScene()
         }
         setupAppearance()
+        attachObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,6 +145,12 @@ class StepAssemblyViewController: UIViewController {
             scene3DSetup = true
             setup3DScene()
         }
+        lblScanTooltop.text = (!sceneARSelected)
+            ? AssemblyTooltipTextType.tapOnPart.rawValue
+            : ((baseObjectScanned)
+                ? AssemblyTooltipTextType.tapOnPart.rawValue
+                : AssemblyTooltipTextType.scanBaseObject.rawValue
+        )
         view3DScene.isHidden = sceneARSelected
         viewARScene.isHidden = !sceneARSelected
     }
@@ -144,16 +160,27 @@ class StepAssemblyViewController: UIViewController {
         ivBaseObjectImage.image = UIImage(named: buildingStepService.baseModelPart.imageName)
         
         if !arEnvironmentService.isDeviceARCapable {
+            lblScanTooltop.text = AssemblyTooltipTextType.tapOnPart.rawValue
             sgmSceneSwitch.isHidden = true
             view3DScene.isHidden = false
             viewARScene.isHidden = true
         }
     }
     
+    private func attachObservers() {
+        arEnvironmentService.lightingStatusChanged = { [weak self] lightingStatus in
+            guard let `self` = self else { return }
+            let shouldDisplayWarning = (lightingStatus == .tooDarkForScanning)
+            self.cnTooDarkToScanningToTop.constant = (shouldDisplayWarning) ? 0 : -self.lblTooDarkForScanning.bounds.height
+            UIView.animate(withDuration: 0.3, animations: {
+                self.lblTooDarkForScanning.alpha = (shouldDisplayWarning) ? 1 : 0
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+
     private func setupARScene() {
         let scene = SCNScene()
-
-        addParts(toScene: scene, sceneType: .sceneAR)
 
         viewARScene.scene = scene
         viewARScene.delegate = self
@@ -176,7 +203,7 @@ class StepAssemblyViewController: UIViewController {
         mainScene.rootNode.addChildNode(cameraOrbit)
         mainScene.rootNode.createPlaneNode(color: .yellow)
 
-        addParts(toScene: mainScene, sceneType: .scene3D)
+        addParts(toNode: mainScene.rootNode, sceneType: .scene3D)
 
         view3DScene.scene = mainScene
         view3DScene.backgroundColor = UIColor.black
@@ -184,11 +211,13 @@ class StepAssemblyViewController: UIViewController {
         view3DScene.autoenablesDefaultLighting = true
     }
     
-    private func addParts(toScene scene: SCNScene, sceneType: SceneType) {
-        addPartWorker(buildingStepService.baseModelPart, toScene: scene, sceneType: sceneType)
+    private func addParts(toNode node: SCNNode, sceneType: SceneType, skipBaseModelPart: Bool = false) {
+        if !skipBaseModelPart {
+            addPartWorker(buildingStepService.baseModelPart, toNode: node, sceneType: sceneType)
+        }
         for i in 0..<buildingStepService.parts.count {
             let part = buildingStepService.parts[i]
-            let radius = (sceneType == .scene3D) ? 0.7 : 0.5
+            let radius = (sceneType == .scene3D) ? 0.7 : 0.3
             let angle = Double(i) / (Double(buildingStepService.parts.count) / 2.0) * Double.pi - Double.pi / 2.0
             let position = SCNVector3(
                 radius * cos(angle),
@@ -196,13 +225,13 @@ class StepAssemblyViewController: UIViewController {
                 radius * sin(angle)
             )
             let delayFactor = Double(i) / Double(buildingStepService.parts.count)
-            addPartWorker(part, toScene: scene, sceneType: sceneType, position: position, shouldAnimate: true, delayFactor: delayFactor)
+            addPartWorker(part, toNode: node, sceneType: sceneType, position: position, shouldAnimate: true, delayFactor: delayFactor)
         }
     }
     
     private func addPartWorker(
         _ part: BuildingStepService.BuildingStepPart,
-        toScene scene: SCNScene,
+        toNode node: SCNNode,
         sceneType: SceneType,
         position: SCNVector3 = SCNVector3(),
         shouldAnimate: Bool = false,
@@ -214,7 +243,7 @@ class StepAssemblyViewController: UIViewController {
         partNode.setValue(part, forKey: PartNodeKeys.part.rawValue)
         partNode.adjustObjectGeometry(objectType: part.objectType, scale: (sceneType == .scene3D) ? 0.3 : 0.2)
 
-        scene.rootNode.addChildNode(partNode)
+        node.addChildNode(partNode)
 
         if !shouldAnimate {
             partNode.position = position
@@ -277,7 +306,15 @@ extension StepAssemblyViewController {
         UIView.animate(withDuration: animationDuration) {
             self.viewActions.alpha = (toggleHighlight != nil) ? 0 : 1
         }
-        scene.rootNode.childNodes.forEach({ otherPartNode in
+        let nodeToSearch: SCNNode
+        if activeSceneType == .sceneAR {
+            let anchorNode = scene.rootNode.childNodes.filter({ $0.childNodes.count > 0 }).first
+            nodeToSearch = anchorNode ?? SCNNode()
+        }
+        else {
+            nodeToSearch = scene.rootNode
+        }
+        nodeToSearch.childNodes.forEach({ otherPartNode in
             guard
                 let part = getNodePart(otherPartNode),
                 !part.isBaseModel
@@ -318,22 +355,30 @@ extension StepAssemblyViewController: ARSCNViewDelegate {
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        objectDetectionCheck(anchor, objectNames: buildingStepService.baseModelScanNames)
-        objectDetectionCheck(anchor, objectNames: buildingStepService.partNames)
+        if baseObjectScanned {
+            return
+        }
+        objectDetectionCheck(anchor, node: node, objectNames: buildingStepService.baseModelScanNames)
     }
 
-    private func objectDetectionCheck(_ anchor: ARAnchor, objectNames: [String]) {
+    private func objectDetectionCheck(_ anchor: ARAnchor, node: SCNNode, objectNames: [String]) {
         if
             let objectAnchor = anchor as? ARObjectAnchor,
             let objectName = objectAnchor.referenceObject.name,
             let objectNameIndex = objectNames.firstIndex(where: { $0 == objectName })
         {
             print("|||| Detected object: '\(objectNames[objectNameIndex])' ||||")
-            //            if let shipModel = shipModel {
-            //                node.addChildNode(shipModel)
-            //                shipModel.simdScale = objectAnchor.referenceObject.scale
-            //                shipModel.simdPosition = objectAnchor.referenceObject.center
-            //            }
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else { return }
+                self.baseObjectScanned = true
+                self.lblScanTooltop.text = "Tap on objects to connect them or get more info"
+                self.arEnvironmentService.lightingStatusChanged = nil
+                // TODO: Update nodes' scale to match anchor reference object
+                self.addParts(toNode: node, sceneType: .sceneAR, skipBaseModelPart: true)
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.lblTooDarkForScanning.alpha = 0
+                })
+            }
         }
     }
 
@@ -343,7 +388,10 @@ extension StepAssemblyViewController: ARSCNViewDelegate {
     }
 
     private func updateOnEveryFrame(_ frame: ARFrame) {
-        arEnvironmentService.updateWithFrameInfo(frame)
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else { return }
+            self.arEnvironmentService.updateWithFrameInfo(frame)
+        }
     }
 }
 
