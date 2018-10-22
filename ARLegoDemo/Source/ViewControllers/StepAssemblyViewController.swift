@@ -156,7 +156,6 @@ class StepAssemblyViewController: UIViewController {
         addParts(toScene: scene, sceneType: .sceneAR)
 
         viewARScene.scene = scene
-        viewARScene.showsStatistics = true
         viewARScene.delegate = self
         viewARScene.automaticallyUpdatesLighting = true
     }
@@ -180,7 +179,6 @@ class StepAssemblyViewController: UIViewController {
         addParts(toScene: mainScene, sceneType: .scene3D)
 
         view3DScene.scene = mainScene
-        view3DScene.showsStatistics = true
         view3DScene.backgroundColor = UIColor.black
         view3DScene.allowsCameraControl = true
         view3DScene.autoenablesDefaultLighting = true
