@@ -27,3 +27,5 @@ General:
   ☐ Create a fallback mechanism if a device has no world tracking configuration supported.
 Refactoring:
   ☐ Make all segue names enums.
+  ☐ Extract cell definitions to separate modules.
+  ☐ Extract type definitions to separate modules.
