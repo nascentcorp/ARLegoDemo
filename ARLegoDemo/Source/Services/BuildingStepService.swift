@@ -85,9 +85,9 @@ class BuildingStepService {
                 BuildingStepPart(name: "Wing", imageName: "wing-300.png", isBaseModel: false, objectName: "cube", objectType: .obj,
                                  scanNames: ["wingBottom", "wingTop"]),
                 BuildingStepPart(name: "Engine", imageName: "engine-300.png", isBaseModel: false, objectName: "statue", objectType: .obj,
-                                 scanNames: ["engineTop", "engineBottom", "engineSide"]),
+                                 scanNames: ["engineTop", "engineTop2", "engineBottom", "engineBottom2", "engineSide"]),
                 BuildingStepPart(name: "Tail", imageName: "tail-300.png", isBaseModel: false, objectName: "torus", objectType: .obj,
-                                 scanNames: ["tailAngled", "tailLeft", "tailRight"])
+                                 scanNames: ["tailAngled", "tailAngled2", "tailLeft", "tailRight"])
             ]
         )
     ]
