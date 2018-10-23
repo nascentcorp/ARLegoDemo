@@ -1,0 +1,38 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "resources" : [
+    {
+      "filename" : "BaseObjectBottom.arobject"
+    },
+    {
+      "filename" : "BaseObjectTop.arobject"
+    },
+    {
+      "filename" : "EngineBottom.arobject"
+    },
+    {
+      "filename" : "EngineSide.arobject"
+    },
+    {
+      "filename" : "EngineTop.arobject"
+    },
+    {
+      "filename" : "TailAngled.arobject"
+    },
+    {
+      "filename" : "TailLeft.arobject"
+    },
+    {
+      "filename" : "TailRight.arobject"
+    },
+    {
+      "filename" : "WingBottom.arobject"
+    },
+    {
+      "filename" : "WingTop.arobject"
+    }
+  ]
+}
