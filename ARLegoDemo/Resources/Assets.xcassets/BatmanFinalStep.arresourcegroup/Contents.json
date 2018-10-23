@@ -5,34 +5,34 @@
   },
   "resources" : [
     {
-      "filename" : "BaseObjectBottom.arobject"
+      "filename" : "baseObjectBottom.arobject"
     },
     {
-      "filename" : "BaseObjectTop.arobject"
+      "filename" : "baseObjectTop.arobject"
     },
     {
-      "filename" : "EngineBottom.arobject"
+      "filename" : "engineBottom.arobject"
     },
     {
-      "filename" : "EngineSide.arobject"
+      "filename" : "engineSide.arobject"
     },
     {
-      "filename" : "EngineTop.arobject"
+      "filename" : "engineTop.arobject"
     },
     {
-      "filename" : "TailAngled.arobject"
+      "filename" : "tailAngled.arobject"
     },
     {
-      "filename" : "TailLeft.arobject"
+      "filename" : "tailLeft.arobject"
     },
     {
-      "filename" : "TailRight.arobject"
+      "filename" : "tailRight.arobject"
     },
     {
-      "filename" : "WingBottom.arobject"
+      "filename" : "wingBottom.arobject"
     },
     {
-      "filename" : "WingTop.arobject"
+      "filename" : "wingTop.arobject"
     }
   ]
 }

@@ -50,7 +50,7 @@ class BuildingStepService {
     private let buildingSteps = [
         BuildingStep(
             arCatalogName: "LegoStep1",
-            baseModel: BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj,
+            baseModel: BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: true, objectName: "statue", objectType: .obj,
                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]),
             additionalParts: [
                 BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj,
@@ -75,6 +75,19 @@ class BuildingStepService {
                 BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj, scanNames: []),
                 BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj, scanNames: []),
                 BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj, scanNames: [])
+            ]
+        ),
+        BuildingStep(
+            arCatalogName: "BatmanFinalStep",
+            baseModel: BuildingStepPart(name: "Batman glider", imageName: "baseObject-300.png", isBaseModel: true, objectName: "statue", objectType: .obj,
+                                        scanNames: ["baseObjectBottom", "baseObjectTop"]),
+            additionalParts: [
+                BuildingStepPart(name: "Wing", imageName: "wing-300.png", isBaseModel: false, objectName: "cube", objectType: .obj,
+                                 scanNames: ["wingBottom", "wingTop"]),
+                BuildingStepPart(name: "Engine", imageName: "engine-300.png", isBaseModel: false, objectName: "statue", objectType: .obj,
+                                 scanNames: ["engineTop", "engineBottom", "engineSide"]),
+                BuildingStepPart(name: "Tail", imageName: "tail-300.png", isBaseModel: false, objectName: "torus", objectType: .obj,
+                                 scanNames: ["tailAngled", "tailLeft", "tailRight"])
             ]
         )
     ]
