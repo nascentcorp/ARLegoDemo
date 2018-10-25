@@ -49,45 +49,23 @@ class BuildingStepService {
     // TODO: This should be loaded from a config file
     private let buildingSteps = [
         BuildingStep(
-            arCatalogName: "LegoStep1",
-            baseModel: BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: true, objectName: "statue", objectType: .obj,
-                scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]),
+            arCatalogName: "BatGliderFirstStep",
+            baseModel: BuildingStepPart(name: "Chasis skeleton", imageName: "statue.png", isBaseModel: true, objectName: "statue", objectType: .obj,
+                scanNames: ["baseAngled", "baseBottom", "baseTop"]),
+            additionalParts: [
+                BuildingStepPart(name: "Left wing", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj,
+                                 scanNames: ["wingTop", "wingBottom"]),
+                BuildingStepPart(name: "Right wing", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj,
+                                 scanNames: ["wingTop", "wingBottom"])
+            ]
+        ),
+        BuildingStep(
+            arCatalogName: "BatGliderFinalStep",
+            baseModel: BuildingStepPart(name: "Glider base", imageName: "torus.png", isBaseModel: true, objectName: "torus", objectType: .obj,
+                scanNames: ["baseBottom", "baseTop"]),
             additionalParts: [
                 BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj,
-                                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj,
-                                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]),
-                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj,
-                                 scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"])
-            ]
-        ),
-        BuildingStep(
-            arCatalogName: "LegoStep1",
-            baseModel: BuildingStepPart(name: "Batwing Step 2", imageName: "torus.png", isBaseModel: true, objectName: "torus", objectType: .obj,
-                scanNames: ["baseStepModelTopSide", "baseStepModelBottomSide"]),
-            additionalParts: [
-                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj, scanNames: []),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj, scanNames: []),
-                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj, scanNames: []),
-                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj, scanNames: []),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj, scanNames: []),
-                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj, scanNames: []),
-                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj, scanNames: []),
-                BuildingStepPart(name: "Statue part", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj, scanNames: []),
-                BuildingStepPart(name: "Torus part", imageName: "torus.png", isBaseModel: false, objectName: "torus", objectType: .obj, scanNames: [])
-            ]
-        ),
-        BuildingStep(
-            arCatalogName: "BatmanFinalStep",
-            baseModel: BuildingStepPart(name: "Batman glider", imageName: "baseObject-300.png", isBaseModel: true, objectName: "statue", objectType: .obj,
-                                        scanNames: ["baseObjectBottom", "baseObjectTop"]),
-            additionalParts: [
-                BuildingStepPart(name: "Wing", imageName: "wing-300.png", isBaseModel: false, objectName: "cube", objectType: .obj,
-                                 scanNames: ["wingBottom", "wingTop"]),
-                BuildingStepPart(name: "Engine", imageName: "engine-300.png", isBaseModel: false, objectName: "statue", objectType: .obj,
-                                 scanNames: ["engineTop", "engineTop2", "engineBottom", "engineBottom2", "engineSide"]),
-                BuildingStepPart(name: "Tail", imageName: "tail-300.png", isBaseModel: false, objectName: "torus", objectType: .obj,
-                                 scanNames: ["tailAngled", "tailAngled2", "tailLeft", "tailRight"])
+                                 scanNames: ["chasisTop", "chasisBottom"])
             ]
         )
     ]

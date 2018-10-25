@@ -43,7 +43,6 @@
 		94EB80B8217F25D10055120F /* baseObject-300.png in Resources */ = {isa = PBXBuildFile; fileRef = 94EB80B4217F25D10055120F /* baseObject-300.png */; };
 		94EB80B9217F25D10055120F /* wing-300.png in Resources */ = {isa = PBXBuildFile; fileRef = 94EB80B5217F25D10055120F /* wing-300.png */; };
 		94EB80BA217F25D10055120F /* tail-300.png in Resources */ = {isa = PBXBuildFile; fileRef = 94EB80B6217F25D10055120F /* tail-300.png */; };
-		94EB80BB217F25D10055120F /* engine-300.png in Resources */ = {isa = PBXBuildFile; fileRef = 94EB80B7217F25D10055120F /* engine-300.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,7 +84,6 @@
 		94EB80B4217F25D10055120F /* baseObject-300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "baseObject-300.png"; sourceTree = "<group>"; };
 		94EB80B5217F25D10055120F /* wing-300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wing-300.png"; sourceTree = "<group>"; };
 		94EB80B6217F25D10055120F /* tail-300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tail-300.png"; sourceTree = "<group>"; };
-		94EB80B7217F25D10055120F /* engine-300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "engine-300.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,7 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				94EB80B4217F25D10055120F /* baseObject-300.png */,
-				94EB80B7217F25D10055120F /* engine-300.png */,
 				94EB80B6217F25D10055120F /* tail-300.png */,
 				94EB80B5217F25D10055120F /* wing-300.png */,
 			);
@@ -341,7 +338,6 @@
 				9480652B21663C8C00DB1E76 /* statue_s.dds in Resources */,
 				94EB80BA217F25D10055120F /* tail-300.png in Resources */,
 				943C505E215E730D002A3773 /* Main.storyboard in Resources */,
-				94EB80BB217F25D10055120F /* engine-300.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

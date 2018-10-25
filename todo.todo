@@ -1,30 +1,31 @@
 General:
+  ☐ Create a mechanism for listing multiple objects with the same model on the scene e.g. two wings named 'Left wing' and 'Right wing'. Maybe if an object has X names that means that it should be scanned X times?
   ✔ Create a wireframe. @done (18-10-01 13:44)
-  ☐ Create a building step data structure.
-    ☐ Required pieces array.
-      ☐ Object file.
-      ☐ Info file.
-        ☐ Dimensions.
-        ☐ Material [optional].
-        ☐ Color [optional].
-        ☐ Description.
-    ☐ Current model state scans.
-  ☐ Create a UI with building step selection options/icons.
-  ☐ Create a specific step UI which needs to have:
-    ☐ Option to scan for required pieces.
-    ☐ Option to display each of the required pieces' details. The details should include:
-      ☐ Dimensions.
-      ☐ Large rotating 3D model which can be zoomed in-out, and rotated using gestures.
-      ☐ Material [optional].
-      ☐ Color [optional].
-      ☐ Description.
-    ☐ Option to scan the model.
-      ☐ The needed pieces list should remove the pieces which a model scan determines are already used (fitted on the starting stage model) [bonus].
-    ☐ Option to display the animation depicting how the pieces should fit onto the current-stage model.
-    ☐ Option to return to building stage selection.
+  ✔ Create a building step data structure. @done (18-10-25 14:00)
+    ✔ Required pieces array. @done (18-10-25 14:00)
+      ✔ Object file. @done (18-10-25 14:00)
+      ✔ Info file. @done (18-10-25 14:00)
+        ✔ Dimensions. @done (18-10-25 14:00)
+        ✔ Material [optional]. @done (18-10-25 14:00)
+        ✔ Color [optional]. @done (18-10-25 14:00)
+        ✔ Description. @done (18-10-25 14:00)
+    ✔ Current model state scans. @done (18-10-25 14:00)
+  ✔ Create a UI with building step selection options/icons. @done (18-10-25 14:00)
+  ✔ Create a specific step UI which needs to have: @done (18-10-25 14:00)
+    ✔ Option to scan for required pieces. @done (18-10-25 14:00)
+    ✔ Option to display each of the required pieces' details. The details should include: @done (18-10-25 14:00)
+      ✔ Dimensions. @done (18-10-25 14:00)
+      ✔ Large rotating 3D model which can be zoomed in-out, and rotated using gestures. @done (18-10-25 14:00)
+      ✔ Material [optional]. @done (18-10-25 14:00)
+      ✔ Color [optional]. @done (18-10-25 14:00)
+      ✔ Description. @done (18-10-25 14:00)
+    ✔ Option to scan the model. @done (18-10-25 14:00)
+      ✔ The needed pieces list should remove the pieces which a model scan determines are already used (fitted on the starting stage model) [bonus]. @done (18-10-25 14:00)
+    ✔ Option to display the animation depicting how the pieces should fit onto the current-stage model. @done (18-10-25 14:00)
+    ✔ Option to return to building stage selection. @done (18-10-25 14:00)
   ☐ Create an eye-guided menu.
-  ☐ Create a UI for detecting if all necessary pieces are on the scene.
-  ☐ Create a fallback mechanism if a device has no world tracking configuration supported.
+  ✔ Create a UI for detecting if all necessary pieces are on the scene. @done (18-10-25 14:00)
+  ✔ Create a fallback mechanism if a device has no world tracking configuration supported. @done (18-10-25 14:01)
 Refactoring:
   ☐ Make all segue names enums.
   ☐ Extract repetitive code into protocols with default implementations.
