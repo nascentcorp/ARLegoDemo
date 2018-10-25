@@ -50,7 +50,7 @@ class BuildingStepService {
     private let buildingSteps = [
         BuildingStep(
             arCatalogName: "BatGliderFirstStep",
-            baseModel: BuildingStepPart(name: "Roof chasis", imageName: "firstStepRoofChasis-300.png", isBaseModel: true, objectName: "statue", objectType: .obj,
+            baseModel: BuildingStepPart(name: "Roof chasis", imageName: "firstStepRoofChasis-300.png", isBaseModel: true, objectName: "firstStepBase", objectType: .obj,
                 scanNames: ["firstStepBaseAngled", "firstStepBaseBottom", "firstStepBaseTop"]),
             additionalParts: [
                 BuildingStepPart(name: "Left wing", imageName: "firstStepWingLeft-300.png", isBaseModel: false, objectName: "cube", objectType: .obj,
