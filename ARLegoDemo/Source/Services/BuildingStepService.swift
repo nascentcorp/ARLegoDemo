@@ -50,22 +50,22 @@ class BuildingStepService {
     private let buildingSteps = [
         BuildingStep(
             arCatalogName: "BatGliderFirstStep",
-            baseModel: BuildingStepPart(name: "Chasis skeleton", imageName: "statue.png", isBaseModel: true, objectName: "statue", objectType: .obj,
-                scanNames: ["baseAngled", "baseBottom", "baseTop"]),
+            baseModel: BuildingStepPart(name: "Roof chasis", imageName: "firstStepRoofChasis-300.png", isBaseModel: true, objectName: "statue", objectType: .obj,
+                scanNames: ["firstStepBaseAngled", "firstStepBaseBottom", "firstStepBaseTop"]),
             additionalParts: [
-                BuildingStepPart(name: "Left wing", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj,
-                                 scanNames: ["wingTop", "wingBottom"]),
-                BuildingStepPart(name: "Right wing", imageName: "statue.png", isBaseModel: false, objectName: "statue", objectType: .obj,
-                                 scanNames: ["wingTop", "wingBottom"])
+                BuildingStepPart(name: "Left wing", imageName: "firstStepWingLeft-300.png", isBaseModel: false, objectName: "cube", objectType: .obj,
+                                 scanNames: ["firstStepWingTop", "firstStepWingBottom"]),
+                BuildingStepPart(name: "Right wing", imageName: "firstStepWingRight-300.png", isBaseModel: false, objectName: "statue", objectType: .obj,
+                                 scanNames: ["firstStepWingTop", "firstStepWingBottom"])
             ]
         ),
         BuildingStep(
             arCatalogName: "BatGliderFinalStep",
-            baseModel: BuildingStepPart(name: "Glider base", imageName: "torus.png", isBaseModel: true, objectName: "torus", objectType: .obj,
-                scanNames: ["baseBottom", "baseTop"]),
+            baseModel: BuildingStepPart(name: "Glider base", imageName: "finalStepGliderBase-300.png", isBaseModel: true, objectName: "torus", objectType: .obj,
+                scanNames: ["finalStepBaseBottom", "finalStepBaseTop"]),
             additionalParts: [
-                BuildingStepPart(name: "Cube part", imageName: "cube.png", isBaseModel: false, objectName: "cube", objectType: .obj,
-                                 scanNames: ["chasisTop", "chasisBottom"])
+                BuildingStepPart(name: "Glider roof", imageName: "finalStepRoof-300.png", isBaseModel: false, objectName: "cube", objectType: .obj,
+                                 scanNames: ["finalStepRoofTop", "finalStepRoofBottom"])
             ]
         )
     ]
