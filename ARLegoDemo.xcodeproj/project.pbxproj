@@ -45,6 +45,8 @@
 		94B5BE64217A02E800E98F19 /* StepSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5BE63217A02E800E98F19 /* StepSelectionViewController.swift */; };
 		94B5BE66217B105200E98F19 /* PartsScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5BE65217B105200E98F19 /* PartsScanViewController.swift */; };
 		94DC82752166302500BC3CA6 /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */; };
+		94F8A754218206FA0069EFE3 /* firstStepBase.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 94F8A752218206FA0069EFE3 /* firstStepBase.mtl */; };
+		94F8A755218206FA0069EFE3 /* firstStepBase.obj in Resources */ = {isa = PBXBuildFile; fileRef = 94F8A753218206FA0069EFE3 /* firstStepBase.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +90,8 @@
 		94B5BE63217A02E800E98F19 /* StepSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSelectionViewController.swift; sourceTree = "<group>"; };
 		94B5BE65217B105200E98F19 /* PartsScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartsScanViewController.swift; sourceTree = "<group>"; };
 		94DC82742166302500BC3CA6 /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
+		94F8A752218206FA0069EFE3 /* firstStepBase.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = firstStepBase.mtl; sourceTree = "<group>"; };
+		94F8A753218206FA0069EFE3 /* firstStepBase.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = firstStepBase.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +197,7 @@
 		9480652421663C8C00DB1E76 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				94F8A751218206FA0069EFE3 /* BatGliderFirstStep */,
 				94EB80AB217F25800055120F /* BatGliderResources */,
 				942D191D217488840066795B /* Cube */,
 				9480652521663C8C00DB1E76 /* Statue */,
@@ -231,12 +236,21 @@
 			isa = PBXGroup;
 			children = (
 				946D60F62181FB78001F4DE4 /* finalStepGliderBase-300.png */,
-				946D60F82181FB78001F4DE4 /* firstStepRoofChasis-300.png */,
 				946D60F72181FB78001F4DE4 /* finalStepRoof-300.png */,
 				946D60F42181FB78001F4DE4 /* firstStepWingLeft-300.png */,
 				946D60F52181FB78001F4DE4 /* firstStepWingRight-300.png */,
 			);
 			path = BatGliderResources;
+			sourceTree = "<group>";
+		};
+		94F8A751218206FA0069EFE3 /* BatGliderFirstStep */ = {
+			isa = PBXGroup;
+			children = (
+				946D60F82181FB78001F4DE4 /* firstStepRoofChasis-300.png */,
+				94F8A752218206FA0069EFE3 /* firstStepBase.mtl */,
+				94F8A753218206FA0069EFE3 /* firstStepBase.obj */,
+			);
+			path = BatGliderFirstStep;
 			sourceTree = "<group>";
 		};
 		94FF995621760AC30054085A /* Nodes */ = {
@@ -342,8 +356,10 @@
 				9480652C21663C8C00DB1E76 /* statue_d.dds in Resources */,
 				9478C17B217491BD00F05576 /* torus.obj in Resources */,
 				942D1921217488840066795B /* cube.png in Resources */,
+				94F8A755218206FA0069EFE3 /* firstStepBase.obj in Resources */,
 				943C5060215E730E002A3773 /* Assets.xcassets in Resources */,
 				9480652B21663C8C00DB1E76 /* statue_s.dds in Resources */,
+				94F8A754218206FA0069EFE3 /* firstStepBase.mtl in Resources */,
 				943C505E215E730D002A3773 /* Main.storyboard in Resources */,
 				946D60FC2181FB78001F4DE4 /* finalStepRoof-300.png in Resources */,
 			);
