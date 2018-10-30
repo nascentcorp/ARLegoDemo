@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		940A79AC2164BE1E00C049CD /* AREnvironmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940A79AB2164BE1E00C049CD /* AREnvironmentService.swift */; };
 		940A79AE2164D29500C049CD /* BuildingStepService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940A79AD2164D29500C049CD /* BuildingStepService.swift */; };
+		94103E6021877D7E00C81B9D /* wingRight.obj in Resources */ = {isa = PBXBuildFile; fileRef = 94103E5A21877D7E00C81B9D /* wingRight.obj */; };
+		94103E6121877D7E00C81B9D /* wingLeft.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 94103E5B21877D7E00C81B9D /* wingLeft.mtl */; };
+		94103E6221877D7E00C81B9D /* firstStepWingLeft-300.png in Resources */ = {isa = PBXBuildFile; fileRef = 94103E5C21877D7E00C81B9D /* firstStepWingLeft-300.png */; };
+		94103E6321877D7E00C81B9D /* firstStepWingRight-300.png in Resources */ = {isa = PBXBuildFile; fileRef = 94103E5D21877D7E00C81B9D /* firstStepWingRight-300.png */; };
+		94103E6421877D7E00C81B9D /* wingRight.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 94103E5E21877D7E00C81B9D /* wingRight.mtl */; };
+		94103E6521877D7E00C81B9D /* wingLeft.obj in Resources */ = {isa = PBXBuildFile; fileRef = 94103E5F21877D7E00C81B9D /* wingLeft.obj */; };
+		94103E6721877D8D00C81B9D /* colorBase.png in Resources */ = {isa = PBXBuildFile; fileRef = 94103E6621877D8D00C81B9D /* colorBase.png */; };
 		94125C0721733CBA004D1A7E /* PartSelectorScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94125C0621733CBA004D1A7E /* PartSelectorScene.swift */; };
 		94125C09217341E5004D1A7E /* GeometryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94125C08217341E5004D1A7E /* GeometryNode.swift */; };
 		94125C0B21734869004D1A7E /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94125C0A21734869004D1A7E /* UIColor+Extensions.swift */; };
@@ -24,8 +31,6 @@
 		943C505E215E730D002A3773 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 943C505C215E730D002A3773 /* Main.storyboard */; };
 		943C5060215E730E002A3773 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 943C505F215E730E002A3773 /* Assets.xcassets */; };
 		943C5063215E730E002A3773 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 943C5061215E730E002A3773 /* LaunchScreen.storyboard */; };
-		946D60F92181FB78001F4DE4 /* firstStepWingLeft-300.png in Resources */ = {isa = PBXBuildFile; fileRef = 946D60F42181FB78001F4DE4 /* firstStepWingLeft-300.png */; };
-		946D60FA2181FB78001F4DE4 /* firstStepWingRight-300.png in Resources */ = {isa = PBXBuildFile; fileRef = 946D60F52181FB78001F4DE4 /* firstStepWingRight-300.png */; };
 		946D60FB2181FB78001F4DE4 /* finalStepGliderBase-300.png in Resources */ = {isa = PBXBuildFile; fileRef = 946D60F62181FB78001F4DE4 /* finalStepGliderBase-300.png */; };
 		946D60FC2181FB78001F4DE4 /* finalStepRoof-300.png in Resources */ = {isa = PBXBuildFile; fileRef = 946D60F72181FB78001F4DE4 /* finalStepRoof-300.png */; };
 		946D60FD2181FB78001F4DE4 /* firstStepRoofChasis-300.png in Resources */ = {isa = PBXBuildFile; fileRef = 946D60F82181FB78001F4DE4 /* firstStepRoofChasis-300.png */; };
@@ -52,6 +57,13 @@
 /* Begin PBXFileReference section */
 		940A79AB2164BE1E00C049CD /* AREnvironmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AREnvironmentService.swift; sourceTree = "<group>"; };
 		940A79AD2164D29500C049CD /* BuildingStepService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingStepService.swift; sourceTree = "<group>"; };
+		94103E5A21877D7E00C81B9D /* wingRight.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wingRight.obj; sourceTree = "<group>"; };
+		94103E5B21877D7E00C81B9D /* wingLeft.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wingLeft.mtl; sourceTree = "<group>"; };
+		94103E5C21877D7E00C81B9D /* firstStepWingLeft-300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "firstStepWingLeft-300.png"; sourceTree = "<group>"; };
+		94103E5D21877D7E00C81B9D /* firstStepWingRight-300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "firstStepWingRight-300.png"; sourceTree = "<group>"; };
+		94103E5E21877D7E00C81B9D /* wingRight.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wingRight.mtl; sourceTree = "<group>"; };
+		94103E5F21877D7E00C81B9D /* wingLeft.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wingLeft.obj; sourceTree = "<group>"; };
+		94103E6621877D8D00C81B9D /* colorBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = colorBase.png; path = BlenderObjects/colorBase.png; sourceTree = SOURCE_ROOT; };
 		94125C0621733CBA004D1A7E /* PartSelectorScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartSelectorScene.swift; sourceTree = "<group>"; };
 		94125C08217341E5004D1A7E /* GeometryNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryNode.swift; sourceTree = "<group>"; };
 		94125C0A21734869004D1A7E /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -69,8 +81,6 @@
 		943C505F215E730E002A3773 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		943C5062215E730E002A3773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		943C5064215E730E002A3773 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		946D60F42181FB78001F4DE4 /* firstStepWingLeft-300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "firstStepWingLeft-300.png"; sourceTree = "<group>"; };
-		946D60F52181FB78001F4DE4 /* firstStepWingRight-300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "firstStepWingRight-300.png"; sourceTree = "<group>"; };
 		946D60F62181FB78001F4DE4 /* finalStepGliderBase-300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "finalStepGliderBase-300.png"; sourceTree = "<group>"; };
 		946D60F72181FB78001F4DE4 /* finalStepRoof-300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "finalStepRoof-300.png"; sourceTree = "<group>"; };
 		946D60F82181FB78001F4DE4 /* firstStepRoofChasis-300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "firstStepRoofChasis-300.png"; sourceTree = "<group>"; };
@@ -237,8 +247,6 @@
 			children = (
 				946D60F62181FB78001F4DE4 /* finalStepGliderBase-300.png */,
 				946D60F72181FB78001F4DE4 /* finalStepRoof-300.png */,
-				946D60F42181FB78001F4DE4 /* firstStepWingLeft-300.png */,
-				946D60F52181FB78001F4DE4 /* firstStepWingRight-300.png */,
 			);
 			path = BatGliderResources;
 			sourceTree = "<group>";
@@ -246,6 +254,13 @@
 		94F8A751218206FA0069EFE3 /* BatGliderFirstStep */ = {
 			isa = PBXGroup;
 			children = (
+				94103E6621877D8D00C81B9D /* colorBase.png */,
+				94103E5C21877D7E00C81B9D /* firstStepWingLeft-300.png */,
+				94103E5D21877D7E00C81B9D /* firstStepWingRight-300.png */,
+				94103E5B21877D7E00C81B9D /* wingLeft.mtl */,
+				94103E5F21877D7E00C81B9D /* wingLeft.obj */,
+				94103E5E21877D7E00C81B9D /* wingRight.mtl */,
+				94103E5A21877D7E00C81B9D /* wingRight.obj */,
 				946D60F82181FB78001F4DE4 /* firstStepRoofChasis-300.png */,
 				94F8A752218206FA0069EFE3 /* firstStepBase.mtl */,
 				94F8A753218206FA0069EFE3 /* firstStepBase.obj */,
@@ -339,28 +354,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94103E6221877D7E00C81B9D /* firstStepWingLeft-300.png in Resources */,
 				9480652E21663C8C00DB1E76 /* statue_n.dds in Resources */,
+				94103E6121877D7E00C81B9D /* wingLeft.mtl in Resources */,
 				9478C17C217491BD00F05576 /* torus.mtl in Resources */,
-				946D60F92181FB78001F4DE4 /* firstStepWingLeft-300.png in Resources */,
 				9480652D21663C8C00DB1E76 /* statue.mtl in Resources */,
 				9480652F21663C8C00DB1E76 /* statue.obj in Resources */,
 				9478C17E2174985100F05576 /* statue.png in Resources */,
+				94103E6021877D7E00C81B9D /* wingRight.obj in Resources */,
 				946D60FD2181FB78001F4DE4 /* firstStepRoofChasis-300.png in Resources */,
 				943C5059215E730D002A3773 /* art.scnassets in Resources */,
-				946D60FA2181FB78001F4DE4 /* firstStepWingRight-300.png in Resources */,
 				943C5063215E730E002A3773 /* LaunchScreen.storyboard in Resources */,
 				946D60FB2181FB78001F4DE4 /* finalStepGliderBase-300.png in Resources */,
 				942D1922217488840066795B /* cube.obj in Resources */,
 				942D1923217488840066795B /* cube.mtl in Resources */,
+				94103E6721877D8D00C81B9D /* colorBase.png in Resources */,
 				9478C1802174994100F05576 /* torus.png in Resources */,
 				9480652C21663C8C00DB1E76 /* statue_d.dds in Resources */,
 				9478C17B217491BD00F05576 /* torus.obj in Resources */,
 				942D1921217488840066795B /* cube.png in Resources */,
 				94F8A755218206FA0069EFE3 /* firstStepBase.obj in Resources */,
 				943C5060215E730E002A3773 /* Assets.xcassets in Resources */,
+				94103E6521877D7E00C81B9D /* wingLeft.obj in Resources */,
 				9480652B21663C8C00DB1E76 /* statue_s.dds in Resources */,
 				94F8A754218206FA0069EFE3 /* firstStepBase.mtl in Resources */,
 				943C505E215E730D002A3773 /* Main.storyboard in Resources */,
+				94103E6421877D7E00C81B9D /* wingRight.mtl in Resources */,
+				94103E6321877D7E00C81B9D /* firstStepWingRight-300.png in Resources */,
 				946D60FC2181FB78001F4DE4 /* finalStepRoof-300.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

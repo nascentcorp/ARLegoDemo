@@ -53,9 +53,9 @@ class BuildingStepService {
             baseModel: BuildingStepPart(name: "Roof chasis", imageName: "firstStepRoofChasis-300.png", isBaseModel: true, objectName: "firstStepBase", objectType: .obj,
                 scanNames: ["firstStepBaseAngled", "firstStepBaseBottom", "firstStepBaseTop"]),
             additionalParts: [
-                BuildingStepPart(name: "Left wing", imageName: "firstStepWingLeft-300.png", isBaseModel: false, objectName: "cube", objectType: .obj,
+                BuildingStepPart(name: "Left wing", imageName: "firstStepWingLeft-300.png", isBaseModel: false, objectName: "wingLeft", objectType: .obj,
                                  scanNames: ["firstStepWingTop", "firstStepWingBottom"]),
-                BuildingStepPart(name: "Right wing", imageName: "firstStepWingRight-300.png", isBaseModel: false, objectName: "statue", objectType: .obj,
+                BuildingStepPart(name: "Right wing", imageName: "firstStepWingRight-300.png", isBaseModel: false, objectName: "wingRight", objectType: .obj,
                                  scanNames: ["firstStepWingTop", "firstStepWingBottom"])
             ]
         ),
