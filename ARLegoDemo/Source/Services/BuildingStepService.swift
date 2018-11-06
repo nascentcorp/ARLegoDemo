@@ -61,10 +61,10 @@ class BuildingStepService {
         ),
         BuildingStep(
             arCatalogName: "BatGliderFinalStep",
-            baseModel: BuildingStepPart(name: "Glider base", imageName: "finalStepGliderBase-300.png", isBaseModel: true, objectName: "torus", objectType: .obj,
+            baseModel: BuildingStepPart(name: "Glider base", imageName: "finalStepGliderBase-300.png", isBaseModel: true, objectName: "finalStepBase", objectType: .obj,
                 scanNames: ["finalStepBaseBottom", "finalStepBaseTop"]),
             additionalParts: [
-                BuildingStepPart(name: "Glider roof", imageName: "finalStepRoof-300.png", isBaseModel: false, objectName: "cube", objectType: .obj,
+                BuildingStepPart(name: "Glider roof", imageName: "finalStepRoof-300.png", isBaseModel: false, objectName: "completeRoof", objectType: .obj,
                                  scanNames: ["finalStepRoofTop", "finalStepRoofBottom"])
             ]
         )
