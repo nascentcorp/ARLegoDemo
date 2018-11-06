@@ -50,21 +50,21 @@ class BuildingStepService {
     private let buildingSteps = [
         BuildingStep(
             arCatalogName: "BatGliderFirstStep",
-            baseModel: BuildingStepPart(name: "Roof chasis", imageName: "firstStepRoofChasis-300.png", isBaseModel: true, objectName: "firstStepBase", objectType: .obj,
+            baseModel: BuildingStepPart(name: "Roof chasis", imageName: "firstStepRoofChasis-300.png", isBaseModel: true, objectName: "roofChasis", objectType: .dae,
                 scanNames: ["firstStepBaseAngled", "firstStepBaseBottom", "firstStepBaseTop"]),
             additionalParts: [
-                BuildingStepPart(name: "Left wing", imageName: "firstStepWingLeft-300.png", isBaseModel: false, objectName: "wingLeft", objectType: .obj,
+                BuildingStepPart(name: "Left wing", imageName: "firstStepWingLeft-300.png", isBaseModel: false, objectName: "wingLeft", objectType: .dae,
                                  scanNames: ["firstStepWingTop", "firstStepWingBottom"]),
-                BuildingStepPart(name: "Right wing", imageName: "firstStepWingRight-300.png", isBaseModel: false, objectName: "wingRight", objectType: .obj,
+                BuildingStepPart(name: "Right wing", imageName: "firstStepWingRight-300.png", isBaseModel: false, objectName: "wingRight", objectType: .dae,
                                  scanNames: ["firstStepWingTop", "firstStepWingBottom"])
             ]
         ),
         BuildingStep(
             arCatalogName: "BatGliderFinalStep",
-            baseModel: BuildingStepPart(name: "Glider base", imageName: "finalStepGliderBase-300.png", isBaseModel: true, objectName: "finalStepBase", objectType: .obj,
+            baseModel: BuildingStepPart(name: "Glider base", imageName: "finalStepGliderBase-300.png", isBaseModel: true, objectName: "bottomChasis", objectType: .dae,
                 scanNames: ["finalStepBaseBottom", "finalStepBaseTop"]),
             additionalParts: [
-                BuildingStepPart(name: "Glider roof", imageName: "finalStepRoof-300.png", isBaseModel: false, objectName: "completeRoof", objectType: .obj,
+                BuildingStepPart(name: "Glider roof", imageName: "finalStepRoof-300.png", isBaseModel: false, objectName: "completeRoof", objectType: .dae,
                                  scanNames: ["finalStepRoofTop", "finalStepRoofBottom"])
             ]
         )

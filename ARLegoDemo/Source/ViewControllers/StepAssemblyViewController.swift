@@ -239,7 +239,8 @@ class StepAssemblyViewController: UIViewController {
         )
     {
         let partScene = SCNScene.create(fromPart: part)
-        guard let partNode = partScene.rootNode.childNodes.first else { return }
+//        guard let partNode = partScene.rootNode.childNodes.first else { return }
+        let partNode = partScene.rootNode.clone()
         partNode.setValue(part, forKey: PartNodeKeys.part.rawValue)
         partNode.adjustObjectGeometry(objectType: part.objectType, scale: (sceneType == .scene3D) ? 0.3 : 0.2)
 

@@ -33,7 +33,7 @@ extension SCNNode {
     }
     
     private func rotateObject(objectType: AcceptedFileType) {
-        if objectType == .obj {
+        if objectType == .obj || objectType == .dae {
             return
         }
         let previousTransform = self.transform
@@ -45,7 +45,7 @@ extension SCNNode {
         let (min, max) = self.boundingBox
         let objectDimensions = max - min
         var rawPivot = max - objectDimensions / 2.0
-        if objectType == .obj {
+        if objectType == .obj || objectType == .dae {
             rawPivot.y = min.y
         }
         else {
