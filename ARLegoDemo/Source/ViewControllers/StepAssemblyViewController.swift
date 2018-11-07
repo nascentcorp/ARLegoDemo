@@ -414,13 +414,21 @@ extension StepAssemblyViewController: UICollectionViewDelegate {
                 return
         }
         for i in 0..<scene.rootNode.childNodes.count {
-            let node = scene.rootNode.childNodes[i]
+            let nodeToSearch: SCNNode
+            if activeSceneType == .sceneAR {
+                let anchorNode = scene.rootNode.childNodes.filter({ $0.childNodes.count > 0 }).first
+                nodeToSearch = anchorNode?.childNodes.first ?? SCNNode()
+            }
+            else {
+                nodeToSearch = scene.rootNode.childNodes[i]
+            }
+
             if
-                let nodePart = node.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart,
+                let nodePart = nodeToSearch.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart,
                 nodePart == cellPart
             {
-                highlight(node, scene: scene)
-                selectedNode = node
+                highlight(nodeToSearch, scene: scene)
+                selectedNode = nodeToSearch
                 break
             }
         }
