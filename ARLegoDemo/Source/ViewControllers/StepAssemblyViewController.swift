@@ -239,7 +239,6 @@ class StepAssemblyViewController: UIViewController {
         )
     {
         let partScene = SCNScene.create(fromPart: part)
-//        guard let partNode = partScene.rootNode.childNodes.first else { return }
         let partNode = partScene.rootNode.clone()
         partNode.setValue(part, forKey: PartNodeKeys.part.rawValue)
         partNode.adjustObjectGeometry(objectType: part.objectType, scale: (sceneType == .scene3D) ? 0.3 : 0.2)
@@ -268,18 +267,21 @@ extension StepAssemblyViewController {
         let results = activeSceneView.hitTest(touch.location(in: activeSceneView), options: nil)
         
         guard let scene = activeSceneView.scene else { return }
-        guard let node = results.first?.node else {
-            highlightWorker(SCNNode(), scene: scene, toggleHighlight: true)
-            selectedNode = nil
-            return
+        guard
+            let node = results.first?.node,
+            let parentObjectNode = node.parent
+            else {
+                highlightWorker(SCNNode(), scene: scene, toggleHighlight: true)
+                selectedNode = nil
+                return
         }
         
         if
-            let part = getNodePart(node),
+            let part = getNodePart(parentObjectNode),
             !part.isBaseModel
         {
-            highlight(node, scene: scene)
-            selectedNode = node
+            highlight(parentObjectNode, scene: scene)
+            selectedNode = parentObjectNode
         }
         else {
             highlightWorker(SCNNode(), scene: scene, toggleHighlight: true)
@@ -330,8 +332,8 @@ extension StepAssemblyViewController {
                     : lowOpacity
                     )
                 : ((otherPartNode == node)
-                    ? highOpacity
-                    : lowOpacity
+                    ? lowOpacity
+                    : highOpacity
             )
             let opacityAction = SCNAction.fadeOpacity(to: targetOpacity, duration: animationDuration)
             otherPartNode.runAction(opacityAction)
@@ -339,7 +341,10 @@ extension StepAssemblyViewController {
     }
 
     private func getNodePart(_ node: SCNNode) -> BuildingStepService.BuildingStepPart? {
-        return node.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart
+        if let part = node.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart {
+            return part
+        }
+        return node.parent?.value(forKey: PartNodeKeys.part.rawValue) as? BuildingStepService.BuildingStepPart
     }
 }
 
