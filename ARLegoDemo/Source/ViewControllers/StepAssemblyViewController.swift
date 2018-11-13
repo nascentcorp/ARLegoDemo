@@ -201,12 +201,12 @@ class StepAssemblyViewController: UIViewController {
         
         let mainScene = SCNScene()
         mainScene.rootNode.addChildNode(cameraOrbit)
-        mainScene.rootNode.createPlaneNode(color: .yellow)
+        mainScene.rootNode.createPlaneNode(color: .darkGray)
 
         addParts(toNode: mainScene.rootNode, sceneType: .scene3D)
 
         view3DScene.scene = mainScene
-        view3DScene.backgroundColor = UIColor.black
+        view3DScene.backgroundColor = UIColor.white
         view3DScene.allowsCameraControl = true
         view3DScene.autoenablesDefaultLighting = true
     }

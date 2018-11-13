@@ -87,7 +87,7 @@ class BaseObjectScanViewController: UIViewController {
         addParts(toScene: mainScene, sceneType: .scene3D)
 
         view3DScene.scene = mainScene
-        view3DScene.backgroundColor = UIColor.black
+        view3DScene.backgroundColor = UIColor.white
         view3DScene.autoenablesDefaultLighting = true
     }
     

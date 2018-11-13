@@ -79,10 +79,10 @@ class ObjectPreviewViewController: UIViewController {
         let mainScene = SCNScene()
         mainScene.rootNode.addChildNode(partNode)
         mainScene.rootNode.addChildNode(cameraOrbit)
-        mainScene.rootNode.createPlaneNode()
+        mainScene.rootNode.createPlaneNode(color: .darkGray)
         
         objectPreviewView.scene = mainScene
-        objectPreviewView.backgroundColor = UIColor.black
+        objectPreviewView.backgroundColor = UIColor.white
         objectPreviewView.allowsCameraControl = true
         objectPreviewView.autoenablesDefaultLighting = true
     }
