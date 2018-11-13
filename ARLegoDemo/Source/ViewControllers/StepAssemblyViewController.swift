@@ -137,6 +137,14 @@ class StepAssemblyViewController: UIViewController {
     }
     
     @IBAction func btnObjectConnectTapped(_ sender: Any) {
+        guard
+            let selectedNode = selectedNode,
+            let part = getNodePart(selectedNode)
+            else {
+                return
+        }
+//        -1.3175, 28.637, 9.3894
+        selectedNode.position = SCNVector3(-0.0013175, -0.028637, 0.0093894)
     }
     
     @IBAction func btnSceneSwitchTapped(_ sender: UISegmentedControl) {
