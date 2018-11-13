@@ -143,8 +143,7 @@ class StepAssemblyViewController: UIViewController {
             else {
                 return
         }
-//        -1.3175, 28.637, 9.3894
-        selectedNode.position = SCNVector3(-0.0013175, -0.028637, 0.0093894)
+        selectedNode.position = SCNVector3(-0.0013175, 0.028637, -0.0093894)
     }
     
     @IBAction func btnSceneSwitchTapped(_ sender: UISegmentedControl) {
@@ -246,10 +245,12 @@ class StepAssemblyViewController: UIViewController {
         delayFactor: Double = 0.0
         )
     {
+        let objectScale: Float = (sceneType == .scene3D) ? 0.001 : 0.001
+        
         let partScene = SCNScene.create(fromPart: part)
         let partNode = partScene.rootNode.clone()
         partNode.setValue(part, forKey: PartNodeKeys.part.rawValue)
-        partNode.adjustObjectGeometry(objectType: part.objectType, scale: (sceneType == .scene3D) ? 0.3 : 0.2)
+        partNode.adjustObjectGeometry(objectType: part.objectType, shouldNormalize: false, shouldCenter: false, scale: objectScale)
 
         node.addChildNode(partNode)
 

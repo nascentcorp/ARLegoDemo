@@ -26,10 +26,17 @@ extension SCNNode {
         addChildNode(planeNode)
     }
 
-    func adjustObjectGeometry(objectType: AcceptedFileType, scale: Float = 1.0) {
+    func adjustObjectGeometry(objectType: AcceptedFileType, shouldNormalize: Bool = true, shouldCenter: Bool = true, shouldScale: Bool = true, scale: Float = 1.0) {
         rotateObject(objectType: objectType)
-        normalizeObject(objectType: objectType, scale: scale)
-        centerObject(objectType: objectType)
+        if shouldNormalize {
+            normalizeObject(objectType: objectType)
+        }
+        if shouldScale {
+            scaleObject(scale: scale)
+        }
+        if shouldCenter {
+            centerObject(objectType: objectType)
+        }
     }
     
     private func rotateObject(objectType: AcceptedFileType) {
@@ -57,13 +64,19 @@ extension SCNNode {
         self.transform = SCNMatrix4Mult(translation, previousTransform)
     }
     
-    private func normalizeObject(objectType: AcceptedFileType, scale: Float) {
+    private func normalizeObject(objectType: AcceptedFileType) {
         let (min, max) = self.boundingBox
         let objectDimensions = max - min
         let objectLength = objectDimensions.length()
-        let objectScale = scale / objectLength
+        let objectScale = 1.0 / objectLength
         let previousTransform = self.transform
         let scale = SCNMatrix4MakeScale(objectScale, objectScale, objectScale)
+        self.transform = SCNMatrix4Mult(scale, previousTransform)
+    }
+
+    private func scaleObject(scale: Float) {
+        let previousTransform = self.transform
+        let scale = SCNMatrix4MakeScale(scale, scale, scale)
         self.transform = SCNMatrix4Mult(scale, previousTransform)
     }
 }
