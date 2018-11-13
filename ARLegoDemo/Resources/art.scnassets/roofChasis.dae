@@ -3,10 +3,10 @@
   <asset>
     <contributor>
       <author>Blender User</author>
-      <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9</authoring_tool>
+      <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2018-11-06T15:02:21</created>
-    <modified>2018-11-06T15:02:21</modified>
+    <created>2018-11-13T08:06:04</created>
+    <modified>2018-11-13T08:06:04</modified>
     <unit name="millimeter" meter="0.001"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -990,7 +990,7 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node id="Cube_001" name="Cube_001" type="NODE">
-        <matrix sid="transform">0.008 0 0 -0.03462601 0 0.004 0 3.206872 0 0 0.0032 9.6 0 0 0 1</matrix>
+        <matrix sid="transform">0.008 0 0 -0.03462601 0 0.004 0 3.206872 0 0 0.0032 17.39058 0 0 0 1</matrix>
         <instance_geometry url="#Cube_019-mesh" name="Cube_001">
           <bind_material>
             <technique_common>
@@ -1000,7 +1000,7 @@
         </instance_geometry>
       </node>
       <node id="Cube_009" name="Cube_009" type="NODE">
-        <matrix sid="transform">-1.12852e-9 -0.008 0 -0.03462498 0.004 -2.25704e-9 0 -4.79313 0 0 0.0032 9.6 0 0 0 1</matrix>
+        <matrix sid="transform">-1.12852e-9 -0.008 0 -0.03462498 0.004 -2.25704e-9 0 -4.79313 0 0 0.0032 17.39058 0 0 0 1</matrix>
         <instance_geometry url="#Cube_016-mesh" name="Cube_009">
           <bind_material>
             <technique_common>
@@ -1010,7 +1010,7 @@
         </instance_geometry>
       </node>
       <node id="engine_dark_gray_005" name="engine_dark_gray_005" type="NODE">
-        <matrix sid="transform">0.008 0 0 -7.982367 0 0.008 0 23.3098 0 0 0.0028 24.40799 0 0 0 1</matrix>
+        <matrix sid="transform">0.008 0 0 -7.982367 0 0.008 0 23.3098 0 0 0.0028 32.19857 0 0 0 1</matrix>
         <instance_geometry url="#Cube_022-mesh" name="engine_dark_gray_005">
           <bind_material>
             <technique_common>
@@ -1020,7 +1020,7 @@
         </instance_geometry>
       </node>
       <node id="engine_dark_gray_001" name="engine_dark_gray_001" type="NODE">
-        <matrix sid="transform">0.008 0 0 8 0 0.008 0 23.3098 0 0 0.0014 17.4 0 0 0 1</matrix>
+        <matrix sid="transform">0.008 0 0 8 0 0.008 0 23.3098 0 0 0.0014 25.19058 0 0 0 1</matrix>
         <instance_geometry url="#Cube_017-mesh" name="engine_dark_gray_001">
           <bind_material>
             <technique_common>
@@ -1030,7 +1030,7 @@
         </instance_geometry>
       </node>
       <node id="dark_gray_glass_holder" name="dark_gray_glass_holder" type="NODE">
-        <matrix sid="transform">-0.01639939 -3.4629e-5 0 0 1.41979e-4 -0.00399985 0 11 0 0 0.0064 9.6 0 0 0 1</matrix>
+        <matrix sid="transform">-0.01639939 -3.4629e-5 0 0 1.41979e-4 -0.00399985 0 11 0 0 0.0064 17.39058 0 0 0 1</matrix>
         <instance_geometry url="#Cube_011-mesh" name="dark_gray_glass_holder">
           <bind_material>
             <technique_common>
@@ -1040,7 +1040,7 @@
         </instance_geometry>
       </node>
       <node id="transparent_2x1_001" name="transparent_2x1_001" type="NODE">
-        <matrix sid="transform">-0.0079997 -1.38516e-5 0 56.01126 6.92581e-5 -0.00159994 0 -10.81991 0 0 0.004 -3.768333 0 0 0 1</matrix>
+        <matrix sid="transform">-0.0079997 -1.38516e-5 0 56.01126 6.92581e-5 -0.00159994 0 -10.81991 0 0 0.004 4.022251 0 0 0 1</matrix>
         <instance_geometry url="#Cube_004-mesh" name="transparent_2x1_001">
           <bind_material>
             <technique_common>
@@ -1050,7 +1050,7 @@
         </instance_geometry>
       </node>
       <node id="light_gray_2x1_002" name="light_gray_2x1_002" type="NODE">
-        <matrix sid="transform">-0.0079997 -3.4629e-5 0 55.9898 6.92581e-5 -0.00399985 0 -13.29894 0 0 0.0016 4.8 0 0 0 1</matrix>
+        <matrix sid="transform">-0.0079997 -3.4629e-5 0 55.9898 6.92581e-5 -0.00399985 0 -13.29894 0 0 0.0016 12.59058 0 0 0 1</matrix>
         <instance_geometry url="#Cube_006-mesh" name="light_gray_2x1_002">
           <bind_material>
             <technique_common>
@@ -1060,7 +1060,7 @@
         </instance_geometry>
       </node>
       <node id="light_gray_2x1_003" name="light_gray_2x1_003" type="NODE">
-        <matrix sid="transform">-0.0079997 -3.4629e-5 0 56.19759 6.92581e-5 -0.00399985 0 10.70015 0 0 0.0016 4.800003 0 0 0 1</matrix>
+        <matrix sid="transform">-0.0079997 -3.4629e-5 0 56.19759 6.92581e-5 -0.00399985 0 10.70015 0 0 0.0016 12.59059 0 0 0 1</matrix>
         <instance_geometry url="#Cube_008-mesh" name="light_gray_2x1_003">
           <bind_material>
             <technique_common>
@@ -1070,7 +1070,7 @@
         </instance_geometry>
       </node>
       <node id="dark_gray_2x4_001" name="dark_gray_2x4_001" type="NODE">
-        <matrix sid="transform">-7.999696 -0.1385161 0 56.09369 0.06925805 -15.99939 0 -1.299401 0 0 1.6 1.6 0 0 0 1</matrix>
+        <matrix sid="transform">-7.999696 -0.1385161 0 56.09369 0.06925805 -15.99939 0 -1.299401 0 0 1.6 9.390584 0 0 0 1</matrix>
         <instance_geometry url="#Cube_009-mesh" name="dark_gray_2x4_001">
           <bind_material>
             <technique_common>
@@ -1080,7 +1080,7 @@
         </instance_geometry>
       </node>
       <node id="black_engine_bottom_join_001" name="black_engine_bottom_join_001" type="NODE">
-        <matrix sid="transform">-0.0079997 -1.38516e-5 0 56.14853 6.92581e-5 -0.00159994 0 5.035301 0 0 0.004 -3.768333 0 0 0 1</matrix>
+        <matrix sid="transform">-0.0079997 -1.38516e-5 0 56.14853 6.92581e-5 -0.00159994 0 5.035301 0 0 0.004 4.022251 0 0 0 1</matrix>
         <instance_geometry url="#Cube_010-mesh" name="black_engine_bottom_join_001">
           <bind_material>
             <technique_common>
@@ -1090,7 +1090,7 @@
         </instance_geometry>
       </node>
       <node id="black_engine_bottom_join" name="black_engine_bottom_join" type="NODE">
-        <matrix sid="transform">-0.0079997 -1.38516e-5 0 -55.84727 6.92581e-5 -0.00159994 0 6.00492 0 0 0.004 -3.768333 0 0 0 1</matrix>
+        <matrix sid="transform">-0.0079997 -1.38516e-5 0 -55.84727 6.92581e-5 -0.00159994 0 6.00492 0 0 0.004 4.022251 0 0 0 1</matrix>
         <instance_geometry url="#Cube_007-mesh" name="black_engine_bottom_join">
           <bind_material>
             <technique_common>
@@ -1100,7 +1100,7 @@
         </instance_geometry>
       </node>
       <node id="transparent_2x1" name="transparent_2x1" type="NODE">
-        <matrix sid="transform">-0.0079997 -1.38516e-5 0 -55.98454 6.92581e-5 -0.00159994 0 -9.850291 0 0 0.004 -3.768333 0 0 0 1</matrix>
+        <matrix sid="transform">-0.0079997 -1.38516e-5 0 -55.98454 6.92581e-5 -0.00159994 0 -9.850291 0 0 0.004 4.022251 0 0 0 1</matrix>
         <instance_geometry url="#Cube_005-mesh" name="transparent_2x1">
           <bind_material>
             <technique_common>
@@ -1110,7 +1110,7 @@
         </instance_geometry>
       </node>
       <node id="light_gray_2x1_001" name="light_gray_2x1_001" type="NODE">
-        <matrix sid="transform">-0.0079997 -3.4629e-5 0 -56.006 6.92581e-5 -0.00399985 0 -12.32933 0 0 0.0016 4.8 0 0 0 1</matrix>
+        <matrix sid="transform">-0.0079997 -3.4629e-5 0 -56.006 6.92581e-5 -0.00399985 0 -12.32933 0 0 0.0016 12.59058 0 0 0 1</matrix>
         <instance_geometry url="#Cube_003-mesh" name="light_gray_2x1_001">
           <bind_material>
             <technique_common>
@@ -1128,7 +1128,7 @@
         <instance_light url="#Lamp-light"/>
       </node>
       <node id="dark_gray_2x4" name="dark_gray_2x4" type="NODE">
-        <matrix sid="transform">-7.999696 -0.1385161 0 -55.9021 0.06925805 -15.99939 0 -0.3297822 0 0 1.6 1.6 0 0 0 1</matrix>
+        <matrix sid="transform">-7.999696 -0.1385161 0 -55.9021 0.06925805 -15.99939 0 -0.3297822 0 0 1.6 9.390584 0 0 0 1</matrix>
         <instance_geometry url="#Cube-mesh" name="dark_gray_2x4">
           <bind_material>
             <technique_common>
@@ -1138,7 +1138,7 @@
         </instance_geometry>
       </node>
       <node id="light_gray_2x1" name="light_gray_2x1" type="NODE">
-        <matrix sid="transform">-0.0079997 -3.4629e-5 0 -55.79821 6.92581e-5 -0.00399985 0 11.66976 0 0 0.0016 4.800003 0 0 0 1</matrix>
+        <matrix sid="transform">-0.0079997 -3.4629e-5 0 -55.79821 6.92581e-5 -0.00399985 0 11.66976 0 0 0.0016 12.59059 0 0 0 1</matrix>
         <instance_geometry url="#Cube_001-mesh" name="light_gray_2x1">
           <bind_material>
             <technique_common>
@@ -1148,7 +1148,7 @@
         </instance_geometry>
       </node>
       <node id="light_gray_2x16" name="light_gray_2x16" type="NODE">
-        <matrix sid="transform">-0.0639976 -6.92581e-5 0 0.09579468 5.54065e-4 -0.0079997 0 -0.8145915 0 0 0.0016 4.8 0 0 0 1</matrix>
+        <matrix sid="transform">-0.0639976 -6.92581e-5 0 0.09579468 5.54065e-4 -0.0079997 0 -0.8145915 0 0 0.0016 12.59058 0 0 0 1</matrix>
         <instance_geometry url="#Cube_002-mesh" name="light_gray_2x16">
           <bind_material>
             <technique_common>
@@ -1158,7 +1158,7 @@
         </instance_geometry>
       </node>
       <node id="transparent_glass_cockpit" name="transparent_glass_cockpit" type="NODE">
-        <matrix sid="transform">0.016 0 0 0 0 0.032 0 -25 0 0 1 6.4 0 0 0 1</matrix>
+        <matrix sid="transform">0.016 0 0 0 0 0.032 0 -25 0 0 1 14.19058 0 0 0 1</matrix>
         <instance_geometry url="#Plane_001-mesh" name="transparent_glass_cockpit">
           <bind_material>
             <technique_common>
@@ -1168,7 +1168,7 @@
         </instance_geometry>
       </node>
       <node id="light_gray_1x4" name="light_gray_1x4" type="NODE">
-        <matrix sid="transform">0.016 0 0 0 0 0.004 0 18.90182 0 0 0.004800001 8 0 0 0 1</matrix>
+        <matrix sid="transform">0.016 0 0 0 0 0.004 0 18.90182 0 0 0.004800001 15.79058 0 0 0 1</matrix>
         <instance_geometry url="#Cube_012-mesh" name="light_gray_1x4">
           <bind_material>
             <technique_common>
@@ -1178,7 +1178,7 @@
         </instance_geometry>
       </node>
       <node id="light_gray_1x4_001" name="light_gray_1x4_001" type="NODE">
-        <matrix sid="transform">0.016 0 0 0 0 0.005 0 19.90981 0 0 0.0016 14.4 0 0 0 1</matrix>
+        <matrix sid="transform">0.016 0 0 0 0 0.005 0 19.90981 0 0 0.0016 22.19058 0 0 0 1</matrix>
         <instance_geometry url="#Cube_013-mesh" name="light_gray_1x4_001">
           <bind_material>
             <technique_common>
@@ -1188,7 +1188,7 @@
         </instance_geometry>
       </node>
       <node id="beige_1x4" name="beige_1x4" type="NODE">
-        <matrix sid="transform">0.016 0 0 -9.53674e-7 0 0.0016 0 26.50981 0 0 0.004 12 0 0 0 1</matrix>
+        <matrix sid="transform">0.016 0 0 -9.53674e-7 0 0.0016 0 26.50981 0 0 0.004 19.79058 0 0 0 1</matrix>
         <instance_geometry url="#Cube_014-mesh" name="beige_1x4">
           <bind_material>
             <technique_common>
@@ -1198,7 +1198,7 @@
         </instance_geometry>
       </node>
       <node id="black_1x6" name="black_1x6" type="NODE">
-        <matrix sid="transform">0.024 0 0 -0.2968836 0 0.0016 0 29.7098 0 0 0.004 11.92728 0 0 0 1</matrix>
+        <matrix sid="transform">0.024 0 0 -0.2968836 0 0.0016 0 29.7098 0 0 0.004 19.71787 0 0 0 1</matrix>
         <instance_geometry url="#Cube_015-mesh" name="black_1x6">
           <bind_material>
             <technique_common>
@@ -1208,7 +1208,7 @@
         </instance_geometry>
       </node>
       <node id="Cube" name="Cube" type="NODE">
-        <matrix sid="transform">0.008 0 0 -0.03462601 0 0.004 0 3.206872 0 0 0.0016 14.4 0 0 0 1</matrix>
+        <matrix sid="transform">0.008 0 0 -0.03462601 0 0.004 0 3.206872 0 0 0.0016 22.19058 0 0 0 1</matrix>
         <instance_geometry url="#Cube_018-mesh" name="Cube">
           <bind_material>
             <technique_common>
