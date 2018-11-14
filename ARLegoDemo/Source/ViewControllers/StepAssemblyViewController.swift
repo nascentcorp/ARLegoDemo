@@ -143,6 +143,7 @@ class StepAssemblyViewController: UIViewController {
             else {
                 return
         }
+        // TODO: Read final positioning properties out of part data
         selectedNode.position = SCNVector3(-0.0013175, 0.028637, -0.0093894)
     }
     
@@ -218,9 +219,9 @@ class StepAssemblyViewController: UIViewController {
         view3DScene.autoenablesDefaultLighting = true
     }
     
-    private func addParts(toNode node: SCNNode, sceneType: SceneType, skipBaseModelPart: Bool = false) {
+    private func addParts(toNode node: SCNNode, sceneType: SceneType, skipBaseModelPart: Bool = false, rotation: Float = 0.0) {
         if !skipBaseModelPart {
-            addPartWorker(buildingStepService.baseModelPart, toNode: node, sceneType: sceneType)
+            addPartWorker(buildingStepService.baseModelPart, toNode: node, sceneType: sceneType, rotation: rotation)
         }
         for i in 0..<buildingStepService.parts.count {
             let part = buildingStepService.parts[i]
@@ -232,7 +233,7 @@ class StepAssemblyViewController: UIViewController {
                 radius * sin(angle)
             )
             let delayFactor = Double(i) / Double(buildingStepService.parts.count)
-            addPartWorker(part, toNode: node, sceneType: sceneType, position: position, shouldAnimate: true, delayFactor: delayFactor)
+            addPartWorker(part, toNode: node, sceneType: sceneType, position: position, shouldAnimate: true, delayFactor: delayFactor, rotation: rotation)
         }
     }
     
@@ -242,7 +243,8 @@ class StepAssemblyViewController: UIViewController {
         sceneType: SceneType,
         position: SCNVector3 = SCNVector3(),
         shouldAnimate: Bool = false,
-        delayFactor: Double = 0.0
+        delayFactor: Double = 0.0,
+        rotation: Float
         )
     {
         let objectScale: Float = (sceneType == .scene3D) ? 0.001 : 0.001
@@ -256,11 +258,12 @@ class StepAssemblyViewController: UIViewController {
 
         if !shouldAnimate {
             partNode.position = position
+            partNode.rotation = SCNVector4(0, CGFloat(rotation), 0, 0)
             return
         }
         
         let animationDuration = 1.0
-        let rotate = SCNAction.rotateBy(x: 0, y: CGFloat(4 * Float.pi), z: 0, duration: 1.5 * animationDuration)
+        let rotate = SCNAction.rotateBy(x: 0, y: CGFloat(4 * Float.pi + rotation), z: 0, duration: 1.5 * animationDuration)
         let move = SCNAction.move(to: position, duration: animationDuration)
         let initialDelay = SCNAction.wait(duration: delayFactor * 1.5 * animationDuration)
         let group = SCNAction.group([rotate, move])
@@ -389,7 +392,10 @@ extension StepAssemblyViewController: ARSCNViewDelegate {
                 self.lblScanTooltop.text = "Tap on objects to connect them or get more info"
                 self.arEnvironmentService.lightingStatusChanged = nil
                 // TODO: Update nodes' scale to match anchor reference object
-                self.addParts(toNode: node, sceneType: .sceneAR, skipBaseModelPart: true)
+                
+                // TODO: Read rotation properties out of base model data
+                // TODO: Adjust scale and positioning to match anchor's
+                self.addParts(toNode: node, sceneType: .sceneAR, skipBaseModelPart: true, rotation: -Float.pi * 0.5)
                 UIView.animate(withDuration: 0.3, animations: {
                     self.lblTooDarkForScanning.alpha = 0
                 })
