@@ -143,8 +143,7 @@ class StepAssemblyViewController: UIViewController {
             else {
                 return
         }
-        // TODO: Read final positioning properties out of part data
-        selectedNode.position = SCNVector3(-0.0013175, 0.028637, -0.0093894)
+        selectedNode.position = part.finalObjectPosition
     }
     
     @IBAction func btnSceneSwitchTapped(_ sender: UISegmentedControl) {
@@ -393,9 +392,8 @@ extension StepAssemblyViewController: ARSCNViewDelegate {
                 self.arEnvironmentService.lightingStatusChanged = nil
                 // TODO: Update nodes' scale to match anchor reference object
                 
-                // TODO: Read rotation properties out of base model data
                 // TODO: Adjust scale and positioning to match anchor's
-                self.addParts(toNode: node, sceneType: .sceneAR, skipBaseModelPart: true, rotation: -Float.pi * 0.5)
+                self.addParts(toNode: node, sceneType: .sceneAR, skipBaseModelPart: true, rotation: self.buildingStepService.baseModelPart.initialObjectRotation)
                 UIView.animate(withDuration: 0.3, animations: {
                     self.lblTooDarkForScanning.alpha = 0
                 })

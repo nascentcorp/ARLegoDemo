@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import SceneKit
 
-// TODO: Make strutures private if they're not needed in the outside declarations
+// TODO: Make structures private if they're not needed in the outside declarations
 // TODO: Updated getters to be consistent and use getters only
 // TODO: See if we should store current step index or not
 
@@ -27,15 +28,21 @@ class BuildingStepService {
         let isBaseModel: Bool
         let objectName: String
         let objectType: AcceptedFileType
+        let finalObjectPosition: SCNVector3
+        let initialObjectRotation: Float
         let scanNames: [String]
         
-        init(id: String = UUID().uuidString, name: String, imageName: String, isBaseModel: Bool, objectName: String, objectType: AcceptedFileType, scanNames: [String]) {
+        init(id: String = UUID().uuidString, name: String, imageName: String, isBaseModel: Bool, objectName: String, objectType: AcceptedFileType,
+             finalObjectPosition: SCNVector3 = SCNVector3(), initialObjectRotation: Float = 0.0, scanNames: [String])
+        {
             self.id = id
             self.name = name
             self.imageName = imageName
             self.isBaseModel = isBaseModel
             self.objectName = objectName
             self.objectType = objectType
+            self.finalObjectPosition = finalObjectPosition
+            self.initialObjectRotation = initialObjectRotation
             self.scanNames = scanNames
         }
     }
@@ -51,7 +58,7 @@ class BuildingStepService {
         BuildingStep(
             arCatalogName: "BatGliderFirstStep",
             baseModel: BuildingStepPart(name: "Roof chasis", imageName: "firstStepRoofChasis-300.png", isBaseModel: true, objectName: "roofChasis", objectType: .dae,
-                scanNames: ["firstStepBaseAngled", "firstStepBaseBottom", "firstStepBaseTop"]),
+                                        scanNames: ["firstStepBaseAngled", "firstStepBaseBottom", "firstStepBaseTop"]),
             additionalParts: [
                 BuildingStepPart(name: "Left wing", imageName: "firstStepWingLeft-300.png", isBaseModel: false, objectName: "wingLeft", objectType: .dae,
                                  scanNames: ["firstStepWingTop", "firstStepWingBottom"]),
@@ -62,10 +69,10 @@ class BuildingStepService {
         BuildingStep(
             arCatalogName: "BatGliderFinalStep",
             baseModel: BuildingStepPart(name: "Glider base", imageName: "finalStepGliderBase-300.png", isBaseModel: true, objectName: "bottomChasis", objectType: .dae,
-                scanNames: ["finalStepBaseBottom", "finalStepBaseTop"]),
+                                        initialObjectRotation: -Float.pi * 0.5, scanNames: ["finalStepBaseBottom", "finalStepBaseTop"]),
             additionalParts: [
                 BuildingStepPart(name: "Glider roof", imageName: "finalStepRoof-300.png", isBaseModel: false, objectName: "completeRoof", objectType: .dae,
-                                 scanNames: ["finalStepRoofTop", "finalStepRoofBottom"])
+                                 finalObjectPosition: SCNVector3(-0.0013175, 0.028637, -0.0093894), scanNames: ["finalStepRoofTop", "finalStepRoofBottom"])
             ]
         )
     ]
