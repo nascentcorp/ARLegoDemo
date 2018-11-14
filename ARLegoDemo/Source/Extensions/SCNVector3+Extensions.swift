@@ -230,3 +230,13 @@ func SCNVector3Project(vectorToProject: SCNVector3, projectionVector: SCNVector3
     let v: SCNVector3 = projectionVector * scale
     return v
 }
+
+extension SCNVector3: Equatable {}
+
+public func ==(lhs: SCNVector3, rhs: SCNVector3) -> Bool {
+    let epsilon: Float = 0.00000001
+    let xEqual = abs(lhs.x - rhs.x) < epsilon
+    let yEqual = abs(lhs.y - rhs.y) < epsilon
+    let zEqual = abs(lhs.z - rhs.z) < epsilon
+    return xEqual && yEqual && zEqual
+}
