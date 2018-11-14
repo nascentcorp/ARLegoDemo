@@ -61,9 +61,9 @@ class BuildingStepService {
                                         scanNames: ["firstStepBaseAngled", "firstStepBaseBottom", "firstStepBaseTop"]),
             additionalParts: [
                 BuildingStepPart(name: "Left wing", imageName: "firstStepWingLeft-300.png", isBaseModel: false, objectName: "wingLeft", objectType: .dae,
-                                 scanNames: ["firstStepWingTop", "firstStepWingBottom"]),
+                                 finalObjectPosition: SCNVector3(0.04114, 0.02482, 0.0011201), scanNames: ["firstStepWingTop", "firstStepWingBottom"]),
                 BuildingStepPart(name: "Right wing", imageName: "firstStepWingRight-300.png", isBaseModel: false, objectName: "wingRight", objectType: .dae,
-                                 scanNames: ["firstStepWingTop", "firstStepWingBottom"])
+                                 finalObjectPosition: SCNVector3(-0.041557, 0.02482, 0.0054193), scanNames: ["firstStepWingTop", "firstStepWingBottom"])
             ]
         ),
         BuildingStep(
