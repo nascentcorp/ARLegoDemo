@@ -200,7 +200,7 @@ class StepAssemblyViewController: UIViewController {
         
         let cameraNode = SCNNode()
         cameraNode.camera = camera
-        cameraNode.position = SCNVector3(x: 0, y: 0.3, z: 1.2)
+        cameraNode.position = SCNVector3(x: 0, y: 0.1, z: 0.4)
 
         let cameraOrbit = SCNNode()
         cameraOrbit.addChildNode(cameraNode)
@@ -246,7 +246,7 @@ class StepAssemblyViewController: UIViewController {
         rotation: Float
         )
     {
-        let objectScale: Float = (sceneType == .scene3D) ? 0.001 : 0.001
+        let objectScale: Float = 0.001
         
         let partScene = SCNScene.create(fromPart: part)
         let partNode = partScene.rootNode.clone()
