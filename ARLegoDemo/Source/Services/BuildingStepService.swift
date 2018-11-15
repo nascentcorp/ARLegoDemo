@@ -30,10 +30,11 @@ class BuildingStepService {
         let objectType: AcceptedFileType
         let finalObjectPosition: SCNVector3
         let initialObjectRotation: Float
+        let initialScanPositionCorrection: SCNVector3
         let scanNames: [String]
         
         init(id: String = UUID().uuidString, name: String, imageName: String, isBaseModel: Bool, objectName: String, objectType: AcceptedFileType,
-             finalObjectPosition: SCNVector3 = SCNVector3(), initialObjectRotation: Float = 0.0, scanNames: [String])
+             finalObjectPosition: SCNVector3 = SCNVector3(), initialScanPositionCorrection: SCNVector3 = SCNVector3(), initialObjectRotation: Float = 0.0, scanNames: [String])
         {
             self.id = id
             self.name = name
@@ -43,6 +44,7 @@ class BuildingStepService {
             self.objectType = objectType
             self.finalObjectPosition = finalObjectPosition
             self.initialObjectRotation = initialObjectRotation
+            self.initialScanPositionCorrection = initialScanPositionCorrection
             self.scanNames = scanNames
         }
     }
@@ -69,7 +71,8 @@ class BuildingStepService {
         BuildingStep(
             arCatalogName: "BatGliderFinalStep",
             baseModel: BuildingStepPart(name: "Glider base", imageName: "finalStepGliderBase-300.png", isBaseModel: true, objectName: "bottomChasis", objectType: .dae,
-                                        initialObjectRotation: -Float.pi * 0.5, scanNames: ["finalStepBaseBottom", "finalStepBaseTop"]),
+                                        initialScanPositionCorrection: SCNVector3(0.007, 0, 0.007), initialObjectRotation: -Float.pi * 0.5,
+                                        scanNames: ["finalStepBaseBottom", "finalStepBaseTop"]),
             additionalParts: [
                 BuildingStepPart(name: "Glider roof", imageName: "finalStepRoof-300.png", isBaseModel: false, objectName: "completeRoof", objectType: .dae,
                                  finalObjectPosition: SCNVector3(-0.0013175, 0.028637, -0.0093894), scanNames: ["finalStepRoofTop", "finalStepRoofBottom"])

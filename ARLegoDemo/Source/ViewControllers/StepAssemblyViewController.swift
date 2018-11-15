@@ -146,14 +146,17 @@ class StepAssemblyViewController: UIViewController {
 
         let animationDuration = 1.0
         let moveSequence: SCNAction
-        if selectedNode.position == part.finalObjectPosition {
-            let upperPosition = part.finalObjectPosition + SCNVector3(x: 0, y: 0.1, z: 0)
+        let correctedFinalPosition = (activeSceneType == .sceneAR)
+            ? buildingStepService.baseModelPart.initialScanPositionCorrection + part.finalObjectPosition
+            : part.finalObjectPosition
+        if selectedNode.position == correctedFinalPosition {
+            let upperPosition = correctedFinalPosition + SCNVector3(x: 0, y: 0.1, z: 0)
             let moveToUpper = SCNAction.move(to: upperPosition, duration: animationDuration * 0.5)
-            let moveToLower = SCNAction.move(to: part.finalObjectPosition, duration: animationDuration * 0.5)
+            let moveToLower = SCNAction.move(to: correctedFinalPosition, duration: animationDuration * 0.5)
             moveSequence = SCNAction.sequence([moveToUpper, moveToLower])
         }
         else {
-            moveSequence = SCNAction.move(to: part.finalObjectPosition, duration: animationDuration)
+            moveSequence = SCNAction.move(to: correctedFinalPosition, duration: animationDuration)
         }
         
         let rotate = SCNAction.rotateBy(x: 0, y: CGFloat(4 * Float.pi), z: 0, duration: animationDuration)
