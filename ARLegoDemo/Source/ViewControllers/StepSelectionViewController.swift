@@ -69,7 +69,8 @@ extension StepSelectionViewController: UITableViewDelegate {
 
         buildingStepService.setBuildingStep(at: indexPath.row)
         
-        let segueToExecute = (arEnvironmentService.isDeviceARCapable) ? "baseObjectScan" : "stepAssembly"
+        let segueToExecute = "stepAssembly"
+//        let segueToExecute = (arEnvironmentService.isDeviceARCapable) ? "baseObjectScan" : "stepAssembly"
         performSegue(withIdentifier: segueToExecute, sender: nil)
     }
 }
